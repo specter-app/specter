@@ -1,1 +1,10 @@
 /* Empty. Add your own CSS if you like */
+.no-margin {
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+	min-height: 102px;
+}
+
+.pane {
+	background: #8A6DE9;
+}
