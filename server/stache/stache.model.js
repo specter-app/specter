@@ -1,11 +1,11 @@
-//  The Cache model
+//  The Stache model
 
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var digicacheSchema = new Schema({
-    digicache: ObjectId,
+var stacheSchema = new Schema({
+    stache: ObjectId,
     title: String,
     date: {type: Date, default: Date.now},
     author: {type: String, default: 'Anonymous'},
@@ -13,4 +13,4 @@ var digicacheSchema = new Schema({
     content: String
 });
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('Stache', stacheSchema);

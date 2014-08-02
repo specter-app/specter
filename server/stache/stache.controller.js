@@ -1,22 +1,22 @@
-var Cache = require('../cache/cache.js');
+var Stache = require('../stache/stache.js');
 
-// Creates a new cache
+// Creates a new stache
 exports.post = function(req, res) {
-    var newCache = {
+    var newStache = {
         title: req.body.title,
         author: req.body.author,
         location: req.body.location,
         content: req.body.content
     }
-    new Cache(newCache).save();
+    new Stache(newStache).save();
 }
 
-// Returns a list of caches
+// Returns a list of staches
 exports.getAll = function(req, res) {
 
 }
 
-// Returns a single cache
+// Returns a single stache
 exports.getOne = function(req, res) {
 
 }
