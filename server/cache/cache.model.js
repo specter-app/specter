@@ -9,6 +9,7 @@ var digicacheSchema = new Schema({
     title: String,
     date: {type: Date, default: Date.now},
     author: {type: String, default: 'Anonymous'},
+    location: {type: Number},
     content: String
 });
 

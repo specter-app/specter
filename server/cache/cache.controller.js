@@ -5,6 +5,7 @@ exports.post = function(req, res) {
     var newCache = {
         title: req.body.title,
         author: req.body.author,
+        location: req.body.location,
         content: req.body.content
     }
     new Cache(newCache).save();
