@@ -8,8 +8,11 @@ var stacheSchema = new Schema({
     stache: ObjectId,
     title: String,
     date: {type: Date, default: Date.now},
+    // time: {type: Time, default: Time.now}
     author: {type: String, default: 'Anonymous'},
-    location: {type: Number},
+    longitude: Number,
+    latitude: Number,
+    coord: [Number, Number],
     content: String
 });
 
