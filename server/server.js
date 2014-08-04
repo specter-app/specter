@@ -1,29 +1,12 @@
-var express = require('express');
+var app = require('./server-config.js');
 var mongoose = require('mongoose');
-var app = module.exports = express();
-var seed = require('./stache/stache.seed.js');
-var api = require('./stache/stache.controller.js');
-// var server = require('http').createServer(app);
+
+app.set('port', process.env.PORT || 8000);
+
+var server = app.listen(app.get('port'), function(){
+  console.log('Server listening on port', server.address().port);
+});
 
 mongoose.connect('mongodb://localhost/specter');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
-
-// routes
-// list all staches
-app.get('/stache', api.list);
-
-// save a new stache
-app.get('/stache/save', api.save);
-
-// get a stache by title
-app.get('/stache/:title', api.getOne);
-
-// get staches nearby specified longitude, latitude
-// within the specified distance
-app.get('/stache/near/:lon-:lat-:dist', api.near);
-
-
-app.listen(8000, function () {
-  console.log('listening on http://localhost:8000');
-})
