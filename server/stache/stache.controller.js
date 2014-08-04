@@ -4,7 +4,7 @@ var Stache = require('./stache.model.js');
 exports.save = function(req, res) {
     // Q: Put data in req.body or req.params?
     // REST endpoints should have directory-like structure -> req.body
-    var stache_date = {
+    var stache_data = {
         title: req.body.title,
         author: req.body.author,
         longitude: req.body.lon,
