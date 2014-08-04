@@ -4,7 +4,9 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var stacheSchema = new Schema({
+// Stache collection
+// ToDo: validation middleware
+var Stache = new Schema({
     stache: ObjectId,
     title: String,
     date: {type: Date, default: Date.now},
@@ -12,8 +14,8 @@ var stacheSchema = new Schema({
     author: {type: String, default: 'Anonymous'},
     longitude: Number,
     latitude: Number,
-    coord: [Number, Number],
+    loc: [Number, Number],
     content: String
 });
 
-module.exports = mongoose.model('Stache', stacheSchema);
+module.exports = mongoose.model('Stache', Stache);
