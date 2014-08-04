@@ -10,7 +10,7 @@ var seed = require('./stache/stache.seed.js');
 var router = express.Router()
     
 router.get('/', function(req, res) {
-  console.log(req.query);
+  console.log('get with request', req.body);
   sCtrl.list(req, res);
   // // get staches nearby specified longitude, latitude
   // // within the specified distance
@@ -18,10 +18,12 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:title', function(req, res) {
+  console.log('get title with request', req.body);
   sCtrl.getOne(req, res); //title, UID, or something else for individual caches?
 });
 
 router.post('/', function(req, res) {
+  console.log('post with request', req.body);
   sCtrl.save(req, res);
 });
 
