@@ -24,7 +24,7 @@ var stache_data = [
     author: 'Goblins',
     longitude: 40,
     latitude: 5,
-    loc: [40, 5],
+    loc: [45, 5],
     content: 'Clash Bash Hammer Knock'
 },
 {
@@ -32,7 +32,7 @@ var stache_data = [
     author: 'Tolkien',
     longitude: 40,
     latitude: 5,
-    loc: [40, 5],
+    loc: [40, 1],
     content: 'Beren came, And doom fell on Tinúviel, That in his arms lay glistening.'
 },
 {
@@ -40,7 +40,7 @@ var stache_data = [
     author: 'Angus',
     longitude: 40,
     latitude: 5,
-    loc: [40, 5],
+    loc: [40, 50],
     content: 'Thunder, thunder, thunder, thunder. I was caught in the middle of a railroad track.'
 },
 {
@@ -48,7 +48,7 @@ var stache_data = [
     author: 'Jared',
     longitude: 40,
     latitude: 5,
-    loc: [40, 5],
+    loc: [60, 5],
     content: 'Party at Outback Steakhouse storage room.'
 },
 {
@@ -56,7 +56,7 @@ var stache_data = [
     author: 'GenerousDonor',
     longitude: 40,
     latitude: 5,
-    loc: [40, 5],
+    loc: [100, 5],
     content: '1 billion IOUs'
 }]
 ;
