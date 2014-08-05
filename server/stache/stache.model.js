@@ -1,6 +1,6 @@
 //  The Stache model
 
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
@@ -11,8 +11,6 @@ var Stache = new Schema({
     title: String,
     date: {type: Date, default: Date.now},
     author: {type: String, default: 'Anonymous'},
-    longitude: Number,
-    latitude: Number,
     loc: {type: [Number], index: '2dsphere'},
     content: String
 });
