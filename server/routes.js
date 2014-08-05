@@ -2,7 +2,7 @@
 // Future: delegate to index.js files for caches and users
 // Call controller methods
 var express = require('express');
-var sCtrl = require('./stache/stache.controller.js');
+var stacheController = require('./stache/stache.controller.js');
 
 //temporary
 var seed = require('./stache/stache.seed.js');
@@ -14,17 +14,17 @@ var router = express.Router()
 
 router.get('/:id', function(req, res) {
   console.log('get stache with id. request body:', req.body);
-  sCtrl.getOne(req, res); //title, UID, or something else for individual caches?
+  stacheController.getOne(req, res); //title, UID, or something else for individual caches?
 });
     
 router.get('/', function(req, res) {
   console.log('get staches near', req.query, '. request body:', req.body);
-  sCtrl.getMany(req, res);
+  stacheController.getNearby(req, res);
 });
 
 router.post('/', function(req, res) {
   console.log('post. request body:', req.body);
-  sCtrl.save(req, res);
+  stacheController.save(req, res);
 });
 
 module.exports = router;
