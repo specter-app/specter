@@ -1,43 +1,84 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-  </head>
-  <body ng-app="starter">
-    <ion-tabs class="tabs-positive tabs-icon-only">
-    <ion-tab title="Home" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline">
-    <button class="button button-full button-large button-energized no-margin">
-    Staches nearby
-    </button>
-    <button class="button button-full button-assertive button-large no-margin">
-    Create a stache
-    </button>
-    <button class="button button-full button-royal button-large no-margin">
-    Social
-    </button>
-    <button class="button button-full button-calm button-large no-margin">
-    Settings
-    </button>
-    </ion-tab>
-    <ion-tab title="About" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
-    <!-- Tab 2 content -->
-    </ion-tab>
-    <ion-tab title="Settings" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
-    <!-- Tab 3 content -->
-    </ion-tab>
-    </ion-tabs>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title></title>
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+        <link href="css/ionic.app.css" rel="stylesheet">
+        -->
+        <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+        <!-- cordova script (this will be a 404 during development) -->
+        <script src="cordova.js"></script>
+        <!-- your app's js -->
+        <script src="js/app.js"></script>
+    </head>
+    <body ng-app="starter">
+        <ion-tabs class="tabs-positive tabs-icon-only slide-in-left">
+        <ion-tab title="Marco" icon-on="ion-ios7-pulse-strong" icon-off="ion-ios7-pulse">
+        <button class="button button-full button-large button-energized no-margin">
+        Staches nearby
+        </button>
+        <button class="button button-full button-assertive button-large no-margin">
+        Create a stache
+        </button>
+        <button class="button button-full button-positive button-large no-margin">
+        Social
+        </button>
+        <button class="button button-full button-calm button-large no-margin">
+        Settings
+        </button>
+        </ion-tab>
+        <ion-tab  class="" title="Mapview" icon-on="ion-ios7-world" icon-off="ion-ios7-world-outline">
+        <div class="list">
+            <div class="item item-button-right no-margin">bao sucks<button class="button button-positive"></button></div>
+        </div>
+        </ion-tab>
+        <ion-tab title="New" icon-on="ion-ios7-download" icon-off="ion-ios7-download-outline">
+        
+        <div class="list" ng-controller="makeStacheController">
+            <label class="item item-input item-stacked-label item-icon-left">
+                <span class="input-label">Title</span>
+                <input type="text" placeholder="John">
+            </label>
+            <a class="item item-icon-left" ng-click="show()" href="#">
+                <i class="icon ion-ios7-pricetag"></i>
+                Tags
+            </a>
+            <a class="item item-divider">
+                Attach...
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-chatbubble-working"></i>
+                Text
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-ios7-camera"></i>
+                Picture
+                <!-- <span class="item-note">
+                Grammy
+                </span> -->
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-mic-a"></i>
+                Audio
+                <!-- <span class="badge badge-assertive">0</span> -->
+            </a>
+        </div>
+        <button class="button button-full button-positive no-margin orange" style="font-size: 42px">
+        MAKE STACHE
+        </button>
+        </ion-tab>
+        
+        <ion-tab title="Profile" icon-on="ion-ios7-person" icon-off="ion-ios7-person-outline">
+        <!-- Tab 4 content -->
+        </ion-tab>
+        <ion-tab title="Settings" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
+        <!-- Tab 5 content -->
+        </ion-tab>
+        </ion-tabs>
+    </body>
 </html>

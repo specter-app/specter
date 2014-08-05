@@ -1,38 +1,21 @@
 function distanceBetween(coord1, coord2) {
-
+  // http://www.geodatasource.com/developers/javascript
 }
 
-function redBlue(distance) {
-	// distance for now is percentage along transition
-  var red = [204, 51, 0];
-  var blue = [0, 153, 255];
-  var result; 
+function transitionColor(distance) {
+  var numColorTransitionSteps = 200;
 
-  var maxDistance = 200;
-  var change = [Math.abs((red[0] - blue[0])/maxDistance), Math.abs((red[1] - blue[1])/maxDistance), 
-    Math.abs((red[2] - blue[2])/maxDistance) ];
-
-  var color = [change[0] * distance, change[1] * distance, change[2] * distance]
-  result = 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
-  return result;
-	// outputs the color value
-}
-
-
-function redBlueMitch(distance) {
-  var n = 200;
-
-  var red = [204, 51, 0];
-  var blue = [0, 153, 255];
+  var startColor = [204, 51, 0];
+  var endColor = [0, 153, 255];
 
   var result = [];
-  result[0] = red[0] + (blue[0] - red[0]) * distance / n;
-  result[1] = red[1] + (blue[1] - red[1]) * distance / n;
-  result[2] = red[2] + (blue[2] - red[2]) * distance / n;
+  result[0] = startColor[0] + (endColor[0] - startColor[0]) * distance / numColorTransitionSteps;
+  result[1] = startColor[1] + (endColor[1] - startColor[1]) * distance / numColorTransitionSteps;
+  result[2] = startColor[2] + (endColor[2] - startColor[2]) * distance / numColorTransitionSteps;
 
   return result;
 }
 
-console.log(redBlueMitch(200));
-console.log(redBlueMitch(100));
-console.log(redBlueMitch(0));
+// console.log(transitionColor(200));
+// console.log(transitionColor(100));
+// console.log(transitionColor(0));

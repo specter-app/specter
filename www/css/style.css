@@ -3,8 +3,47 @@
 	margin-top: 0px !important;
 	margin-bottom: 0px !important;
 	min-height: 102px;
+	border: 0px;
 }
 
-.pane {
+/*.pane {
 	background: #8A6DE9;
+	text-align: center;
 }
+*/
+.circle {
+	background: #4A87EE;
+	border-radius: 50%;
+	width: 80%;
+	height: 50%;
+
+}
+
+.orange {
+  color : white;
+  background-color : orange;
+}
+
+./*item {
+
+}*/
+/*
+.button-assertive {
+	background-color: #B3FF84 !important;
+}
+
+.button-royal {
+	background-color: #E8D8B4 !important;	
+}
+
+.button-calm {
+	background-color: #FF7870 !important;
+}
+
+.button-energized {
+	background-color: #996AE8 !important;
+}
+
+.button-positive {
+	background-color: #00E3FF !important;
+}*/
