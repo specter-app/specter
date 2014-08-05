@@ -57,7 +57,6 @@ angular.module('starter', ['ionic'])
       // }, 2000);
 
     };
-    // MAKE THIS POPUP WORK
 
     $scope.showPopup = function() {
       var myPopup = $ionicPopup.show({
