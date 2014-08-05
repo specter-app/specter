@@ -10,7 +10,10 @@ exports.save = function(req, res) {
         longitude: req.body.lon,
         latitude: req.body.lat,
         loc: [req.body.lon, req.body.lat],
-        content: req.body.content
+        content: req.body.content,
+        locked: req.body.locked,
+        clue: req.body.clue,
+        password: req.body.password
     };
 
     // Test data
@@ -29,25 +32,18 @@ exports.save = function(req, res) {
         console.log('Stache saved!');
         res.send('Stache saved!');
     });
-}
+};
 
-// Returns a list of staches
-exports.list = function(req, res) {
-    // Todo: use req.params to for query parameters
-    // i.e. tags, time
-    Stache.find({}, function(err, staches) {
-        console.log("staches: ", staches);
-        res.json(staches);
-    });
-}
-
-// Returns a single stache
+// Returns a single stache by ID if client geolocation is within range
 exports.getOne = function(req, res) {
     console.log("params: ", req.params);
-    Stache.findOne({title: req.params.title}, function(err, stache) {
-        res.send(stache);
+    Stache.findOne({_id: req.params.id}, function(err, stache) {
+      if (err) res.send(err.status, err);
+      // if (!isAtLocation(req.query.lon, req.query.lat)) return res.send('Out of range of stache.');
+      if (stache.locked && req.query.password !== stache.password) return res.send('Failed to open stache.');
+      res.send(stache);
     });
-}
+};
 
 // Returns a list of nearby staches
 exports.near = function(req, res) {
@@ -64,4 +60,4 @@ exports.near = function(req, res) {
         console.log("staches: ", staches);
         res.send(staches);
     });
-}
+};
