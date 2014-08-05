@@ -16,16 +16,6 @@ exports.save = function(req, res) {
         password: req.body.password
     };
 
-    // Test data
-/*    var stache_data = {
-        title: 'Stache 2',
-        author: 'user1',
-        longitude: 50,
-        latitude: 90,
-        loc: [50, 90],
-        content: 'Roses are red, violets are blue, digital caches are awesome.'
-    };
-*/
     var stache = new Stache(stache_data)
     stache.save(function(err) {
         if (err) throw err;
@@ -46,18 +36,29 @@ exports.getOne = function(req, res) {
 };
 
 // Returns a list of nearby staches
-exports.near = function(req, res) {
-    console.log("params: ", req.params);
+exports.getNearby = function(req, res) {
+    var query = req.query.coord.split(" ");
+    var coord = [Number(query[0]), Number(query[1])];
+    var dist = Number(query[2]);
+
     // Tell MongoDB to index fields that contain lat/lon
     // run this command from a mongo prompt: 
     // db.[collection_name].ensureIndex({ [field_name]: "2d" })
-    /*Stache.find({loc: {$near: [req.params.lon, req.params.lat], 
+
+    /*
+    Stache.find({loc: {$near: [req.params.lon, req.params.lat], 
         $maxDistance: req.params.dist}}, function(err, staches) {
             console.log("staches: ", staches);
             res.send(staches);
-        });*/
-    Stache.find({loc: {$near: [40, 5], $maxDistance: 500}}, function(err, staches) {
-        console.log("staches: ", staches);
-        res.send(staches);
+        });
+    */
+    
+    /*
+    maxDistance takes input in radians
+    The radius of the Earth is approximately 3,959 miles or 6,371 kilometers.
+    */
+    var point = { type : "Point", coordinates : coord};
+    Stache.geoNear(point, { maxDistance : dist/3959 }, function(err, staches, stats) {
+       res.send(staches);
     });
 };
