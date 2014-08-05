@@ -42,11 +42,14 @@
         <div class="list" ng-controller="makeStacheController">
             <label class="item item-input item-stacked-label item-icon-left">
                 <span class="input-label">Title</span>
-                <input type="text" placeholder="John">
+                <input type="text" placeholder="Give it a name">
             </label>
             <a class="item item-icon-left" ng-click="show()" href="#">
                 <i class="icon ion-ios7-pricetag"></i>
                 Tags
+                <span class="item-note">
+                    {{data.currentTags.join(', ')}}
+                </span>
             </a>
             <a class="item item-divider">
                 Attach...
