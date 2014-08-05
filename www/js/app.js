@@ -17,6 +17,7 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
   .controller('makeStacheController', function($scope, $ionicActionSheet, $ionicPopup, $timeout) {
     $scope.data = {
       currentTags: []
@@ -81,3 +82,4 @@ angular.module('starter', ['ionic'])
       });
     };
   });
+
