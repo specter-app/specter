@@ -8,9 +8,7 @@ var server = app.listen(app.get('port'), function(){
 });
 
 
-var mongoUri = process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/specter';
+var mongoUri = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/specter';
 
 mongoose.connect(mongoUri);
 var db = mongoose.connection;
