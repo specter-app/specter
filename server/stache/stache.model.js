@@ -1,16 +1,19 @@
 //  The Stache model
 
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var stacheSchema = new Schema({
+// Stache collection
+// ToDo: validation middleware
+var StacheSchema = new Schema({
     stache: ObjectId,
     title: String,
     date: {type: Date, default: Date.now},
     author: {type: String, default: 'Anonymous'},
-    location: {type: Number},
+    loc: {type: [Number], index: '2dsphere'},
     content: String
 });
 
-module.exports = mongoose.model('Stache', stacheSchema);
+var Stache = mongoose.model('Stache', StacheSchema);
+module.exports = Stache;

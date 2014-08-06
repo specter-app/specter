@@ -1,22 +1,65 @@
-var Stache = require('../stache/stache.js');
+var Stache = require('./stache.model.js');
 
-// Creates a new stache
-exports.post = function(req, res) {
-    var newStache = {
+// Creates and saves a new stache
+exports.save = function(req, res) {
+    var stache_data = {
         title: req.body.title,
         author: req.body.author,
-        location: req.body.location,
-        content: req.body.content
-    }
-    new Stache(newStache).save();
-}
+        loc: [req.body.lon, req.body.lat],
+        content: req.body.content,
+        locked: req.body.locked,
+        clue: req.body.clue,
+        password: req.body.password
+    };
 
-// Returns a list of staches
-exports.getAll = function(req, res) {
+    var stache = new Stache(stache_data);
+    stache.save(function(err) {
+        if (err) throw err;
+        console.log('Stache saved!');
+        res.send('Stache saved!');
+    });
+};
 
-}
-
-// Returns a single stache
+// Returns a single stache by ID if client geolocation is within range
 exports.getOne = function(req, res) {
+    Stache.findOne({_id: req.params.id}, function(err, stache) {
+      if (err) res.send(err.status, err);
+      // if (!isAtLocation(req.query.lon, req.query.lat)) return res.send('Out of range of stache.');
+      if (stache.locked && req.query.password !== stache.password) return res.send('Failed to open stache.');
+      res.send(stache);
+    });
+};
 
-}
+// Returns a list of nearby staches
+exports.getNearby = function(req, res) {
+    var query, coord, dist;
+
+    if (req.query.coord) {
+        console.log('query nearby');
+        query = req.query.coord.split(" ");
+        coord = [Number(query[0]), Number(query[1])];
+        dist = Number(query[2]);
+    } else {
+        console.log('grab all');
+        coord = [40, 5]; // temporary default coordinates
+        dist = 10000000; // default search radius (meters)
+    }
+
+    // Tell MongoDB to index fields that contain lat/lon
+    // run this command from a mongo prompt: 
+    // db.staches.ensureIndex({ loc: "2dsphere" })
+
+    Stache.find(
+       { loc :
+           { $near :
+              {
+                $geometry : {type : "Point", coordinates : coord},
+                $maxDistance : dist // meters
+              }
+           }
+        },
+        function(err,staches) {
+            res.send(staches);
+        }
+    );
+};
