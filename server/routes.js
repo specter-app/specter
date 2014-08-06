@@ -16,10 +16,10 @@ router.get('/:id', function(req, res) {
   console.log('get stache with id. request body:', req.body);
   stacheController.getOne(req, res); //title, UID, or something else for individual caches?
 });
-    
+
 router.get('/', function(req, res) {
 // example route with querystring:
-// http://localhost:8000/staches/?coord=40+5+10
+// http://localhost:8000/staches/?coord=40+5+10000000
   console.log('get staches near', req.query, '. request body:', req.body);
   stacheController.getNearby(req, res);
 });
