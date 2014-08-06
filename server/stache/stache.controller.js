@@ -42,7 +42,7 @@ exports.getNearby = function(req, res) {
     } else {
         console.log('grab all');
         coord = [40, 5]; // temporary default coordinates
-        dist = 10000000; // default search radius (meters)
+        dist = 100; // default search radius (meters)
     }
 
     // Tell MongoDB to index fields that contain lat/lon
