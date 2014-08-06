@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('specter', ['ionic', 'specter.tab'])
+angular.module('specter', ['ionic', 'specter.tab', 'restangular'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -16,4 +16,10 @@ angular.module('specter', ['ionic', 'specter.tab'])
       StatusBar.styleDefault();
     }
   });
+})
+.config(function(RestangularProvider) {
+  RestangularProvider.setBaseUrl('http://localhost:8000');
+  // RestangularProvider.setRestangularFields({
+  //   id: '_id'
+  // });
 });
