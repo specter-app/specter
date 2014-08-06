@@ -7,6 +7,12 @@ var server = app.listen(app.get('port'), function(){
   console.log('Server listening on port', server.address().port);
 });
 
-mongoose.connect('mongodb://localhost/specter');
+
+var mongoUri = process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/specter';
+
+mongoose.connect(mongoUri);
 var db = mongoose.connection;
+
 db.on('error', console.error.bind(console, 'connection error: '));

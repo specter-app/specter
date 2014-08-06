@@ -6,7 +6,7 @@ var ObjectId = Schema.ObjectId;
 
 // Stache collection
 // ToDo: validation middleware
-var Stache = new Schema({
+var StacheSchema = new Schema({
     stache: ObjectId,
     title: String,
     date: {type: Date, default: Date.now},
@@ -15,4 +15,5 @@ var Stache = new Schema({
     content: String
 });
 
-module.exports = mongoose.model('Stache', Stache);
+var Stache = mongoose.model('Stache', StacheSchema);
+module.exports = Stache;
