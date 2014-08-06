@@ -7,6 +7,7 @@ exports.save = function(req, res) {
         author: req.body.author,
         loc: [req.body.lon, req.body.lat],
         content: req.body.content,
+        tags: req.body.tags,
         locked: req.body.locked,
         clue: req.body.clue,
         password: req.body.password
