@@ -7,7 +7,6 @@ var stacheController = require('./stache/stache.controller.js');
 //temporary
 var seed = require('./stache/stache.seed.js');
 
-
 var router = express.Router();
 
 //staches/283497a823947hj

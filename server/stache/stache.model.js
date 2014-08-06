@@ -12,7 +12,8 @@ var StacheSchema = new Schema({
     date: {type: Date, default: Date.now},
     author: {type: String, default: 'Anonymous'},
     loc: {type: [Number], index: '2dsphere'},
-    content: String
+    content: String,
+    tags: [String]
 });
 
 var Stache = mongoose.model('Stache', StacheSchema);
