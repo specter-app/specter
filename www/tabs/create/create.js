@@ -1,13 +1,13 @@
-angular.module('specter.tab.create', [])
+angular.module('specter.tab.create', ['specter.tab.create.controller'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('tab.create', {
-      url: "/create",
-      views: {
-        'create-tab': {
-          templateUrl: "tabs/create/create.html",
-          // controller: 'MarcopoloCtrl'
-        }
+  .state('tab.create', {
+    url: "/create",
+    views: {
+      'create-tab': {
+        templateUrl: "tabs/create/create.html",
+        controller: 'createCtrl'
       }
-    })
+    }
+  });
 });

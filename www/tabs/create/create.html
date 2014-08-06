@@ -1,7 +1,34 @@
 <ion-view>
-  <h1>Create tabs</h1>
-  <h1>Create tabs</h1>
-  <h1>Create tabs</h1>
-  <h1>Create tabs</h1>
-  <h1>Create tabs</h1>
+<div class="list">
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Title</span>
+    <input type="text" placeholder="Give it a name">
+  </label>
+  <a class="item item-icon-left" ng-click="show()">
+    <i class="icon ion-ios7-pricetag"></i>
+    Tags
+    <span class="item-note">
+      {{data.currentTags.join(', ')}}
+    </span>
+  </a>
+  <a class="item item-divider">
+    Attach...
+  </a>
+  <a class="item item-icon-left">
+    <i class="icon ion-chatbubble-working"></i>
+    Text
+  </a>
+  <a class="item item-icon-left">
+    <i class="icon ion-ios7-camera"></i>
+    Picture
+  </a>
+  <a class="item item-icon-left">
+    <i class="icon ion-mic-a"></i>
+    Audio
+    <!-- <span class="badge badge-assertive">0</span> -->
+  </a>
+</div>
+<button class="button button-full button-positive no-margin orange" style="font-size: 42px">
+  MAKE STACHE
+</button>
 </ion-view>
