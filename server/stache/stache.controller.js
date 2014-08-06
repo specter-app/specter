@@ -33,29 +33,33 @@ exports.getOne = function(req, res) {
 // Returns a list of nearby staches
 exports.getNearby = function(req, res) {
     var query, coord, dist;
-    if(req.query.coord) {
-      query = req.query.coord.split(" ");
-      coord = [Number(query[0]), Number(query[1])];
-      dist = Number(query[2]);
+
+    if (req.query.coord) {
+        console.log('query nearby');
+        query = req.query.coord.split(" ");
+        coord = [Number(query[0]), Number(query[1])];
+        dist = Number(query[2]);
     } else {
-      console.log('no coord specified');
-      coord = [40, 5];
-      dist = 100000;
+        console.log('grab all');
+        coord = [40, 5]; // temporary default coordinates
+        dist = 10000000; // default search radius (meters)
     }
 
     // Tell MongoDB to index fields that contain lat/lon
-    // run this command from a mongo prompt:
-    // db.[collection_name].ensureIndex({ [field_name]: "2d" })
+    // run this command from a mongo prompt: 
+    // db.staches.ensureIndex({ loc: "2dsphere" })
 
-    // maxDistance takes input in radians
-    // The radius of the Earth is approximately 3,959 miles or 6,371 kilometers.
-    var point = { type : "Point", coordinates : coord};
-    Stache.find(function(err, staches) {
-      res.json(200, staches);
-    });
-    // Stache.geoNear(point, { maxDistance : dist/3959 }, function(err, staches, stats) {
-    //   console.log(err)
-    //    res.send(staches);
-    // });
-
+    Stache.find(
+       { loc :
+           { $near :
+              {
+                $geometry : {type : "Point", coordinates : coord},
+                $maxDistance : dist // meters
+              }
+           }
+        },
+        function(err,staches) {
+            res.send(staches);
+        }
+    );
 };
