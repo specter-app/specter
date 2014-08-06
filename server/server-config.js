@@ -30,7 +30,8 @@ if (app.get('env') === 'development') {
 // Production error handler
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.send(err.status, err.message); // Don't send stacktrace to client if for production
+  // res.send(err.status, err.message); // Don't send stacktrace to client if for production
+  res.send(err.message);
 });
 
 module.exports = app;
