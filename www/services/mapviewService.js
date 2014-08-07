@@ -1,6 +1,5 @@
 (function(){
   'use strict';
-  console.log(1);
   var mapviewService = function(Restangular){
     this.getAll = function(){
       return Restangular.all('staches').getList().then(function(staches){
