@@ -29,7 +29,7 @@ describe('Stache model', function() {
         testStache1 = {
             title: 'Advice From Yoda',
             author: 'Yoda',
-            loc: [50, 5],
+            loc: [40, 6],
             content: 'Train yourself to let go of everything you fear to lose.',
             tags: ['Wise', 'Advice'],
             locked: true,
@@ -58,8 +58,8 @@ describe('Stache model', function() {
         });
     });
 
-    describe('Get One by ID', function() {
-        var stache1, stache2;
+    describe('Get One by Id', function() {
+        var stache1;
 
         beforeEach(function(done) {
             stache1 = new Stache(testStache1);
@@ -68,7 +68,7 @@ describe('Stache model', function() {
             });
         });
 
-        it('should retrieve the correct stache', function(done) {
+        it('should retrieve the correct stache by id', function(done) {
             var id = String(stache1._id);
             Stache.findOne({_id: id}, function(err, stache) {
               stache._id.should.eql(stache1._id);
@@ -78,7 +78,37 @@ describe('Stache model', function() {
     });
 
     describe('Get Nearby', function() {
-       
+       var stache1, stache2;
+
+        beforeEach(function(done) {
+            stache1 = new Stache(testStache1);
+            stache2 = new Stache(testStache2);
+            stache1.save(function(err, stache1) {
+                stache2.save(function(err, stache2) {
+                    done();
+                });
+            });
+        });
+
+        it('should retrieve nearby staches', function(done) {
+            var coord = [40, 5];
+            var dist = 120000; //120 km
+
+            Stache.find(
+                { loc :
+                   { $near :
+                      {
+                        $geometry : {type : "Point", coordinates : coord},
+                        $maxDistance : dist // meters
+                      }
+                   }
+                },
+                function(err, staches) {
+                    staches.length.should.eql(2);
+                    done();
+                }
+            );
+        });
     });
 
     describe('Stache Model Schema', function() {
