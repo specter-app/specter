@@ -1,4 +1,4 @@
-var app = require('./server/server-config.js');
+var app = require('./server-config.js');
 var mongoose = require('mongoose');
 
 app.set('port', process.env.PORT || 8000);

@@ -23,14 +23,14 @@ app.use('*', function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next){
     res.status(err.status || 500);
-    res.send(err.status, err.message, err); // Print error stacktrace
+    res.send(err.message, err); // Print error stacktrace
   });
 }
 
 // Production error handler
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  // res.send(err.status, err.message); // Don't send stacktrace to client if for production
+  // Don't send stacktrace to client if for production
   res.send(err.message);
 });
 
