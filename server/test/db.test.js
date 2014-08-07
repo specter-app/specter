@@ -1,7 +1,6 @@
 var should = require('should');
 var mongoose = require('mongoose');
 var config = require('../config');
-// var stachController = require('../stache/stache.controller.js');
 var Stache = require('../stache/stache.model.js');
 var testStache1, testStache2;
 
@@ -24,7 +23,7 @@ if ( process.env.NODE_ENV !== 'test' ) {
 describe('Stache model', function() {
 
     beforeEach(function(done){
-        //clear out db
+        // Clear out db
         Stache.remove(done);
  
         testStache1 = {
@@ -48,6 +47,44 @@ describe('Stache model', function() {
     });
 
     describe('Save', function() {
+        it('should save new staches without error', function(done) {
+            var stache1 = new Stache(testStache1);
+            var stache2 = new Stache(testStache1);
+            stache1.save(function(err, stache1) {
+                stache2.save(function(err, stache2) {
+                    done();
+                });
+            });
+        });
+    });
+
+    describe('Get One by ID', function() {
+        var stache1, stache2;
+
+        beforeEach(function(done) {
+            stache1 = new Stache(testStache1);
+            stache2 = new Stache(testStache1);
+            stache1.save(function(err, stache1) {
+                stache2.save(function(err, stache2) {
+                    done();
+                });
+            });
+        });
+
+        it('should retrieve the correct stache', function(done) {
+            var id = String(stache1._id);
+            Stache.findOne({_id: id}, function(err, stache) {
+              stache._id.should.eql(stache1._id);
+              done();
+            });
+        });
+    });
+
+    describe('Get Nearby', function() {
+       
+    });
+
+    describe('Stache Model Schema', function() {
         var stache1, stache2;
 
         beforeEach(function(done) {
@@ -93,14 +130,6 @@ describe('Stache model', function() {
             should.exist(stache2.password);
             done();
         });
-    });
-
-    describe('Get One by ID', function() {
-        
-    });
-
-    describe('Get Nearby', function() {
-       
     });
 });
 
