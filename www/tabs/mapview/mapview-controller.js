@@ -3,9 +3,9 @@ angular.module('specter.tab.mapview.controller', ['restangular'])
   var staches = Restangular.all('staches');
   staches.getList().then(function(staches){
     $scope.staches = staches;
-    console.log(staches)
+    console.log(staches);
   }, function(response){
-    console.log('error with status', response)
-  })
+    console.log('error with status', response);
+  });
   
 });

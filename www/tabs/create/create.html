@@ -7,8 +7,8 @@
   <a class="item item-icon-left" ng-click="show()">
     <i class="icon ion-ios7-pricetag"></i>
     Tags
-    <span class="item-note">
-      {{data.currentTags.join(', ')}}
+    <span class="item-note" ng-repeat="(key, val) in data.currentTags">
+      {{key}}&nbsp
     </span>
   </a>
   <a class="item item-divider">
