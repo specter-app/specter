@@ -48,32 +48,59 @@ describe('Stache model', function() {
     });
 
     describe('Save', function() {
-        var stache;
+        var stache1, stache2;
 
         beforeEach(function(done) {
-            stache = new Stache(testStache1);
-            stache.save(function(err, stache) {
-                done();
+            stache1 = new Stache(testStache1);
+            stache2 = new Stache(testStache1);
+            stache1.save(function(err, stache1) {
+                stache2.save(function(err, stache2) {
+                    done();
+                });
             });
         });
 
         it('should have required properties', function(done) {
-            stache.should.have.property('title', 'Advice From Yoda');
-            // stache.should.have.property('loc', [50, 5]);
-            stache.should.have.property('locked', true);
-            stache.should.have.property('content', 'Train yourself to let go of everything you fear to lose.');
+            // Test stache1
+            stache1.should.have.property('title', 'Advice From Yoda');
+            // stache1.should.have.property('loc', [50, 5]);
+            stache1.should.have.property('locked', true);
+            stache1.should.have.property('content', 'Train yourself to let go of everything you fear to lose.');
+
+            // Test stache2
+            stache2.should.have.property('title', 'Advice From Yoda');
+            // stache2.should.have.property('loc', [50, 5]);
+            stache2.should.have.property('locked', true);
+            stache2.should.have.property('content', 'Train yourself to let go of everything you fear to lose.');
             done();
         });
 
         it('should have default properties', function(done) {
-            should.exist(stache._id);
-            should.exist(stache.date);
-            should.exist(stache.author);
-            should.exist(stache.locked);
-            should.exist(stache.clue);
-            should.exist(stache.password);
+            // Test stache1
+            should.exist(stache1._id);
+            should.exist(stache1.date);
+            should.exist(stache1.author);
+            should.exist(stache1.locked);
+            should.exist(stache1.clue);
+            should.exist(stache1.password);
+
+            // Test stache2
+            should.exist(stache2._id);
+            should.exist(stache2.date);
+            should.exist(stache2.author);
+            should.exist(stache2.locked);
+            should.exist(stache2.clue);
+            should.exist(stache2.password);
             done();
         });
+    });
+
+    describe('Get One by ID', function() {
+        
+    });
+
+    describe('Get Nearby', function() {
+       
     });
 });
 
