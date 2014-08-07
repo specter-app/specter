@@ -63,11 +63,8 @@ describe('Stache model', function() {
 
         beforeEach(function(done) {
             stache1 = new Stache(testStache1);
-            stache2 = new Stache(testStache1);
             stache1.save(function(err, stache1) {
-                stache2.save(function(err, stache2) {
-                    done();
-                });
+                done();
             });
         });
 
