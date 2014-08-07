@@ -5,7 +5,7 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/www'));
+app.use(express.static('../' + __dirname + '/www'));
 
 app.use(cors());
 

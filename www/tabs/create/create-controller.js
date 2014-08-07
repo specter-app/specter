@@ -1,7 +1,8 @@
 angular.module('specter.tab.create.controller', ['restangular'])
 .controller('createCtrl', function($scope, $ionicActionSheet, $ionicPopup, $timeout, Restangular) {
+
   $scope.data = {
-    currentTags: []
+    currentTags: {}
   };
 
   // Triggered on a button click, or some other target
@@ -27,7 +28,7 @@ angular.module('specter.tab.create.controller', ['restangular'])
           // clicked add tags button
           $scope.showPopup();
         } else {
-          $scope.data.currentTags.push(data.text);
+          $scope.data.currentTags[data.text] = true;
         }
       }
     });
@@ -52,7 +53,7 @@ angular.module('specter.tab.create.controller', ['restangular'])
         text: '<b>Save tag</b>',
         type: 'button-positive',
         onTap: function(e) {
-          $scope.data.currentTags.push($scope.data.newTag);
+          $scope.data.currentTags[$scope.data.newTag] = true;
           $scope.data.newTag = '';
         }
       }, ]
@@ -73,7 +74,8 @@ angular.module('specter.tab.create.controller', ['restangular'])
       content: 'this is a cool test stache',
       locked: false,
       clue:'',
-      password: null
+      password: null,
+      tags: Object.keys($scope.data.currentTags)
     };
     console.log('saving', newStache);
     staches.post(newStache);
