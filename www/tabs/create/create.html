@@ -2,7 +2,7 @@
 <div class="list">
   <label class="item item-input item-stacked-label">
     <span class="input-label">Title</span>
-    <input type="text" placeholder="Give it a name">
+    <input type="text" placeholder="Give it a name" ng-model="data.titleText">
   </label>
   <a class="item item-icon-left" ng-click="show()">
     <i class="icon ion-ios7-pricetag"></i>
@@ -28,7 +28,7 @@
     <!-- <span class="badge badge-assertive">0</span> -->
   </a>
 </div>
-<button class="button button-full button-positive no-margin orange" style="font-size: 42px">
+<button class="button button-full button-positive no-margin orange" ng-click="saveStache()" style="font-size: 42px">
   MAKE STACHE
 </button>
 </ion-view>

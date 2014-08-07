@@ -1,8 +1,9 @@
-angular.module('specter.tab.create.controller', [])
-.controller('createCtrl', function($scope, $ionicActionSheet, $ionicPopup, $timeout) {
+angular.module('specter.tab.create.controller', ['restangular'])
+.controller('createCtrl', function($scope, $ionicActionSheet, $ionicPopup, $timeout, Restangular) {
   $scope.data = {
     currentTags: []
   };
+
   // Triggered on a button click, or some other target
   $scope.show = function() {
     // Show the action sheet
@@ -59,5 +60,22 @@ angular.module('specter.tab.create.controller', [])
     myPopup.then(function(res) {
       // console.log('Tapped!', res);
     });
+  };
+
+  $scope.saveStache = function() {
+    var staches = Restangular.all('staches');
+
+    var newStache = {
+      title: $scope.data.titleText,
+      author: 'cool mitch',
+      lon: 40,
+      lat: 5,
+      content: 'this is a cool test stache',
+      locked: false,
+      clue:'',
+      password: null
+    };
+    console.log('saving', newStache);
+    staches.post(newStache);
   };
 });
