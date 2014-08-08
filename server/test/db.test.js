@@ -1,55 +1,29 @@
 var should = require('should');
 var mongoose = require('mongoose');
-var config = require('../config');
 var Stache = require('../stache/stache.model.js');
-var testStache1, testStache2;
+var fixtures = require('./test.fixtures.js');
+var assert = require('assert');
 
-process.env.NODE_ENV = 'test';
-var mongoUri = config[process.env.NODE_ENV].mongodb;
-var db = mongoose.connect(mongoUri);
+// Use test database
+var config = require('../config/test.js');
+var db = mongoose.connect(config.mongodb);
 
 // trap any errors from mongoose connection
 mongoose.connection.on('error', function(err){
     console.log(err);
 });
 
-console.log('NODE_ENV: ' + process.env.NODE_ENV);
- 
-if ( process.env.NODE_ENV !== 'test' ) {
-    console.log("NODE_ENV does not equal 'test'!");
-    process.exit(1);
-}
-
 describe('Stache model', function() {
 
     beforeEach(function(done){
         // Clear out db
         Stache.remove(done);
- 
-        testStache1 = {
-            title: 'Advice From Yoda',
-            author: 'Yoda',
-            loc: [40, 6],
-            content: 'Train yourself to let go of everything you fear to lose.',
-            tags: ['Wise', 'Advice'],
-            locked: true,
-            clue: 'Training Plan',
-            password: 'L3tG0'
-        };
- 
-        testStache2 = {
-            title: 'Wise Words from Darth Vader',
-            author: 'Darth Vader',
-            loc: [40, 5],
-            content: 'The ability to destroy a planet is insignificant next to the power of the force.',
-            tags: ['Wise', 'Evil']
-        };
     });
 
     describe('Save', function() {
         it('should save new staches without error', function(done) {
-            var stache1 = new Stache(testStache1);
-            var stache2 = new Stache(testStache1);
+            var stache1 = new Stache(fixtures.testStache1);
+            var stache2 = new Stache(fixtures.testStache2);
             stache1.save(function(err, stache1) {
                 stache2.save(function(err, stache2) {
                     done();
@@ -62,7 +36,7 @@ describe('Stache model', function() {
         var stache1;
 
         beforeEach(function(done) {
-            stache1 = new Stache(testStache1);
+            stache1 = new Stache(fixtures.testStache1);
             stache1.save(function(err, stache1) {
                 done();
             });
@@ -81,8 +55,8 @@ describe('Stache model', function() {
        var stache1, stache2;
 
         beforeEach(function(done) {
-            stache1 = new Stache(testStache1);
-            stache2 = new Stache(testStache2);
+            stache1 = new Stache(fixtures.testStache1);
+            stache2 = new Stache(fixtures.testStache2);
             stache1.save(function(err, stache1) {
                 stache2.save(function(err, stache2) {
                     done();
@@ -115,8 +89,8 @@ describe('Stache model', function() {
         var stache1, stache2;
 
         beforeEach(function(done) {
-            stache1 = new Stache(testStache1);
-            stache2 = new Stache(testStache1);
+            stache1 = new Stache(fixtures.testStache1);
+            stache2 = new Stache(fixtures.testStache2);
             stache1.save(function(err, stache1) {
                 stache2.save(function(err, stache2) {
                     done();
@@ -127,15 +101,17 @@ describe('Stache model', function() {
         it('should have required properties', function(done) {
             // Test stache1
             stache1.should.have.property('title', 'Advice From Yoda');
-            // stache1.should.have.property('loc', [50, 5]);
+            var coord1 = [40 , 6];
+            assert.deepEqual(JSON.stringify(stache1.loc), JSON.stringify(coord1));
             stache1.should.have.property('locked', true);
             stache1.should.have.property('content', 'Train yourself to let go of everything you fear to lose.');
 
             // Test stache2
-            stache2.should.have.property('title', 'Advice From Yoda');
-            // stache2.should.have.property('loc', [50, 5]);
-            stache2.should.have.property('locked', true);
-            stache2.should.have.property('content', 'Train yourself to let go of everything you fear to lose.');
+            stache2.should.have.property('title', 'Wise Words from Darth Vader');
+            var coord2 = [40 , 5];
+            assert.deepEqual(JSON.stringify(stache2.loc), JSON.stringify(coord2));
+            stache2.should.have.property('locked', false);
+            stache2.should.have.property('content', 'The ability to destroy a planet is insignificant next to the power of the force.');
             done();
         });
 
@@ -163,12 +139,12 @@ describe('Stache model', function() {
 
 // After tests are done, 
 // drop the database and close the connection
-after(function(done) {
-    db.connection.db.dropDatabase(function() {
-        db.connection.close(function(){
-            done();
-        });
-    });
-});
+// after(function(done) {
+//     db.connection.db.dropDatabase(function() {
+//         db.connection.close(function(){
+//             done();
+//         });
+//     });
+// });
 
 
