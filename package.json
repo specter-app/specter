@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node server/server.js"
+    "test": ""
   },
   "dependencies": {
     "body-parser": "~1.5.2",
@@ -20,10 +20,7 @@
     "method-override": "~2.1.2",
     "mongoose": "~3.8.14",
     "restangular": "^1.4.0",
-    "sass": "^0.5.0",
-    "mocha": "~1.21.4",
-    "should": "~4.0.4",
-    "supertest": "~0.13.0"
+    "sass": "^0.5.0"
   },
   "devDependencies": {
     "bower": "^1.3.3",
@@ -33,9 +30,9 @@
     "gulp-util": "^2.2.14",
     "karma": "^0.12.19",
     "shelljs": "^0.3.0",
-    "uglify-js": "^2.4.15"
-  },
-  "scripts": {
-    "test": ""
+    "uglify-js": "^2.4.15",
+    "mocha": "~1.21.4",
+    "should": "~4.0.4",
+    "supertest": "~0.13.0"
   }
 }
