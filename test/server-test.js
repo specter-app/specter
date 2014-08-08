@@ -5,14 +5,14 @@ var request = require('supertest');
 
 //App modules to test
 var server = require('../server/server.js');
-var config = require('../server/server-config.js')
+var app = require('../server/server-config.js')
 var routes = require('../server/routes.js');
 var stacheController = require('../server/stache/stache.controller.js');
 
 //Database modules
 var mongoose = require('mongoose');
-// var connectionString.mongodb = require('../server/config/test.js');
-var db = mongoose.connect('mongodb://localhost/server-test');
+var config = require('../server/config/test.js');
+var db = mongoose.connect(config.mongodb);
 
 mongoose.connection.on('error', function(err){
   console.log('MONGOOSE ERROR', err);
@@ -56,8 +56,7 @@ describe('Stache API', function(){
       // .expect('Content-Type', /json/)
       .expect(200)
       .end(function(err, res){
-        console.log('RES', res);
-        var result = JSON.parse(res.body);
+        var result = res.body[0];
         console.log('RESULT', result);
         should.equal(result.title, test_stache.title);
         done();
