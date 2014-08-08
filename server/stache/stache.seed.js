@@ -12,37 +12,37 @@ var stache_data = [
 {
     title: 'BeautifulPoem',
     author: 'Specter',
-    loc: [50, 5],
+    loc: [40, 5.1],
     content: 'Roses are red, violets are blue, digital caches are awesome.'
 },
 {
     title: 'UglyPoem',
     author: 'Goblins',
-    loc: [45, 5],
+    loc: [40, 5.2],
     content: 'Clash Bash Hammer Knock'
 },
 {
     title: 'BerenAndLuthien',
     author: 'Tolkien',
-    loc: [40, 1],
+    loc: [40.1, 5],
     content: 'Beren came, And doom fell on Tinúviel, That in his arms lay glistening.'
 },
 {
     title: 'ACDC',
     author: 'Angus',
-    loc: [40, 50],
+    loc: [40.2, 5],
     content: 'Thunder, thunder, thunder, thunder. I was caught in the middle of a railroad track.'
 },
 {
     title: 'Invite',
     author: 'Jared',
-    loc: [60, 5],
+    loc: [40, 6],
     content: 'Party at Outback Steakhouse storage room.'
 },
 {
     title: 'Money',
     author: 'GenerousDonor',
-    loc: [100, 5],
+    loc: [40, 5.3],
     content: '1 billion IOUs'
 }]
 ;
