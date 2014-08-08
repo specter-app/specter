@@ -1,7 +1,13 @@
 angular.module('specter.tab.create.controller', ['restangular'])
-.controller('createCtrl', ['$scope', '$ionicActionSheet', '$ionicPopup', 
-  'Restangular', 'stacheService', function($scope, $ionicActionSheet, 
-    $ionicPopup, Restangular, stacheService){
+.controller('createCtrl', ['$scope', 
+  '$ionicActionSheet', 
+  '$ionicPopup',
+  '$cordovaCamera', 
+  'Restangular', 
+  'stacheService', 
+  function($scope, $ionicActionSheet, $ionicPopup, $cordovaCamera, 
+    Restangular, stacheService){
+
     $scope.data = {
       currentTags: {}
     };
@@ -78,29 +84,25 @@ angular.module('specter.tab.create.controller', ['restangular'])
         };
       stacheService.saveStache(newStache);
     };
+
+    $scope.takePicture = function() {
+      var options = { 
+          quality : 75, 
+          destinationType : Camera.DestinationType.FILE_URI, 
+          sourceType : Camera.PictureSourceType.CAMERA, 
+          allowEdit : true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 100,
+          targetHeight: 100,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false
+      };
+
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+        $scope.imageData = imageData;
+      }, function(err) {
+        // An error occured. Show a message to the user
+      });
+    };
+   
 }]);
-
-
-  // function($scope, $ionicActionSheet, $ionicPopup, $timeout, Restangular) {
-
-  
-  // };
-
-  // $scope.saveStache = function() {
-  //   var staches = Restangular.all('staches');
-
-  //   var newStache = {
-  //     title: $scope.data.titleText,
-  //     author: 'cool mitch',
-  //     lon: 40,
-  //     lat: 5,
-  //     content: 'this is a cool test stache',
-  //     locked: false,
-  //     clue:'',
-  //     password: null,
-  //     tags: Object.keys($scope.data.currentTags)
-  //   };
-  //   console.log('saving', newStache);
-  //   staches.post(newStache);
-  // };
-// });

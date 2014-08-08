@@ -1,4 +1,4 @@
-angular.module('specter.tab.marcopolo', [])
+angular.module('specter.tab.marcopolo', ['specter.tab.marcopolo.controller'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('tab.marcopolo', {
@@ -6,8 +6,8 @@ angular.module('specter.tab.marcopolo', [])
       views: {
         'marcopolo-tab': {
           templateUrl: "tabs/marcopolo/marcopolo.html",
-          // controller: 'MarcopoloCtrl'
+          controller: 'marcopoloCtrl'
         }
       }
-    })
+    });
 });

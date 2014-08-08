@@ -1,5 +1,6 @@
 (function(){
   'use strict';
+
   var stacheService = function(Restangular){
     this.getAll = function(){
       return Restangular.all('staches').getList().then(function(staches){
