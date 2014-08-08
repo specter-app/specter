@@ -9,6 +9,26 @@
         // return ('error with status', response);
       });
     };
+
+    this.saveStache = function(params) {
+      console.log(params);
+      var staches = Restangular.all('staches');
+
+      var newStache = {
+        title: params.title,
+        author: 'cool mitch',
+        lon: 40,
+        lat: 5,
+        content: 'this is a cool test stache',
+        locked: false,
+        clue: '',
+        password: null,
+        tags: params.tags
+      };
+      console.log('saving', newStache);
+      staches.post(newStache);
+    };
+
   };
   angular.module('specter').service('stacheService', [
     'Restangular',
