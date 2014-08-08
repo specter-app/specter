@@ -139,12 +139,12 @@ describe('Stache model', function() {
 
 // After tests are done, 
 // drop the database and close the connection
-// after(function(done) {
-//     db.connection.db.dropDatabase(function() {
-//         db.connection.close(function(){
-//             done();
-//         });
-//     });
-// });
+after(function(done) {
+    db.connection.db.dropDatabase(function() {
+        db.connection.close(function(){
+            done();
+        });
+    });
+});
 
 
