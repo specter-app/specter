@@ -1,13 +1,12 @@
 angular.module('specter.tab.create.controller', ['restangular'])
-.controller('createCtrl', ['$scope',
-  '$ionicActionSheet',
+.controller('createCtrl', ['$scope', 
+  '$ionicActionSheet', 
   '$ionicPopup',
-  '$cordovaCamera',
-  'Restangular',
-  'stacheService',
-  '$rootScope',
-  function($scope, $ionicActionSheet, $ionicPopup, $cordovaCamera,
-    Restangular, stacheService, $rootScope){
+  '$cordovaCamera', 
+  'Restangular', 
+  'stacheService', 
+  function($scope, $ionicActionSheet, $ionicPopup, $cordovaCamera, 
+    Restangular, stacheService){
 
     $scope.data = {
       currentTags: {}
@@ -87,23 +86,23 @@ angular.module('specter.tab.create.controller', ['restangular'])
     };
 
     $scope.takePicture = function() {
-      var options = {
-            cameraDirection: 2,
-            quality: 90, // 1-100
-            allowEdit : true, // necessary for Square aspect ratio
-            targetWidth: 640,
-            targetHeight: 640,
-            correctOrientation: 1,
-            saveToPhotoAlbum: false,
-            destinationType: navigator.camera.DestinationType.FILE_URI,
-            sourceType : navigator.camera.PictureSourceType.CAMERA
-          };
+      var options = { 
+          quality : 75, 
+          destinationType : Camera.DestinationType.FILE_URI, 
+          sourceType : Camera.PictureSourceType.CAMERA, 
+          allowEdit : true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 100,
+          targetHeight: 100,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false
+      };
 
       $cordovaCamera.getPicture(options).then(function(imageData) {
         $scope.imageData = imageData;
-        //$scope.$apply();
       }, function(err) {
-        $scope.imageData = "ERROR";
+        // An error occured. Show a message to the user
       });
     };
+   
 }]);
