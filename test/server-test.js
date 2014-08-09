@@ -4,14 +4,14 @@ var should = require('should');
 var request = require('supertest');
 
 //App modules to test
-var server = require('../server/server.js');
-var app = require('../server/server-config.js')
-var routes = require('../server/routes.js');
-var stacheController = require('../server/stache/stache.controller.js');
+var server = require('../server.js');
+var app = require('../server-config.js')
+var routes = require('../routes.js');
+var stacheController = require('../stache/stache.controller.js');
 
 //Database modules
 var mongoose = require('mongoose');
-var config = require('../server/config/test.js');
+var config = require('../config/test.js');
 var db = mongoose.connect(config.mongodb);
 
 mongoose.connection.on('error', function(err){
@@ -75,8 +75,12 @@ describe('Stache API', function(){
   });
 
   after(function(done){
-    mongoose.connection.close();
-    console.log('Database connection closed.');
-    done();
+    mongoose.connection.db.dropDatabase(function(){
+      mongoose.connection.close(function(err){
+        if(err) throw err;
+        console.log('Database connection closed.');
+        done();
+      });
+    })
   });
 });
