@@ -6,8 +6,9 @@ angular.module('specter.tab.create.controller', ['restangular'])
   'Restangular',
   'stacheService',
    '$rootScope',
+   '$cordovaCapture',
   function($scope, $ionicActionSheet, $ionicPopup, $cordovaCamera,
-    Restangular, stacheService, $rootScope){
+    Restangular, stacheService, $rootScope, $cordovaCapture){
 
     $scope.data = {
       currentTags: {}
@@ -107,5 +108,16 @@ angular.module('specter.tab.create.controller', ['restangular'])
         $scope.imageData = "ERROR";
       });
     };
+
+   $scope.captureAudio = function() {
+     var options = { limit: 3, duration: 10 };
+     $cordovaCapture.captureAudio(options).then(function(audioData) {
+         $scope.audioData = audioData;
+     }, function(err) {
+     $scope.audioData = "ERROR";
+    });
+ }
+
+
 
 }]);

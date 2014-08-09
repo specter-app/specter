@@ -24,14 +24,17 @@
     Picture
     <img src="{{imageData}}" height="100" width="100">
   </a>
-  <a class="item item-icon-left">
+  <a class="item item-icon-left" ng-click="captureAudio()" >
     <i class="icon ion-mic-a"></i>
     Audio
-    <!-- <span class="badge badge-assertive">0</span> -->
   </a>
-</div>
-<button class="button button-full button-positive no-margin orange" ng-click="saveStache()" style="font-size: 42px">
+  <!-- <a class="item item-icon-left" >
+    <i class="icon ion-mic-a"></i>
+    {{audioData}}
+  </a> -->
+  </div>
+  <button class="button button-full button-positive no-margin orange" ng-click="saveStache()" style="font-size: 42px">
   MAKE STACHE
-</button>
+  </button>
 </ion-content>
 </ion-view>
