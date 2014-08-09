@@ -95,6 +95,7 @@ angular.module('specter.tab.create.controller', ['restangular'])
             targetHeight: 640,
             correctOrientation: 1,
             saveToPhotoAlbum: false,
+            encodingType: Camera.EncodingType.JPEG,
             destinationType: navigator.camera.DestinationType.FILE_URI,
             sourceType : navigator.camera.PictureSourceType.CAMERA
           };

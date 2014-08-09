@@ -1,4 +1,5 @@
 <ion-view>
+  <ion-content>
 <div class="list">
   <label class="item item-input item-stacked-label">
     <span class="input-label">Title</span>
@@ -21,7 +22,7 @@
   <a class="item item-icon-left" ng-click="takePicture()">
     <i class="icon ion-ios7-camera"></i>
     Picture
-    {{imageData}}
+    <img src="{{imageData}}" height="100" width="100">
   </a>
   <a class="item item-icon-left">
     <i class="icon ion-mic-a"></i>
@@ -32,4 +33,5 @@
 <button class="button button-full button-positive no-margin orange" ng-click="saveStache()" style="font-size: 42px">
   MAKE STACHE
 </button>
+</ion-content>
 </ion-view>
