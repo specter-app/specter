@@ -1,5 +1,5 @@
 angular.module('specter.tab.create.controller', ['restangular'])
-.controller('createCtrl', ['$scope',
+.controller('createCtrl', [
   '$ionicActionSheet',
   '$ionicPopup',
   '$cordovaCamera',
@@ -7,15 +7,15 @@ angular.module('specter.tab.create.controller', ['restangular'])
   'stacheService',
    '$rootScope',
    '$cordovaCapture',
-  function($scope, $ionicActionSheet, $ionicPopup, $cordovaCamera,
+  function( $ionicActionSheet, $ionicPopup, $cordovaCamera,
     Restangular, stacheService, $rootScope, $cordovaCapture){
-
-    $scope.data = {
+    var self = this;
+    this.data = {
       currentTags: {}
     };
 
     // Triggered on a button click, or some other target
-    $scope.show = function() {
+    this.show = function() {
       // Show the action sheet
       var hideSheet = $ionicActionSheet.show({
         buttons: [{
@@ -35,9 +35,9 @@ angular.module('specter.tab.create.controller', ['restangular'])
         buttonClicked: function(index, data) {
           if (index === 3) {
             // clicked add tags button
-            $scope.showPopup();
+            self.showPopup();
           } else {
-            $scope.data.currentTags[data.text] = true;
+            self.data.currentTags[data.text] = true;
           }
         }
       });
@@ -49,12 +49,12 @@ angular.module('specter.tab.create.controller', ['restangular'])
 
     };
 
-    $scope.showPopup = function() {
+    this.showPopup = function() {
       var myPopup = $ionicPopup.show({
         template: '<input type="text" ng-model="data.newTag">',
         title: 'Enter a new tag',
         // subTitle: 'Please use normal things',
-        scope: $scope,
+        scope: self,
         buttons: [{
           text: 'Cancel'
         },
@@ -62,8 +62,8 @@ angular.module('specter.tab.create.controller', ['restangular'])
           text: '<b>Save tag</b>',
           type: 'button-positive',
           onTap: function(e) {
-            $scope.data.currentTags[$scope.data.newTag] = true;
-            $scope.data.newTag = '';
+            self.data.currentTags[self.data.newTag] = true;
+            self.data.newTag = '';
           }
         }, ]
       });
@@ -72,22 +72,22 @@ angular.module('specter.tab.create.controller', ['restangular'])
       });
     };
 
-    $scope.saveStache = function() {
+    this.saveStache = function() {
        var newStache = {
-          title: $scope.data.titleText,
-          author: 'cool mitch',
+          title: self.data.titleText,
+          author: 'bao the boss',
           lon: 40,
           lat: 5,
           content: 'this is a cool test stache',
           locked: false,
           clue:'',
           password: null,
-          tags: Object.keys($scope.data.currentTags)
+          tags: Object.keys(self.data.currentTags)
         };
       stacheService.saveStache(newStache);
     };
 
-     $scope.takePicture = function() {
+     this.takePicture = function() {
       var options = {
             cameraDirection: 2,
             quality: 90, // 1-100
@@ -102,19 +102,18 @@ angular.module('specter.tab.create.controller', ['restangular'])
           };
 
       $cordovaCamera.getPicture(options).then(function(imageData) {
-        $scope.imageData = imageData;
-        $scope.$apply();
+        self.imageData = imageData;
       }, function(err) {
-        $scope.imageData = "ERROR";
+        self.imageData = "ERROR";
       });
     };
 
-   $scope.captureAudio = function() {
+   this.captureAudio = function() {
      var options = { limit: 3, duration: 10 };
      $cordovaCapture.captureAudio(options).then(function(audioData) {
-         $scope.audioData = audioData;
+         self.audioData = audioData;
      }, function(err) {
-     $scope.audioData = "ERROR";
+     self.audioData = "ERROR";
     });
  }
 
