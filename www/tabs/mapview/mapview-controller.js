@@ -1,6 +1,7 @@
 angular.module('specter.tab.mapview.controller', [])
-.controller('mapviewCtrl', ['$scope', 'stacheService', function($scope, stacheService) {
+.controller('mapviewCtrl', ['stacheService', function(stacheService) {
+  var self = this;
   stacheService.getAll().then(function(staches) {
-    $scope.staches = staches;
+    self.staches = staches;
   });
 }]);
