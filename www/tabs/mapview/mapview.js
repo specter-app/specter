@@ -6,7 +6,9 @@ angular.module('specter.tab.mapview', ['specter.tab.mapview.controller'])
       views: {
         'mapview-tab': {
           templateUrl: "tabs/mapview/mapview.html",
-          controller: 'mapviewCtrl'
+          // controllerAs: "mapview",
+          //controllerAs did not work for some reason so I had to use mapviewCtrl as mapview
+          controller: 'mapviewCtrl as mapview'
         }
       }
     });
