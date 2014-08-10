@@ -6,7 +6,7 @@ angular.module('specter.tab.create', ['specter.tab.create.controller'])
     views: {
       'create-tab': {
         templateUrl: "tabs/create/create.html",
-        controller: 'createCtrl'
+        controller: 'createCtrl as create'
       }
     }
   });
