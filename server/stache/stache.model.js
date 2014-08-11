@@ -11,6 +11,8 @@ var StacheSchema = new Schema({
     title: {type: String, required: true},
     date: {type: Date, default: Date.now},
     author: {type: String, default: 'Anonymous'},
+    lon: {type: Number, required: true},
+    lat: {type: Number, required: true},
     loc: {type: [Number], index: '2dsphere', required: true},
     content: {type: String, required: true},
     tags: [String],
