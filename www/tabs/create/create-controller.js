@@ -18,7 +18,6 @@ angular.module('specter.tab.create.controller', ['restangular'])
     this.location = {long: "", lat: ""};
 
     this.show = function() {
-      // Show the action sheet
       var hideSheet = $ionicActionSheet.show({
         buttons: [{
           text: 'Funny'
@@ -43,19 +42,21 @@ angular.module('specter.tab.create.controller', ['restangular'])
           }
         }
       });
-
-      // For example's sake, hide the sheet after two seconds
-      // $timeout(function() {
-      //   hideSheet();
-      // }, 2000);
-
+    };
+    this.saveStache = function() {
+      stacheService.saveStache({
+         title: self.data.titleText,
+         content: self.data.content,
+         tags: Object.keys(self.data.currentTags),
+         lon: self.location.long,
+         lat: self.location.lat
+       });
     };
 
     this.showPopup = function() {
       var myPopup = $ionicPopup.show({
         template: '<input type="text" ng-model="data.newTag">',
         title: 'Enter a new tag',
-        // subTitle: 'Please use normal things',
         scope: self,
         buttons: [{
           text: 'Cancel'
@@ -74,34 +75,20 @@ angular.module('specter.tab.create.controller', ['restangular'])
       });
     };
 
-    this.saveStache = function() {
-       var newStache = {
-          title: self.data.titleText,
-          author: 'bao the boss',
-          lon: 40,
-          lat: 5,
-          content: 'this is a cool test stache',
-          locked: false,
-          clue:'',
-          password: null,
-          tags: Object.keys(self.data.currentTags)
-        };
-      stacheService.saveStache(newStache);
-    };
 
-     this.takePicture = function() {
+    this.takePicture = function() {
       var options = {
-            cameraDirection: 2,
-            quality: 90, // 1-100
-            allowEdit : true, // necessary for Square aspect ratio
-            targetWidth: 640,
-            targetHeight: 640,
-            correctOrientation: 1,
-            saveToPhotoAlbum: false,
-            encodingType: Camera.EncodingType.JPEG,
-            destinationType: navigator.camera.DestinationType.FILE_URI,
-            sourceType : navigator.camera.PictureSourceType.CAMERA
-          };
+        cameraDirection: 2,
+        quality: 90,
+        allowEdit : true,
+        targetWidth: 640,
+        targetHeight: 640,
+        correctOrientation: 1,
+        saveToPhotoAlbum: false,
+        encodingType: Camera.EncodingType.JPEG,
+        destinationType: navigator.camera.DestinationType.FILE_URI,
+        sourceType : navigator.camera.PictureSourceType.CAMERA
+      };
 
       $cordovaCamera.getPicture(options).then(function(imageData) {
         self.imageData = imageData;
@@ -120,8 +107,8 @@ angular.module('specter.tab.create.controller', ['restangular'])
    };
 
    geoService.getLocation().then(function(position) {
-     self.location.long = position.coords.latitude;
-     self.location.lat = position.coords.longitude;
+     self.location.long = position.coords.longitude;
+     self.location.lat = position.coords.latitude;
    }, function(err) {
      self.location = err;
    });
@@ -133,7 +120,7 @@ angular.module('specter.tab.create.controller', ['restangular'])
      }, function(err) {
        self.location = err
      }, function(position) {
-   self.location.long = position.coords.latitude;
-   self.location.lat = position.coords.longitude;
+   self.location.long = position.coords.longitude;
+   self.location.lat = position.coords.latitude;
    });
 }]);

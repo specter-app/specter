@@ -11,8 +11,8 @@ angular.module('specter.tab.marcopolo.controller', [])
         zoom: 15
       };
       geoService.getLocation().then(function(position) {
-        self.location.long = position.coords.latitude;
-        self.location.lat = position.coords.longitude;
+        self.location.long = position.coords.longitude;
+        self.location.lat = position.coords.latitude;
       }, function(err) {
         self.location = err;
       });
@@ -24,7 +24,7 @@ angular.module('specter.tab.marcopolo.controller', [])
         }, function(err) {
           self.location = err
         }, function(position) {
-      self.location.long = position.coords.latitude;
-      self.location.lat = position.coords.longitude;
+      self.location.long = position.coords.longitude;
+      self.location.lat = position.coords.latitude;
       });
   }]);

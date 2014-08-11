@@ -42,12 +42,12 @@ exports.getNearby = function(req, res) {
         dist = Number(query[2]);
     } else {
         console.log('grab all');
-        coord = [40, 5]; // temporary default coordinates
-        dist = 100; // default search radius (meters)
+        coord = [-122.4089, 37.7837]; // temporary default coordinates
+        dist = 10000000; // default search radius (meters)
     }
 
     // Tell MongoDB to index fields that contain lat/lon
-    // run this command from a mongo prompt: 
+    // run this command from a mongo prompt:
     // db.staches.ensureIndex({ loc: "2dsphere" })
 
     Stache.find(
