@@ -3,10 +3,10 @@ angular.module('specter.tab.marcopolo.controller', [])
     function($scope, geoService) {
       $scope.map = {
         center: {
-            latitude: 45,
-            longitude: -73
+            latitude: 37.7837,
+            longitude: -122.4089
         },
-        zoom: 8
+        zoom: 15
       };
       geoService.getLocation().then(function(location) {
         $scope.location = location;
