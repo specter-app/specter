@@ -19,6 +19,11 @@
     <script src="lib/ng-cordova.min.js"></script>
     <script src="cordova.js"></script>
 
+    <!-- angular google maps -->
+    <script src='http://maps.googleapis.com/maps/api/js?libraries=weather,visualization&sensor=false&language=en&v=3.14'></script>
+    <script src='lib/lodash.underscore.min.js'></script>
+    <script src='lib/angular-google-maps.min.js'></script>
+
     <!-- your app's js -->
     <script src="lib/lodash.min.js"></script>
     <script src="lib/restangular.min.js"></script>
@@ -34,9 +39,9 @@
     <script src="services/stacheService.js"></script>
     <script src="tabs/mapview/mapview.js"></script>
     <script src="tabs/mapview/mapview-controller.js"></script>
-
-
     <script src="filters/timeConversion.js"></script>
+    <script src="directive/marcopoloDirective.js"></script>
+
   </head>
   <body ng-app="specter" animation="slide-left-right-ios7" class="platform-ios platform-cordova platform-webview">
     <ion-nav-view animation="slide-left-right"></ion-nav-view>
