@@ -7,6 +7,9 @@ var request = require('supertest');
 var fixture = require('./test.fixtures.js');
 var Stache = require('../stache/stache.model.js');
 
+//Server
+var server = require('../server.js');
+
 //Database modules
 var mongoose = require('mongoose');
 db = mongoose.connection;
@@ -18,13 +21,12 @@ db.on('error', function(err){
 //Basic server route tests
 describe('Stache API', function(){
   var staches = [];
-  staches.push(fixture.testStache1, fixture.testStache2, fixture.testStache3);
 
   describe('POST /staches', function(){
     it('should post a stache', function(done){
-      request('http://localhost:8000')
+      request(server)
       .post('/staches')
-      .send(staches[0])
+      .send(fixture.testStache3)
       .expect(201, done);
     });
   });
@@ -64,13 +66,13 @@ describe('Stache API', function(){
   });
 
   after(function(done){
-  //   db.collections['staches'].drop(function(err){
-  //     if(err) throw err;
+    db.db.dropDatabase(function(err){
+      if(err) throw err;
       db.close(function(err){
         if(err) throw err;
         console.log('Database connection closed.');
         done();
       });
-  //   });
+    });
   });
 });
