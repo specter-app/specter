@@ -5,26 +5,26 @@ exports.save = function(req, res) {
     var stache_data = {
         title: req.body.title,
         author: req.body.author,
-        loc: [req.body.lon, req.body.lat],
+        loc: [req.body.loc[0], req.body.loc[1]],
         content: req.body.content,
         tags: req.body.tags,
         locked: req.body.locked,
         clue: req.body.clue,
         password: req.body.password
     };
-
     var stache = new Stache(stache_data);
+    console.log('I\'M TRYING TO SAVE', stache);
     stache.save(function(err) {
         if (err) throw err;
         console.log('Stache saved!');
-        res.send('Stache saved!');
+        res.status(201).send('Stache saved!');
     });
 };
 
 // Returns a single stache by ID if client geolocation is within range
 exports.getOne = function(req, res) {
     Stache.findOne({_id: req.params.id}, function(err, stache) {
-      if (err) res.send(err.status, err);
+      if (err) res.status(err.status).send(err.message);
       // if (!isAtLocation(req.query.lon, req.query.lat)) return res.send('Out of range of stache.');
       // if (stache.locked && req.query.password !== stache.password) return res.send('Failed to open stache.');
       res.send(stache);
