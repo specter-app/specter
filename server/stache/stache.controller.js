@@ -13,7 +13,6 @@ exports.save = function(req, res) {
         password: req.body.password
     };
     var stache = new Stache(stache_data);
-    console.log('I\'M TRYING TO SAVE', stache);
     stache.save(function(err) {
         if (err) throw err;
         console.log('Stache saved!');
