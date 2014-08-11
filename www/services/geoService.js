@@ -11,7 +11,6 @@
           });
     };
   };
-
   angular.module('specter').service('geoService', [
     '$cordovaGeolocation',
     geoService

@@ -6,7 +6,7 @@ angular.module('specter.tab.marcopolo', ['specter.tab.marcopolo.controller'])
       views: {
         'marcopolo-tab': {
           templateUrl: "tabs/marcopolo/marcopolo.html",
-          controller: 'marcopoloCtrl'
+          controller: 'marcopoloCtrl as marcopolo'
         }
       }
     });

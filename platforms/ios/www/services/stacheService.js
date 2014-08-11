@@ -14,12 +14,11 @@
     this.saveStache = function(params) {
       console.log(params);
       var staches = Restangular.all('staches');
-
       var newStache = {
         title: params.title,
         author: 'cool mitch',
-        lon: 40,
-        lat: 5,
+        lon: 37.7837,
+        lat: -122.4089,
         content: 'this is a cool test stache',
         locked: false,
         clue: '',

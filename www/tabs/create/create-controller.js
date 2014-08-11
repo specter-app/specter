@@ -7,14 +7,16 @@ angular.module('specter.tab.create.controller', ['restangular'])
   'stacheService',
    '$rootScope',
    '$cordovaCapture',
+   '$cordovaGeolocation',
+   'geoService',
   function( $ionicActionSheet, $ionicPopup, $cordovaCamera,
-    Restangular, stacheService, $rootScope, $cordovaCapture){
+    Restangular, stacheService, $rootScope, $cordovaCapture, $cordovaGeolocation, geoService){
     var self = this;
     this.data = {
       currentTags: {}
     };
+    this.location = {long: "", lat: ""};
 
-    // Triggered on a button click, or some other target
     this.show = function() {
       // Show the action sheet
       var hideSheet = $ionicActionSheet.show({
@@ -111,12 +113,27 @@ angular.module('specter.tab.create.controller', ['restangular'])
    this.captureAudio = function() {
      var options = { limit: 3, duration: 10 };
      $cordovaCapture.captureAudio(options).then(function(audioData) {
-         self.audioData = audioData;
+       self.audioData = audioData;
      }, function(err) {
-     self.audioData = "ERROR";
-    });
- }
+       self.audioData = "ERROR";
+     });
+   };
 
-
-
+   geoService.getLocation().then(function(position) {
+     self.location.long = position.coords.latitude;
+     self.location.lat = position.coords.longitude;
+   }, function(err) {
+     self.location = err;
+   });
+   var watch = $cordovaGeolocation.watchPosition({
+     frequency: 1000
+   });
+   watch.promise.then(function() {
+       // Not currently used
+     }, function(err) {
+       self.location = err
+     }, function(position) {
+   self.location.long = position.coords.latitude;
+   self.location.lat = position.coords.longitude;
+   });
 }]);
