@@ -11,12 +11,12 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-  console.log('Received GET request to /staches:id with req.body:', req.body);
+  console.log('Received GET request to /staches/:id.');
   stacheController.getOne(req, res);
 });
 
 router.post('/', function(req, res) {
-  console.log('Received POST request to /staches with req.body:', req.body);
+  console.log('Received POST request to /staches.');
   stacheController.save(req, res);
 });
 
