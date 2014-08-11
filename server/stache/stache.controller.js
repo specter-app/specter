@@ -5,7 +5,9 @@ exports.save = function(req, res) {
     var stache_data = {
         title: req.body.title,
         author: req.body.author,
-        loc: [req.body.loc[0], req.body.loc[1]],
+        lon: req.body.lon,
+        lat: req.body.lat,
+        loc: [req.body.lon, req.body.lat],
         content: req.body.content,
         tags: req.body.tags,
         locked: req.body.locked,
@@ -26,6 +28,7 @@ exports.getOne = function(req, res) {
       if (err) res.status(err.status).send(err.message);
       // if (!isAtLocation(req.query.lon, req.query.lat)) return res.send('Out of range of stache.');
       // if (stache.locked && req.query.password !== stache.password) return res.send('Failed to open stache.');
+
       res.send(stache);
     });
 };
@@ -43,6 +46,7 @@ exports.getNearby = function(req, res) {
         console.log('grab all');
         coord = [-122.4089, 37.7837]; // temporary default coordinates
         dist = 10000000; // default search radius (meters)
+        return res.status(400).send('Query must contain geolocation.')
     }
 
     // Tell MongoDB to index fields that contain lat/lon
