@@ -18,18 +18,18 @@ exports.save = function(req, res) {
     stache.save(function(err, savedStache) {
         if (err) throw err;
         console.log('Stache saved with id:', savedStache._id);
-        res.status(201).send(savedStache);
+        res.status(201).json(savedStache);
     });
 };
 
 // Returns a single stache by ID if client geolocation is within range
 exports.getOne = function(req, res) {
     Stache.findOne({_id: req.params.id}, function(err, stache) {
-      if (err) res.status(err.status).send(err.message);
-      // if (!isAtLocation(req.query.lon, req.query.lat)) return res.send('Out of range of stache.');
-      // if (stache.locked && req.query.password !== stache.password) return res.send('Failed to open stache.');
+      if (err) res.status(err.status).json(err.message);
+      // if (!isAtLocation(req.query.lon, req.query.lat)) return res.json('Out of range of stache.');
+      // if (stache.locked && req.query.password !== stache.password) return res.json('Failed to open stache.');
 
-      res.send(stache);
+      res.json(stache);
     });
 };
 
@@ -46,7 +46,7 @@ exports.getNearby = function(req, res) {
         console.log('grab all');
         coord = [-122.4089, 37.7837]; // temporary default coordinates
         dist = 10000000; // default search radius (meters)
-        return res.status(400).send('Query must contain geolocation.')
+        return res.status(400).json({message: 'Query must contain geolocation.'});
     }
 
     // Tell MongoDB to index fields that contain lat/lon
@@ -63,7 +63,7 @@ exports.getNearby = function(req, res) {
            }
         },
         function(err,staches) {
-            res.send(staches);
+            res.json(staches);
         }
     );
 };
