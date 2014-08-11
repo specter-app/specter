@@ -6,43 +6,43 @@ var stache_data = [
 {
     title: 'HRAdvice',
     author: 'LaoTzu',
-    loc: [37.7837, -122.4089],
+    loc: [-122.4089, 37.7837],
     content: 'Those who flow as life flows know they need no other force.'
 },
 {
     title: 'BeautifulPoem',
     author: 'Specter',
-    loc: [37.7837, -122.4089],
+    loc: [-122.4089, 37.7837],
     content: 'Roses are red, violets are blue, digital caches are awesome.'
 },
 {
     title: 'UglyPoem',
     author: 'Goblins',
-    loc: [37.7837, -122.4089],
+    loc: [-122.4089, 37.7837],
     content: 'Clash Bash Hammer Knock'
 },
 {
     title: 'BerenAndLuthien',
     author: 'Tolkien',
-    loc: [37.7837, -122.4089],
+    loc: [-122.4089, 37.7837],
     content: 'Beren came, And doom fell on Tinúviel, That in his arms lay glistening.'
 },
 {
     title: 'ACDC',
     author: 'Angus',
-    loc: [37.7837, -122.4089],
+    loc: [-122.4089, 37.7837],
     content: 'Thunder, thunder, thunder, thunder. I was caught in the middle of a railroad track.'
 },
 {
     title: 'Invite',
     author: 'Jared',
-    loc: [37.7837, -122.4089],
+    loc: [-122.4089, 37.7837],
     content: 'Party at Outback Steakhouse storage room.'
 },
 {
     title: 'Money',
     author: 'GenerousDonor',
-    loc: [37.7837, -122.4089],
+    loc: [-122.4089, 37.7837],
     content: '1 billion IOUs'
 }]
 ;
