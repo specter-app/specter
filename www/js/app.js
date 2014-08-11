@@ -18,5 +18,5 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova'])
   });
 })
 .config(function(RestangularProvider) {
-  RestangularProvider.setBaseUrl('http://localhost:8000');
+  RestangularProvider.setBaseUrl('http://specter.azurewebsites.net');
 });
