@@ -79,8 +79,8 @@ angular.module('specter.tab.create.controller', ['restangular'])
     this.takePicture = function() {
       var options = {
         cameraDirection: 2,
-        quality: 90, // 1-100
-        allowEdit : true, // necessary for Square aspect ratio
+        quality: 90,
+        allowEdit : true,
         targetWidth: 640,
         targetHeight: 640,
         correctOrientation: 1,
@@ -107,8 +107,8 @@ angular.module('specter.tab.create.controller', ['restangular'])
    };
 
    geoService.getLocation().then(function(position) {
-     self.location.long = position.coords.latitude;
-     self.location.lat = position.coords.longitude;
+     self.location.long = position.coords.longitude;
+     self.location.lat = position.coords.latitude;
    }, function(err) {
      self.location = err;
    });
@@ -120,7 +120,7 @@ angular.module('specter.tab.create.controller', ['restangular'])
      }, function(err) {
        self.location = err
      }, function(position) {
-   self.location.long = position.coords.latitude;
-   self.location.lat = position.coords.longitude;
+   self.location.long = position.coords.longitude;
+   self.location.lat = position.coords.latitude;
    });
 }]);

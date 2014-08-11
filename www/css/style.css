@@ -1,10 +1,10 @@
 /* Empty. Add your own CSS if you like */
-.no-margin {
+/*.no-margin {
 	margin-top: 0px !important;
 	margin-bottom: 0px !important;
 	min-height: 102px;
 	border: 0px;
-}
+}*/
 
 .angular-google-map-container {
     height: 400px;

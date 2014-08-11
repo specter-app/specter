@@ -19,8 +19,8 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
 })
 .config(function(RestangularProvider) {
   RestangularProvider.setBaseUrl('http://specter.azurewebsites.net/');
-  // RestangularProvider.setDefaultHeaders({
-  //   "Content-Type": "application/json",
-  //   "X-Requested-With": "XMLHttpRequest"
-  // });
+  RestangularProvider.setDefaultHeaders({
+    "Content-Type": "application/json",
+    "X-Requested-With": "XMLHttpRequest"
+  });
 });
