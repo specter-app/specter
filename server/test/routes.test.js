@@ -20,7 +20,6 @@ db.on('error', function(err){
 
 //Basic server route tests
 describe('Stache API', function(){
-  var staches = [];
 
   describe('POST /staches', function(){
     it('should post a stache', function(done){
@@ -33,15 +32,24 @@ describe('Stache API', function(){
 
   describe('GET /staches', function(){
 
-    // beforeEach(function(done){
-    //   mongoose.connection.collections['staches'].drop(function(err){
-    //     mongoose.connection.collections['staches'].insert(staches, function(err, docs){
-    //       done(docs);
-    //     });
-    //   });
-    // });
+    beforeEach(function(done){
+      db.collections['staches'].drop(function(err){
+        if(err) throw err;
+        done();
+      });
+    });
 
-    xit('should receive requests', function(done){
+    xit('should retrieve nearby staches', function(done){
+      
+      var staches = [fixture.testStache1, fixture.testStache2, fixture.testStache3];
+      
+      before(function(done){
+        db.collections['staches'].insert(staches, function(err, docs){
+          if(err) throw err;
+          done(docs);
+        });
+      });
+
       request(server)
       .get('/staches')
       // .expect('Content-Type', /json/)
@@ -54,14 +62,27 @@ describe('Stache API', function(){
       });
     });
 
-    xit('should return an array of caches when sent geocoords', function(done){
-      var temp = request(server).get('/staches/?coord=40+5+100')
-      // .expect('Content-Type', /json/);
-      .expect(200)
-      .end(function(err, res){
-        console.log(res.text);
-        done();
+    it('should retrieve a correct stache by id', function(done){
+      request(server)
+      .post('/staches')
+      .send(fixture.testStache2)
+      .expect(201)
+      .end(function(err, postRes){
+        request(server)
+        .get('/staches/' + postRes.body._id)        
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, getRes){
+          should.equal(getRes.body._id, postRes.body._id);
+          should.equal(getRes.body.title, postRes.body.title);
+          should.equal(getRes.body.author, postRes.body.author);
+          should.equal(getRes.body.lat, postRes.body.lat);
+          should.equal(getRes.body.lon, postRes.body.lon);
+          should.equal(getRes.body.content, postRes.body.content);
+          done();
+        });
       });
+
     });
   });
 
