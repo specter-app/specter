@@ -21,7 +21,7 @@ module.exports.testStache2 = {
     tags: ['Wise', 'Evil']
 };
 
-module.exports.testStacheRoute1 = {
+module.exports.testStache3 = {
     title: 'Veggie Burger',
     author: 'Hamburglar',
     lon: 41,
