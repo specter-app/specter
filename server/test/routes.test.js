@@ -1,56 +1,45 @@
-//Testing modules
+//Testing frameworks
 var mocha = require('mocha');
 var should = require('should');
 var request = require('supertest');
 
-//App modules to test
-var server = require('../server.js');
-var app = require('../server-config.js')
-var routes = require('../routes.js');
-var stacheController = require('../stache/stache.controller.js');
+//Test helpers
+var fixture = require('./test.fixtures.js');
+var Stache = require('../stache/stache.model.js');
 
 //Database modules
 var mongoose = require('mongoose');
-var config = require('../config/test.js');
-var db = mongoose.connect(config.mongodb);
+db = mongoose.connection;
 
-mongoose.connection.on('error', function(err){
-  console.log('MONGOOSE ERROR', err);
+db.on('error', function(err){
+  console.log(err);
 });
 
-var test_stache = {
-    title: 'Veggie Burger',
-    author: 'Bob',
-    loc: [40, 5],
-    content: 'HEY THERE PAL! WAY TO FIND ME!',
-    tags: ['greeting', 'nonsense'],
-    locked: false,
-}
-
-//Basic server tests
+//Basic server route tests
 describe('Stache API', function(){
-
-  beforeEach(function(done){
-    mongoose.connection.collections['staches'].drop(function(err){
-      mongoose.connection.collections['staches'].insert(test_stache, function(err, docs){
-        id = docs[0]._id;
-        done();
-      });
-    });
-  });
+  var staches = [];
+  staches.push(fixture.testStache1, fixture.testStache2, fixture.testStache3);
 
   describe('POST /staches', function(){
-    xit('should post a stache', function(done){
-      var req = request(server)
+    it('should post a stache', function(done){
+      request('http://localhost:8000')
       .post('/staches')
+      .send(staches[0])
       .expect(201, done);
-      
-      console.log( req );
     });
   });
 
   describe('GET /staches', function(){
-    it('should receive requests', function(done){
+
+    // beforeEach(function(done){
+    //   mongoose.connection.collections['staches'].drop(function(err){
+    //     mongoose.connection.collections['staches'].insert(staches, function(err, docs){
+    //       done(docs);
+    //     });
+    //   });
+    // });
+
+    xit('should receive requests', function(done){
       request(server)
       .get('/staches')
       // .expect('Content-Type', /json/)
@@ -60,7 +49,7 @@ describe('Stache API', function(){
         console.log('RESULT', result);
         should.equal(result.title, test_stache.title);
         done();
-      })
+      });
     });
 
     xit('should return an array of caches when sent geocoords', function(done){
@@ -75,12 +64,13 @@ describe('Stache API', function(){
   });
 
   after(function(done){
-    mongoose.connection.db.dropDatabase(function(){
-      mongoose.connection.close(function(err){
+  //   db.collections['staches'].drop(function(err){
+  //     if(err) throw err;
+      db.close(function(err){
         if(err) throw err;
         console.log('Database connection closed.');
         done();
       });
-    })
+  //   });
   });
 });
