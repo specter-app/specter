@@ -15,10 +15,10 @@ exports.save = function(req, res) {
         password: req.body.password
     };
     var stache = new Stache(stache_data);
-    stache.save(function(err) {
+    stache.save(function(err, savedStache) {
         if (err) throw err;
-        console.log('Stache saved!');
-        res.status(201).send('Stache saved!');
+        console.log('Stache saved with id:', savedStache._id);
+        res.status(201).send(savedStache);
     });
 };
 
