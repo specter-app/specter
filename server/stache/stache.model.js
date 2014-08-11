@@ -20,4 +20,5 @@ var StacheSchema = new Schema({
 });
 
 var Stache = mongoose.model('Stache', StacheSchema);
+
 module.exports = Stache;
