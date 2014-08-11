@@ -16,3 +16,12 @@ module.exports.testStache2 = {
     content: 'The ability to destroy a planet is insignificant next to the power of the force.',
     tags: ['Wise', 'Evil']
 };
+
+module.exports.testStache3 = {
+    title: 'Veggie Burger',
+    author: 'Hamburglar',
+    loc: [41, 4],
+    content: 'Cow-ered!',
+    tags: ['Food', 'McDonalds'],
+    locked: false
+};
