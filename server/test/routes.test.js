@@ -90,7 +90,7 @@ describe('Stache API', function(){
       });
     });
 
-    xit('should retrieve a correct stache by id', function(done){
+    it('should retrieve a correct stache by id', function(done){
       request(server)
       .get('/staches/' + postRes1._id)        
       .expect(200)
