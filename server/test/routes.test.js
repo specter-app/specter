@@ -76,18 +76,11 @@ describe('Stache API', function(){
       });
     });
 
-    xit('should error on retrieve nearby staches if no geolocation in query string', function(done){
+    it('should error 400 on retrieve nearby staches if no id param or geolocation query', function(done){
       request(server)
       .get('/staches')
       // .expect('Content-Type', /json/)
-      .expect(200)
-      .end(function(err, res){
-        if(err) throw err;
-        var result = res.body[0];
-        console.log('RESULT', result);
-        should.equal(result.title, test_stache.title);
-        done();
-      });
+      .expect(400, done);
     });
 
     it('should retrieve a correct stache by id', function(done){
