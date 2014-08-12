@@ -38,10 +38,10 @@ exports.getNearby = function(req, res) {
     var query, coord, dist;
 
     if (req.query.coord) {
-        console.log('query nearby');
         query = req.query.coord.split(" ");
         coord = [Number(query[0]), Number(query[1])];
         dist = Number(query[2]);
+        console.log('query nearby:', coord, dist);
     } else {
         console.log('grab all');
         coord = [-122.4089, 37.7837]; // temporary default coordinates
@@ -50,9 +50,8 @@ exports.getNearby = function(req, res) {
         return;
     }
 
-    // Tell MongoDB to index fields that contain lat/lon
-    // run this command from a mongo prompt:
-    // db.staches.ensureIndex({ loc: "2dsphere" })
+    // Be sure to invoke ensureIndex on every mongoDB instance so as to index fields that contain lat/lon,
+    // ideally from the mongo shell, as otherwise $geoNear queries may fail: db.staches.ensureIndex({ loc: "2dsphere" })
 
     Stache.find(
        { loc :
@@ -64,7 +63,8 @@ exports.getNearby = function(req, res) {
            }
         },
         function(err,staches) {
-            res.json(staches);
+            if(err) throw err;
+            res.send(staches);
         }
     );
 };
