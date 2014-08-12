@@ -1,6 +1,6 @@
 angular.module('specter.tab.marcopolo.controller', [])
-  .controller('marcopoloCtrl', ['geoService', '$cordovaGeolocation', '$scope',
-    function(geoService, $cordovaGeolocation, $scope) {
+  .controller('marcopoloCtrl', ['geoService', '$cordovaGeolocation', '$scope', '$timeout',
+    function(geoService, $cordovaGeolocation, $scope, $timeout) {
       var self = this;
       self.location = {long: "", lat: ""};
       $scope.map = {
