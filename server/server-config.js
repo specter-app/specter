@@ -11,14 +11,21 @@ app.use(express.static(__dirname + '/../www'));
 app.use(cors());
 
 // Configure based on environment
-console.log('environment: ', app.get('env'));
 var config = require('./config/' + app.get('env') + '.js');
 
 // Connect to mongodb instance
 var mongoUri = config.mongodb;
+//Default server options values as follows, so no need to explicit set them
+// var dbOptions = {
+//   server: { auto_reconnect: true, poolSize: 5 }
+// };
 mongoose.connect(mongoUri);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
+
+//Confirm environmental variables and environment
+console.log( 'config.mongodb:', mongoUri );
+console.log( 'environment: ', app.get('env') );
 
 // Routes
 app.use('/staches', require('./routes.js'));
@@ -34,7 +41,7 @@ app.use('*', function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next){
     res.status(err.status || 500);
-    res.send(err.message, err); // Print error stacktrace
+    res.send(err); // Print error stacktrace
   });
 }
 

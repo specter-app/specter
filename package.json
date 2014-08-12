@@ -30,6 +30,7 @@
     "gulp-karma": "0.0.4",
     "gulp-util": "^2.2.14",
     "karma": "^0.12.19",
+    "mocha": "~1.21.4",
     "shelljs": "^0.3.0",
     "uglify-js": "^2.4.15",
     "mocha": "~1.21.4",
