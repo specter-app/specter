@@ -8,6 +8,11 @@ angular.module('specter.tab.marcopolo', ['specter.tab.marcopolo.controller'])
           templateUrl: "tabs/marcopolo/marcopolo.html",
           controller: 'marcopoloCtrl as marcopolo'
         }
+      },
+      resolve: {
+        location: function (geoService) {
+          return geoService.getLocation();
+        }
       }
     });
 });
