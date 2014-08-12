@@ -26,7 +26,8 @@ console.log('config.mongodb:', mongoUri);
 console.log('environment:', app.get('env'));
 
 // routes
-app.use('/staches', require('./routes.js'));
+app.use('/staches', require('./stache'));
+app.use('/users', require('./user'));
 
 // create 404 error response for any non-existent REST endpoints
 app.use('*', function(req, res, next) {

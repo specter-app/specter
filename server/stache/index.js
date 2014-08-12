@@ -1,5 +1,5 @@
 var express = require('express');
-var stacheController = require('./stache/stache.controller.js');
+var stacheController = require('./stache.controller.js');
 
 var staches = express.Router();
 
@@ -17,7 +17,4 @@ staches.post('/', function(req, res) {
   stacheController.save(req, res);
 });
 
-module.exports = {
-  staches: staches,
-  users: users
-};
+module.exports = staches;
