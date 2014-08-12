@@ -32,29 +32,57 @@ describe('Stache API', function(){
 
   describe('GET /staches', function(){
 
-    beforeEach(function(done){
+    var stachesRes, postRes1, postRes2, postRes3;
+    var staches = [fixture.testStache1, fixture.testStache2, fixture.testStache3];
+    
+    before(function(done){
       db.collections['staches'].drop(function(err){
         if(err) throw err;
+        db.collections['staches'].insert(staches, function(err, docs){
+          if(err) throw err;
+          stachesRes = docs;
+          postRes1 = docs[0];
+          postRes2 = docs[1];
+          postRes3 = docs[2];
+          // console.log('DOCS', docs);
+          //call ensureIndex to guard against lat/long indexing failure for $geoNear queries
+          db.collections['staches'].ensureIndex({ loc: "2dsphere" }, function(err){
+            done();
+          });
+        });
+      });
+    });
+
+    it('should retrieve nearby staches with geolocation in query string', function(done){
+      request(server)
+      .get('/staches/?coord=40+5+100')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function(err, res){
+        if(err) throw err;
+        //should return only the one result within range of [40, 5]
+        should.equal(res.body.length, 1);
+      });
+
+      request(server)
+      .get('/staches/?coord=40+5+1000000')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function(err, res){
+        if(err) throw err;
+        //should return all 3 results since max distance is so large
+        should.equal(res.body.length, 3);
         done();
       });
     });
 
-    xit('should retrieve nearby staches', function(done){
-      
-      var staches = [fixture.testStache1, fixture.testStache2, fixture.testStache3];
-      
-      before(function(done){
-        db.collections['staches'].insert(staches, function(err, docs){
-          if(err) throw err;
-          done(docs);
-        });
-      });
-
+    xit('should error on retrieve nearby staches if no geolocation in query string', function(done){
       request(server)
       .get('/staches')
       // .expect('Content-Type', /json/)
       .expect(200)
       .end(function(err, res){
+        if(err) throw err;
         var result = res.body[0];
         console.log('RESULT', result);
         should.equal(result.title, test_stache.title);
@@ -62,25 +90,20 @@ describe('Stache API', function(){
       });
     });
 
-    it('should retrieve a correct stache by id', function(done){
+    xit('should retrieve a correct stache by id', function(done){
       request(server)
-      .post('/staches')
-      .send(fixture.testStache2)
-      .expect(201)
-      .end(function(err, postRes){
-        request(server)
-        .get('/staches/' + postRes.body._id)        
-        .expect(200)
-        .expect('Content-Type', /json/)
-        .end(function(err, getRes){
-          should.equal(getRes.body._id, postRes.body._id);
-          should.equal(getRes.body.title, postRes.body.title);
-          should.equal(getRes.body.author, postRes.body.author);
-          should.equal(getRes.body.lat, postRes.body.lat);
-          should.equal(getRes.body.lon, postRes.body.lon);
-          should.equal(getRes.body.content, postRes.body.content);
-          done();
-        });
+      .get('/staches/' + postRes1._id)        
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end(function(err, getRes){
+        if(err) throw err;
+        should.equal(getRes.body._id, postRes1._id);
+        should.equal(getRes.body.title, postRes1.title);
+        should.equal(getRes.body.author, postRes1.author);
+        should.equal(getRes.body.lat, postRes1.lat);
+        should.equal(getRes.body.lon, postRes1.lon);
+        should.equal(getRes.body.content, postRes1.content);
+        done();
       });
 
     });
