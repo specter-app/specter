@@ -1,12 +1,15 @@
 var express = require('express');
+var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var cors = require('cors');
-var app = express();
+var cors = require('cors'); // Middleware for CORS headers
 var mongoose = require('mongoose');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/../www'));
+var app = express(); // Create our server instance
+
+app.use(morgan('dev')); // Returns middleware that logs HTTP requests in pre-defined 'dev' format
+app.use(bodyParser.json()); // Returns middleware that only accepts JSON
+app.use(bodyParser.urlencoded({ extended: false })); // Returns middleware that only accepts flat (non-nested) query strings
+app.use(express.static(__dirname + '/../www')); // Returns middleware that servers static HTML files from a dedicated directory and bypasses the remaining routes
 
 app.use(cors());
 
