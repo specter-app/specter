@@ -2,15 +2,16 @@ angular.module('specter.tab.create.controller', ['restangular'])
 .controller('createCtrl', [
   '$ionicActionSheet',
   '$ionicPopup',
-  '$cordovaCamera',
   'Restangular',
+  'cameraService',
   'stacheService',
    '$rootScope',
    '$cordovaCapture',
    '$cordovaGeolocation',
    'geoService',
-  function( $ionicActionSheet, $ionicPopup, $cordovaCamera,
-    Restangular, stacheService, $rootScope, $cordovaCapture, $cordovaGeolocation, geoService){
+   '$cordovaCamera',
+  function( $ionicActionSheet, $ionicPopup, Restangular, cameraService,
+    stacheService, $rootScope, $cordovaCapture, $cordovaGeolocation, geoService, $cordovaCamera){
     var self = this;
     this.data = {
       currentTags: {}
@@ -75,27 +76,35 @@ angular.module('specter.tab.create.controller', ['restangular'])
       });
     };
 
-
-    this.takePicture = function() {
-      var options = {
-        cameraDirection: 2,
-        quality: 90,
-        allowEdit : true,
-        targetWidth: 640,
-        targetHeight: 640,
-        correctOrientation: 1,
-        saveToPhotoAlbum: false,
-        encodingType: Camera.EncodingType.JPEG,
-        destinationType: navigator.camera.DestinationType.FILE_URI,
-        sourceType : navigator.camera.PictureSourceType.CAMERA
-      };
-
-      $cordovaCamera.getPicture(options).then(function(imageData) {
+    this.takePicture = function(){
+      cameraService.takePicture().then(function(imageData) {
         self.imageData = imageData;
       }, function(err) {
-        self.imageData = "ERROR";
-      });
+        self.imageData = err;
+      })
     };
+    // this.takePicture = function() {
+    //   var options = {
+    //     cameraDirection: 2,
+    //     quality: 90,
+    //     allowEdit : true,
+    //     targetWidth: 640,
+    //     targetHeight: 640,
+    //     correctOrientation: 1,
+    //     saveToPhotoAlbum: false,
+    //     encodingType: Camera.EncodingType.JPEG,
+    //     destinationType: navigator.camera.DestinationType.FILE_URI,
+    //     sourceType : navigator.camera.PictureSourceType.CAMERA
+    //   };
+    //
+    //   $cordovaCamera.getPicture(options).then(function(imageData) {
+    //     self.imageData = imageData;
+    //   }, function(err) {
+    //     self.imageData = "ERROR";
+    //   });
+    // };
+
+
 
    this.captureAudio = function() {
      var options = { limit: 3, duration: 10 };
@@ -106,21 +115,22 @@ angular.module('specter.tab.create.controller', ['restangular'])
      });
    };
 
-   geoService.getLocation().then(function(position) {
-     self.location.long = position.coords.longitude;
-     self.location.lat = position.coords.latitude;
-   }, function(err) {
-     self.location = err;
-   });
-   var watch = $cordovaGeolocation.watchPosition({
-     frequency: 1000
-   });
-   watch.promise.then(function() {
-       // Not currently used
-     }, function(err) {
-       self.location = err
-     }, function(position) {
-   self.location.long = position.coords.longitude;
-   self.location.lat = position.coords.latitude;
-   });
+  geoService.getLocation().then(function(position) {
+    self.location.long = position.coords.longitude;
+    self.location.lat = position.coords.latitude;
+  }, function(err) {
+    self.location = err;
+  });
+  var watch = $cordovaGeolocation.watchPosition({
+    frequency: 1000
+  });
+  watch.promise.then(function() {
+      // Not currently used
+    }, function(err) {
+      self.location = err
+    }, function(position) {
+  self.location.long = position.coords.longitude;
+  self.location.lat = position.coords.latitude;
+  });
+
 }]);
