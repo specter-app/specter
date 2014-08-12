@@ -1,5 +1,7 @@
 <ion-view>
-  <google-map center="map.center" zoom="map.zoom"></google-map>
+  <google-map center="map.center" zoom="map.zoom">
+    <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="heatLayerCallback"></layer>
+  </google-map>
   <!-- {{marcopolo.location.long}}
   {{marcopolo.location.lat}} -->
   {{marcopolo.distance}}
