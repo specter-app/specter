@@ -19,7 +19,7 @@ angular.module('specter.tab.marcopolo.controller', [])
         zoom: 15
       };
       var watch = $cordovaGeolocation.watchPosition({
-        frequency: 1000
+        frequency: 10000
       });
       watch.promise.then(function() {
           // Not currently used
@@ -28,5 +28,7 @@ angular.module('specter.tab.marcopolo.controller', [])
         }, function(position) {
       self.location.long = position.coords.longitude;
       self.location.lat = position.coords.latitude;
+      self.distance = geoService.calculateDistance(-122.27013, 37.87487, self.location.long, self.location.lat)
       });
+
   }]);
