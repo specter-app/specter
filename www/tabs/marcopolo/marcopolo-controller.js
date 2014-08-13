@@ -28,5 +28,7 @@ angular.module('specter.tab.marcopolo.controller', [])
         }, function(position) {
       self.location.long = position.coords.longitude;
       self.location.lat = position.coords.latitude;
+      self.distance = geoService.calculateDistance(-122.27013, 37.87487, self.location.long, self.location.lat)
       });
+
   }]);
