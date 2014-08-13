@@ -17,6 +17,7 @@ angular.module('specter.tab.marcopolo.controller', [])
         })
       self.location.long = location.coords.longitude;
       self.location.lat = location.coords.latitude;
+
       $scope.map = {
         center: {
             latitude: self.location.lat,
@@ -83,9 +84,6 @@ angular.module('specter.tab.marcopolo.controller', [])
         }, function(position) {
       self.location.long = position.coords.longitude;
       self.location.lat = position.coords.latitude;
-      if (self.currentStache){
-        self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat)        
-      }
+      self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat)
       });
-
   }]);
