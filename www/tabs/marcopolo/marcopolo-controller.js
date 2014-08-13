@@ -17,18 +17,15 @@ angular.module('specter.tab.marcopolo.controller', [])
       HeatLayer = function (heatLayer) {
           var map, pointarray, heatmap;
           
+          // TODO: Store heatmap data points in local storage when app closes
           // localStorage.setItem(taxiData, JSON.stringify(taxiData));
-          // console.dir(JSON.parse(localStorage.getItem(taxiData)));
-
           // var pointArray = new google.maps.MVCArray(JSON.parse(localStorage.getItem(taxiData)));
           
           // Test adding a new point
-          var hackreactor = heatmapService.addPoint(37.783792, -122.408997, 20);
-          console.log(hackreactor);
+          var hackreactor = heatmapService.addPoint('stache2', 37.783792, -122.408997, 20);
 
           // Get all data points for heatmap
-          $scope.pointArray = heatmapService.getPoints();
-          console.log($scope.pointArray);
+          $scope.pointArray = heatmapService.getPoints('stache2');
           heatLayer.setData($scope.pointArray);
 
       //function changeGradient() {

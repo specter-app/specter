@@ -2,7 +2,7 @@
   'use strict';
   var heatmapService = function() {
 
-    var dataPoints = [
+    var dataPoints = { stache1: [
       {location: new google.maps.LatLng(37.782551, -122.445368), weight: 0.1},
       {location: new google.maps.LatLng(37.782745, -122.444586), weight: 0.5},
       {location: new google.maps.LatLng(37.782842, -122.443688), weight: 1.5},
@@ -503,24 +503,29 @@
       {location: new google.maps.LatLng(37.753837, -122.403172), weight: 1.5},
       {location: new google.maps.LatLng(37.752986, -122.403112), weight: 1.5},
       {location: new google.maps.LatLng(37.751266, -122.403355), weight: 1.5}
-    ];
+    ]};
 
-    this.addPoint = function(lat, lon, dist) {
+    this.addPoint = function(stacheID, lat, lon, dist) {
       var newPoint = {
         location: new google.maps.LatLng(lat, lon),
         weight: dist
       };
-      dataPoints.push(newPoint);
+
+      if (dataPoints.hasOwnProperty(stacheID)) {
+        dataPoints[stacheID].push(newPoint);
+      } else {
+        dataPoints[stacheID] = [newPoint];
+      }
       return newPoint;
     };
 
-    this.getPoints = function() {
-      return dataPoints;
+    this.getPoints = function(stacheID) {
+      return dataPoints[stacheID];
     };
 
   };
 
   angular.module('specter').service('heatmapService', [
-    heatmapService
+      heatmapService
     ]);
 })();
