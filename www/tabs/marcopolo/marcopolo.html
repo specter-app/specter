@@ -1,6 +1,6 @@
 <ion-view>
-  <google-map 
-    style="height:500px;margin:12px;" 
+  <google-map
+    style="height:500px;margin:12px;"
     center="map.center" zoom="map.zoom"
     draggable="true"
     dragging="map.dragging"
@@ -11,7 +11,6 @@
     control="map.control">
     <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="heatLayerCallback"></layer>
   </google-map>
-  <!-- {{marcopolo.location.long}}
-  {{marcopolo.location.lat}} -->
   {{marcopolo.distance}}
+  {{marcopolo.currentStache}}
 </ion-view>
