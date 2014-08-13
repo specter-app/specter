@@ -511,6 +511,7 @@
         weight: dist
       };
       dataPoints.push(newPoint);
+      return newPoint;
     };
 
     this.getPoints = function() {

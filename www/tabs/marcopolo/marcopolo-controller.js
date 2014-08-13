@@ -15,13 +15,18 @@ angular.module('specter.tab.marcopolo.controller', [])
       };
 
       HeatLayer = function (heatLayer) {
-          // Adding 500 Data Points
           var map, pointarray, heatmap;
           
           // localStorage.setItem(taxiData, JSON.stringify(taxiData));
           // console.dir(JSON.parse(localStorage.getItem(taxiData)));
 
           // var pointArray = new google.maps.MVCArray(JSON.parse(localStorage.getItem(taxiData)));
+          
+          // Test adding a new point
+          var hackreactor = heatmapService.addPoint(37.783792, -122.408997, 20);
+          console.log(hackreactor);
+
+          // Get all data points for heatmap
           $scope.pointArray = heatmapService.getPoints();
           console.log($scope.pointArray);
           heatLayer.setData($scope.pointArray);
