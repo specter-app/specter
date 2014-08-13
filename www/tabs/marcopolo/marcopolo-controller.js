@@ -25,7 +25,7 @@ angular.module('specter.tab.marcopolo.controller', [])
           var hackreactor = heatmapService.addPoint('stache2', 37.783792, -122.408997, 20);
 
           // Get all data points for heatmap
-          $scope.pointArray = heatmapService.getPoints('stache2');
+          $scope.pointArray = heatmapService.getPoints('stache1');
           heatLayer.setData($scope.pointArray);
 
       //function changeGradient() {
