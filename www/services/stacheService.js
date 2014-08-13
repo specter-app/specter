@@ -34,6 +34,13 @@
       staches.post(newStache);
     };
 
+    this.getOne = function(id){
+      return Restangular.one('staches/', id).get().then(function(stache){
+        return stache;
+      }, function(err){
+        return err;
+      });
+    };
   };
   angular.module('specter').service('stacheService', [
     'Restangular',

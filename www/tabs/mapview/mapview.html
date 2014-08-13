@@ -1,7 +1,8 @@
 <ion-view>
   <ion-content>
     <div class="list">
-      <div ng-repeat="stache in mapview.staches">
+
+      <div ng-repeat="stache in mapview.staches" ng-click=mapview.redirect(stache._id)>
         <a class="item item-thumbnail-left" href="#">
           <img src="http://typeinstereo.com/wp-content/uploads/2013/04/Weezer-Blue-Album-1994.jpg">
           <h2>{{stache.author}}</h2>
