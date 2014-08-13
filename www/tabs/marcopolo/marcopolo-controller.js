@@ -19,7 +19,7 @@ angular.module('specter.tab.marcopolo.controller', [])
         zoom: 15
       };
       var watch = $cordovaGeolocation.watchPosition({
-        frequency: 1000
+        frequency: 10000
       });
       watch.promise.then(function() {
           // Not currently used
