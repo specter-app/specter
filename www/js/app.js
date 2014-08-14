@@ -23,4 +23,17 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
     "Content-Type": "application/json",
     "X-Requested-With": "XMLHttpRequest"
   });
+})
+.filter('distance', function() {
+
+  return function(distance) {
+    if (distance === undefined) {
+      return "Generating ectoplasm...";
+    } else if (distance >= 1000) {
+      distance *= 0.000621371192;
+      return distance.toFixed(2) + " miles";
+    } else {
+      return distance.toFixed(0) + " meters";
+    }
+  };
 });
