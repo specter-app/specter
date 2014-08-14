@@ -11,13 +11,23 @@ angular.module('specter.tab.marcopolo.controller', [])
       var self = this;
       self.location = {long: "", lat: ""};
       self.id = $stateParams.id.slice(1);
-      stacheService.getOne(self.id).then(function(stache){
-          self.currentStache = stache;
-        }, function(err){
-          return err;
-        });
       self.location.long = location.coords.longitude;
       self.location.lat = location.coords.latitude;
+
+      stacheService.getOne(self.id)
+        .then(function(stache) {
+          self.currentStache = stache;
+        })
+        .then(function(stache) {
+          self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
+          var weight = 1 / (4 * Math.log(1 + self.distance * 0.000621371192));
+          console.log("weight: ", weight);
+          heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
+          $scope.pointArray = heatmapService.getPoints(self.id);
+        })
+        .catch(function(err) {
+          return err;
+        });
 
       $scope.map = {
         center: {
@@ -34,10 +44,10 @@ angular.module('specter.tab.marcopolo.controller', [])
           // var pointArray = new google.maps.MVCArray(JSON.parse(localStorage.getItem(taxiData)));
 
           // Get all data points for heatmap
-          $scope.pointArray = heatmapService.getPoints('stache1');
+          var weight = 1 / (3 * Math.log(1 + self.distance * 0.000621371192));
+          heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
+          $scope.pointArray = heatmapService.getPoints(self.id);
           heatLayer.setData($scope.pointArray);
-          // Test adding a new point
-          // var hackreactor = heatmapService.addPoint('stache1', 37.783792, -122.408997, 20);
 
       //function changeGradient() {
       //    var gradient = [
@@ -85,22 +95,29 @@ angular.module('specter.tab.marcopolo.controller', [])
           self.location.lat = position.coords.latitude;
           self.prevDistance = self.distance;
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
-          // console.log("prevDistance: ", self.prevDistance);
-          // console.log("distance: ", self.distance);
 
-          // Check if user has move by at least 50 meters (0.3 miles) 
+          // Check if user has moved by 0.30 miles (50 meters)
           // from previous location
           // TODO: Check against existing heat map data
-          if (self.prevDistance && self.prevDistance - self.distance >= 0) {
+          //  Math.floor lat & lon, use as key,
+          //  e.g. stache1: { 'lat1, lon1': datapoint1, 'lat2, lon2': datapoint2 }
+          var moveDistance = self.prevDistance - self.distance;
+          
+          // If user is within 3 meters, reveal stache
+          if (self.prevDistance && self.distance < 3) {
+            console.log("You found the stache!");
+            // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
+          } else if (self.prevDistance && moveDistance >= 3) {
             console.log("User has traveled, adding new location to heatmap.");
-            
-            // Temporary - Test adding a new point
-            var hackreactor = heatmapService.addPoint('stache1', 37.783792, -122.408997, 20);
-            $scope.pointArray = heatmapService.getPoints('stache1');
+
+            // Normalize distance in miles to calculate weight of heatmap data point
+            var weight = 1 / (5 * Math.log(1 + self.distance * 0.000621371192));
+
+            // console.log(self.id, self.location.lat, self.location.long, weight);
             
             // Add current location to heatmap
-            // heatmapService.addPoint(self.id, self.location.lat, self.location.long, self.distance);
-            // $scope.pointArray = heatmapService.getPoints(self.id);
+            heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
+            $scope.pointArray = heatmapService.getPoints(self.id);
           }
       });
       $scope.$watch('pointArray', function (pointArray) {
