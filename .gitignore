@@ -27,6 +27,7 @@ bower_components
 www/lib
 .DS_Store
 platforms
+plugins
 
 # Mongo URI
 /server/config/development-mongolab.js

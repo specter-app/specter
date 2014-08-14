@@ -1,20 +1,21 @@
 angular.module('specter.tab.marcopolo.controller', [])
   .controller('marcopoloCtrl', [
+      'heatmapService',
       'geoService',
       '$cordovaGeolocation',
       '$scope',
       'location',
       '$stateParams',
       'stacheService',
-    function(geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService) {
+    function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService) {
       var self = this;
       self.location = {long: "", lat: ""};
       self.id = $stateParams.id.slice(1);
       stacheService.getOne(self.id).then(function(stache){
           self.currentStache = stache;
         }, function(err){
-          return err
-        })
+          return err;
+        });
       self.location.long = location.coords.longitude;
       self.location.lat = location.coords.latitude;
 
@@ -84,6 +85,6 @@ angular.module('specter.tab.marcopolo.controller', [])
         }, function(position) {
       self.location.long = position.coords.longitude;
       self.location.lat = position.coords.latitude;
-      self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat)
+      self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
       });
   }]);
