@@ -130,7 +130,7 @@ describe('Basic server endpoint tests', function(){
         });
       });
 
-      it('should successfully sign up a new user via /signup', function(done){
+      xit('should successfully sign up a new user via /signup', function(done){
         request(server)
         .post('/users/signup')
         .send(fixture.testUser)
@@ -154,7 +154,7 @@ describe('Basic server endpoint tests', function(){
         })
       });
 
-      it('should successfully log in an existing user via /login', function(done){
+      xit('should successfully log in an existing user via /login', function(done){
         request(server)
         .post('/users/login')
         .send(fixture.testUser)
