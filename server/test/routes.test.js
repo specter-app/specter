@@ -28,7 +28,11 @@ describe('Basic server endpoint tests', function(){
         request(server)
         .post('/staches')
         .send(fixture.testStache3)
-        .expect(201, done);
+        .expect(201)
+        .end(function(err, res){
+          if(err) throw err;
+          done();
+        });
       });
     });
 
@@ -82,7 +86,11 @@ describe('Basic server endpoint tests', function(){
         request(server)
         .get('/staches')
         // .expect('Content-Type', /json/)
-        .expect(400, done);
+        .expect(400)
+        .end(function(err, res){
+          if(err) throw err;
+          done();
+        });
       });
 
       it('should retrieve a correct stache by id', function(done){
