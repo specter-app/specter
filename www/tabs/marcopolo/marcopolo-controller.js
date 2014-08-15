@@ -21,7 +21,6 @@ angular.module('specter.tab.marcopolo.controller', [])
         .then(function(stache) {
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
           var weight = 1 / (4 * Math.log(1 + self.distance * 0.000621371192));
-          console.log("weight: ", weight);
           heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
           $scope.pointArray = heatmapService.getPoints(self.id);
         })
@@ -39,9 +38,6 @@ angular.module('specter.tab.marcopolo.controller', [])
 
       HeatLayer = function (heatLayer) {
           var map, pointarray, heatmap;
-          // TODO: Store heatmap data points in local storage when app closes
-          // localStorage.setItem(taxiData, JSON.stringify(taxiData));
-          // var pointArray = new google.maps.MVCArray(JSON.parse(localStorage.getItem(taxiData)));
 
           // Get all data points for heatmap
           var weight = 1 / (3 * Math.log(1 + self.distance * 0.000621371192));
@@ -86,40 +82,31 @@ angular.module('specter.tab.marcopolo.controller', [])
       var watch = $cordovaGeolocation.watchPosition({
         frequency: 10000
       });
-      watch.promise.then(function() {
-          // Not currently used
-        }, function(err) {
-          self.location = err;
-        }, function(position) {
+      watch.promise.then(function(position) {
           self.location.long = position.coords.longitude;
           self.location.lat = position.coords.latitude;
-          self.prevDistance = self.distance;
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
 
-          // Check if user has moved by 0.30 miles (50 meters)
-          // from previous location
-          // TODO: Check against existing heat map data
-          //  Math.floor lat & lon, use as key,
-          //  e.g. stache1: { 'lat1, lon1': datapoint1, 'lat2, lon2': datapoint2 }
-          var moveDistance = self.prevDistance - self.distance;
-          
           // If user is within 3 meters, reveal stache
+          // Else, check if user has moved by 11 meters from previous location
+          // (lon & lat store to 4 decimel places, i.e. 0.0001, in heatmapService)
           if (self.prevDistance && self.distance < 3) {
             console.log("You found the stache!");
             // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
-          } else if (self.prevDistance && moveDistance >= 3) {
+          } else if (!heatmapService.contains(self.id, self.location.lat, self.location.long)) {
             console.log("User has traveled, adding new location to heatmap.");
-
             // Normalize distance in miles to calculate weight of heatmap data point
             var weight = 1 / (5 * Math.log(1 + self.distance * 0.000621371192));
-
-            // console.log(self.id, self.location.lat, self.location.long, weight);
-            
             // Add current location to heatmap
             heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
             $scope.pointArray = heatmapService.getPoints(self.id);
           }
+      })
+      .catch(function(err) {
+        return err;
       });
+
+      // Rerender heatmap whenever new data has been added
       $scope.$watch('pointArray', function (pointArray) {
         console.log('watch on pointArray triggered');
         $scope.heatLayer.setData(pointArray);

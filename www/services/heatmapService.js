@@ -1,8 +1,8 @@
 (function() {
   'use strict';
   var heatmapService = function() {
-
-    var dataPoints = { stache1: [
+    var visited = {};
+    var dataPoints = { fakestache: [
       {location: new google.maps.LatLng(37.782551, -122.445368), weight: 0.1},
       {location: new google.maps.LatLng(37.782745, -122.444586), weight: 0.5},
       {location: new google.maps.LatLng(37.782842, -122.443688), weight: 1.5},
@@ -513,14 +513,22 @@
 
       if (dataPoints.hasOwnProperty(stacheID)) {
         dataPoints[stacheID].push(newPoint);
+        var key = lat.toFixed(4) + ", " + lon.toFixed(4);
+        visited[stacheID][key] = true;
       } else {
         dataPoints[stacheID] = [newPoint];
+        visited[stacheID] = {};
       }
       return newPoint;
     };
 
     this.getPoints = function(stacheID) {
       return dataPoints[stacheID];
+    };
+
+    this.contains = function(stacheID, lat, lon) {
+      var key = lat.toFixed(4) + ", " + lon.toFixed(4);
+      return visited[stacheID][key] ? true : false;
     };
 
   };
