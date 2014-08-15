@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx
+xmlns="http://www.topografix.com/GPX/1/1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+version="1.1" 
+creator="gpx-poi.com">
+
+   <wpt lat="37.784456" lon="-122.407445"> 
+      <name>Powell Bart Station</name>
+   </wpt>
+   <wpt lat="37.784421" lon="-122.408226">
+   </wpt>
+   <wpt lat="37.784021" lon="-122.408426">
+   </wpt>
+   <wpt lat="37.783821" lon="-122.40866">
+   </wpt>
+   <wpt lat="37.783721" lon="-122.408756">
+   </wpt>
+   <wpt lat="37.783681" lon="-122.408816">
+   </wpt>
+   <wpt lat="37.783681" lon="-122.408896">
+   </wpt>
+   <wpt lat="37.783681" lon="-122.408906">
+   </wpt>
+   <wpt lat="37.783681" lon="-122.408986">
+   </wpt>
+   <wpt lat="37.783621" lon="-122.408926"> 
+      <name>HR</name>
+   </wpt>
+
+</gpx>
