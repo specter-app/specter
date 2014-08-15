@@ -87,10 +87,6 @@ angular.module('specter.tab.marcopolo.controller', [])
           self.location.long = position.coords.longitude;
           self.location.lat = position.coords.latitude;
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
-
-          // Check if user has moved by 0.30 miles (50 meters)
-          // from previous location
-          var moveDistance = self.prevDistance - self.distance;
           var visited = heatmapService.contains(self.id, self.location.lat, self.location.long);
           
           // If user is within 3 meters, reveal stache

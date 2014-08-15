@@ -528,6 +528,8 @@
     };
 
     this.contains = function(stacheID, lat, lon) {
+      // Truncate lat and lon to 5 decimel places
+      // (results in precision of 1 meter)
       var key = lat.toFixed(5) + ", " + lon.toFixed(5);
       return visited[stacheID][key] ? true : false;
     };
