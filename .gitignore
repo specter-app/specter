@@ -28,6 +28,7 @@ www/lib
 .DS_Store
 platforms
 plugins
+plugins/
 
 # Mongo URI
 /server/config/development-mongolab.js

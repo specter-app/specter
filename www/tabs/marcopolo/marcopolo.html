@@ -12,7 +12,7 @@
     control="map.control">
     <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="heatLayerCallback"></layer>
   </google-map>
-  <h1>{{marcopolo.distance}}</h1>
-  <h1>{{marcopolo.currentStache.title}}</h1>
+  <h6>{{marcopolo.distance | distance}}</h6>
+  <h3>{{marcopolo.currentStache.title}}</h3>
 </ion-content>
 </ion-view>
