@@ -137,6 +137,8 @@ describe('Basic server endpoint tests', function(){
         .expect(201)
         .end(function(err, res){
           if(err) throw err;
+          //should.equal(fixture.testUser.username, res.body.username);
+          //should receive message confirming success of signup and token
           done();
         });
       });
@@ -159,6 +161,7 @@ describe('Basic server endpoint tests', function(){
         .expect(201)
         .end(function(err, res){
           if(err) throw err;
+          //should confirm login somehow
           done();
         })
       });
