@@ -55,7 +55,7 @@ describe('Stache API', function(){
 
     it('should retrieve nearby staches with geolocation in query string', function(done){
       request(server)
-      .get('/staches/?coord=40+5+100')
+      .get('/staches/?dist=100&lon=40&lat=5')
       .expect('Content-Type', /json/)
       .expect(200)
       .end(function(err, res){
@@ -65,7 +65,7 @@ describe('Stache API', function(){
       });
 
       request(server)
-      .get('/staches/?coord=40+5+1000000')
+      .get('/staches/?dist=1000000&lon=40&lat=5')
       .expect('Content-Type', /json/)
       .expect(200)
       .end(function(err, res){

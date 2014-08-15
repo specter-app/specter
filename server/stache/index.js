@@ -5,7 +5,7 @@ var staches = express.Router();
 
 staches.get('/', function(req, res) {
 // example route with querystring:
-// http://localhost:8000/staches/?coord=-122+37+1000000
+// http://localhost:8000/staches/?dist=100000&lon=-127&lat=32
   stacheController.getNearby(req, res);
 });
 
