@@ -33,7 +33,7 @@ module.exports.testStache3 = {
 };
 
 // New user without user_id
-module.exports.testUserNew = {
+module.exports.testUser = {
   username: 'scavenster',
   password: 'scavengers4evr',
   firstName: 'Bob',
