@@ -16,7 +16,7 @@
       }).then(function(imageData) {
         return imageData;
       }, function(err) {
-        return "ERROR";
+        return err;
       });
     };
   };

@@ -5,13 +5,11 @@ angular.module('specter.tab.create.controller', ['restangular'])
   'Restangular',
   'cameraService',
   'stacheService',
-   '$rootScope',
    '$cordovaCapture',
    '$cordovaGeolocation',
    'geoService',
-   '$cordovaCamera',
   function( $ionicActionSheet, $ionicPopup, Restangular, cameraService,
-    stacheService, $rootScope, $cordovaCapture, $cordovaGeolocation, geoService, $cordovaCamera){
+    stacheService, $cordovaCapture, $cordovaGeolocation, geoService){
     var self = this;
     this.data = {
       currentTags: {}
@@ -89,26 +87,16 @@ angular.module('specter.tab.create.controller', ['restangular'])
      $cordovaCapture.captureAudio(options).then(function(audioData) {
        self.audioData = audioData;
      }, function(err) {
-       self.audioData = "ERROR";
+       self.audioData = err;
      });
    };
 
+  //call get location on click of the create button
   geoService.getLocation().then(function(position) {
     self.location.long = position.coords.longitude;
     self.location.lat = position.coords.latitude;
   }, function(err) {
     self.location = err;
-  });
-  var watch = $cordovaGeolocation.watchPosition({
-    frequency: 1000
-  });
-  watch.promise.then(function() {
-      // Not currently used
-    }, function(err) {
-      self.location = err
-    }, function(position) {
-  self.location.long = position.coords.longitude;
-  self.location.lat = position.coords.latitude;
   });
 
 }]);
