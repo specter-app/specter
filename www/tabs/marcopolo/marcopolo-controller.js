@@ -83,7 +83,10 @@ angular.module('specter.tab.marcopolo.controller', [])
       var watch = $cordovaGeolocation.watchPosition({
         frequency: 10000
       });
-      watch.promise.then(function(position) {
+      watch.promise.then(function() {
+      }, function(err) {
+        return err;
+      }, function(position) {
           self.location.long = position.coords.longitude;
           self.location.lat = position.coords.latitude;
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
@@ -103,9 +106,6 @@ angular.module('specter.tab.marcopolo.controller', [])
             heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
             $scope.pointArray = heatmapService.getPoints(self.id);
           }
-      })
-      .catch(function(err) {
-        return err;
       });
 
       // Rerender heatmap whenever new data has been added
