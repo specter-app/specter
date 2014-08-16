@@ -21,6 +21,8 @@
       options="map.options">
       <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="heatLayerCallback"></layer>
     </google-map>
-    <h6>{{marcopolo.distance | distance}}</h6>
-</ion-content>
+  </ion-content>
+  <ion-footer-bar style="background-color:{{ proximityColor }}">
+  </ion-footer-bar>
+  <h6>{{marcopolo.distance | distance}}</h6>
 </ion-view>
