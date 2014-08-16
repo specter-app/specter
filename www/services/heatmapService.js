@@ -534,6 +534,11 @@
       return visited[stacheID][key] ? true : false;
     };
 
+    this.weight = function(distance) {
+      // Normalize distance in miles to calculate weight of heatmap data point
+      return 1 / (50 * Math.log(1 + distance * 0.000621371192));
+    };
+
   };
 
   angular.module('specter').service('heatmapService', [
