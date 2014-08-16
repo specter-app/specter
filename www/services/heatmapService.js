@@ -511,13 +511,14 @@
         weight: dist
       };
 
+      var key = lat.toFixed(5) + ", " + lon.toFixed(5);
+      
       if (dataPoints.hasOwnProperty(stacheID)) {
         dataPoints[stacheID].push(newPoint);
-        var key = lat.toFixed(4) + ", " + lon.toFixed(4);
         visited[stacheID][key] = true;
       } else {
         dataPoints[stacheID] = [newPoint];
-        visited[stacheID] = {};
+        visited[stacheID] = { key: true };
       }
       return newPoint;
     };
@@ -527,7 +528,9 @@
     };
 
     this.contains = function(stacheID, lat, lon) {
-      var key = lat.toFixed(4) + ", " + lon.toFixed(4);
+      // Truncate lat and lon to 5 decimel places
+      // (results in precision of 1 meter)
+      var key = lat.toFixed(5) + ", " + lon.toFixed(5);
       return visited[stacheID][key] ? true : false;
     };
 

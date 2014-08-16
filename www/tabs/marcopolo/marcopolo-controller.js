@@ -33,7 +33,8 @@ angular.module('specter.tab.marcopolo.controller', [])
             latitude: self.location.lat,
             longitude: self.location.long
         },
-        zoom: 15
+        zoom: 17,
+        options: {mapTypeId: google.maps.MapTypeId.SATELLITE }
       };
 
       HeatLayer = function (heatLayer) {
@@ -86,14 +87,13 @@ angular.module('specter.tab.marcopolo.controller', [])
           self.location.long = position.coords.longitude;
           self.location.lat = position.coords.latitude;
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
-
+          var visited = heatmapService.contains(self.id, self.location.lat, self.location.long);
+          
           // If user is within 3 meters, reveal stache
-          // Else, check if user has moved by 11 meters from previous location
-          // (lon & lat store to 4 decimel places, i.e. 0.0001, in heatmapService)
-          if (self.prevDistance && self.distance < 3) {
+          if (self.distance < 3) {
             console.log("You found the stache!");
             // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
-          } else if (!heatmapService.contains(self.id, self.location.lat, self.location.long)) {
+          } else if (!visited) {
             console.log("User has traveled, adding new location to heatmap.");
             // Normalize distance in miles to calculate weight of heatmap data point
             var weight = 1 / (5 * Math.log(1 + self.distance * 0.000621371192));
