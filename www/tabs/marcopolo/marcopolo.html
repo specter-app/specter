@@ -1,7 +1,15 @@
 <ion-view>
+  <ion-header-bar class="bar-positive">
+    <div class="buttons">
+      <button class="button" ng-click="doSomething()">My Staches</button>
+    </div>
+    <h1 class="title">{{marcopolo.currentStache.title}}</h1>
+    <div class="buttons">
+      <button class="button">Back</button>
+    </div>
+  </ion-header-bar>
   <ion-content>
   <google-map
-    style="height:500px;margin:12px;"
     center="map.center" zoom="map.zoom"
     draggable="true"
     dragging="map.dragging"
@@ -14,6 +22,5 @@
     <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="heatLayerCallback"></layer>
   </google-map>
   <h6>{{marcopolo.distance | distance}}</h6>
-  <h3>{{marcopolo.currentStache.title}}</h3>
 </ion-content>
 </ion-view>

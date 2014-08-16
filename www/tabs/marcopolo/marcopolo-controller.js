@@ -89,6 +89,8 @@ angular.module('specter.tab.marcopolo.controller', [])
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
           var visited = heatmapService.contains(self.id, self.location.lat, self.location.long);
           
+          // Used to set proximity indicator
+          // $scope.distance = self.distance;
           // If user is within 3 meters, reveal stache
           if (self.distance < 3) {
             console.log("You found the stache!");
