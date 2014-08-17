@@ -123,10 +123,6 @@ angular.module('specter.tab.marcopolo.controller', [])
       });
 
       // Rerender heatmap whenever new data has been added
-      // $scope.$watch('pointArray', function (pointArray) {
-      //   console.log('watch on pointArray triggered');
-      //   self.heatLayer.setData(pointArray);
-      // }, true);
       $scope.$watch('marcopolo.pointArray', function (pointArray) {
         console.log('watch on pointArray triggered');
         self.heatLayer.setData(pointArray);
