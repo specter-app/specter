@@ -505,6 +505,23 @@
       {location: new google.maps.LatLng(37.751266, -122.403355), weight: 1.5}
     ]};
 
+    var gradient = [
+      'rgba(0, 255, 255, 0)',
+      'rgba(0, 255, 255, 1)',
+      'rgba(0, 191, 255, 1)',
+      'rgba(0, 127, 255, 1)',
+      'rgba(0, 63, 255, 1)',
+      'rgba(0, 0, 255, 1)',
+      'rgba(0, 0, 223, 1)',
+      'rgba(0, 0, 191, 1)',
+      'rgba(0, 0, 159, 1)',
+      'rgba(0, 0, 127, 1)',
+      'rgba(63, 0, 91, 1)',
+      'rgba(127, 0, 63, 1)',
+      'rgba(191, 0, 31, 1)',
+      'rgba(255, 0, 0, 1)'
+    ];
+
     this.addPoint = function(stacheID, lat, lon, dist) {
       var newPoint = {
         location: new google.maps.LatLng(lat, lon),
@@ -537,6 +554,40 @@
     this.weight = function(distance) {
       // Normalize distance in miles to calculate weight of heatmap data point
       return 1 / (50 * Math.log(1 + distance * 0.000621371192));
+    };
+
+    this.colorIndex = function(weight) {
+      return Math.floor((Math.ceil(weight) / 11) * gradient.length);
+    };
+
+    this.createHeatLayer = function(heatLayer) {
+      var map, pointarray, heatmap;
+
+      var weight = this.weight(1000);
+      
+      // Set color of proximity indicator bar (below map)
+      // var colorIndex = heatmapService.colorIndex(weight);
+
+      // if (colorIndex < gradient.length - 1) {
+      //   self.proximityColor = gradient[colorIndex];
+      // }
+
+      // Add point to heatmap
+      // this.addPoint(self.id, self.location.lat, self.location.long, weight);
+      // Get all data points for heatmap
+      // $scope.pointArray = heatmapService.getPoints(self.id);
+      // heatLayer.setData($scope.pointArray);
+
+      heatLayer.set('gradient', gradient);
+
+      // function changeRadius() {
+      //     heatmap.set('radius', heatmap.get('radius') ? null : 20);
+      // }
+      
+      // function changeOpacity() {
+      //     heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+      // }
+      return heatLayer;
     };
 
   };
