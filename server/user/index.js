@@ -8,11 +8,11 @@ users.post('/signup', function(req, res){
     //reject / sign in on existing
     //save on non-existing
   //send token
-  res.status(201).send();
+  userController.signup(req, res);
 });
 
 users.post('/login', function(req, res){
-  res.status(201).send();
+  userController.login(req, res);
 });
 
 module.exports = users;
