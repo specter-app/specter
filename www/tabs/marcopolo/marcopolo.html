@@ -1,12 +1,12 @@
 <ion-view>
   <ion-header-bar class="bar-positive">
     <div class="buttons">
-      <button class="button" ng-click="doSomething()">Profile</button>
+      <button class="button" ng-click="doSomething()">My Staches</button>
     </div>
     <h1 class="title">{{marcopolo.currentStache.title}}</h1>
-    <div class="buttons">
+    <!-- <div class="buttons">
       <button class="button">Back</button>
-    </div>
+    </div> -->
   </ion-header-bar>
   <ion-content>
     <google-map
@@ -19,10 +19,10 @@
       pan="true"
       control="map.control" 
       options="map.options">
-      <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="heatLayerCallback"></layer>
+      <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="marcopolo.heatLayerCallback"></layer>
     </google-map>
   </ion-content>
-  <ion-footer-bar style="background-color:{{ proximityColor }}">
+  <ion-footer-bar style="background-color:{{ marcopolo.proximityColor }}">
   </ion-footer-bar>
   <h6>{{marcopolo.distance | distance}}</h6>
 </ion-view>
