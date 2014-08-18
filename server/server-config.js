@@ -1,6 +1,7 @@
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 var cors = require('cors'); // middleware for CORS headers
 var mongoose = require('mongoose');
 
@@ -9,6 +10,7 @@ var app = express(); // create our server instance
 app.use(morgan('dev')); // log HTTP requests in pre-defined 'dev' format
 app.use(bodyParser.json()); // only accept JSON requests
 app.use(bodyParser.urlencoded({ extended: false })); // only accept flat (non-nested) query strings
+app.use(methodOverride());
 app.use(express.static(__dirname + '/../www')); // serve static HTML files from a dedicated directory and bypasses remaining routes
 app.use(cors());
 
