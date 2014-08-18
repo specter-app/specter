@@ -14,14 +14,10 @@ angular.module('specter.tab.marcopolo.controller', [])
       self.location.long = location.coords.longitude;
       self.location.lat = location.coords.latitude;
 
-      stacheService.getOne(self.id)
-        .then(function(stache) {
+      stacheService.getOne(self.id).then(function(stache){
           self.currentStache = stache;
-        })
-        .then(function(stache) {
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
-        })
-        .catch(function(err) {
+        }, function(err){
           return err;
         });
 
@@ -58,11 +54,7 @@ angular.module('specter.tab.marcopolo.controller', [])
         var weight = heatmapService.weight(self.distance);
         
         // Set color of proximity indicator bar (below map)
-        var colorIndex = heatmapService.colorIndex(weight);
-
-        if (colorIndex < gradient.length - 1) {
-          self.proximityColor = gradient[colorIndex];
-        }
+        self.proximityColor = heatmapService.color(weight);
 
         // Add point to heatmap
         heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
@@ -88,7 +80,7 @@ angular.module('specter.tab.marcopolo.controller', [])
       };
 
       var watch = $cordovaGeolocation.watchPosition({
-        frequency: 10000
+        frequency: 1000
       });
 
       watch.promise.then(function() {
@@ -106,18 +98,13 @@ angular.module('specter.tab.marcopolo.controller', [])
             // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
           } else if (!visited) {
             console.log("User has traveled, adding new location to heatmap.");
-            
             var weight = heatmapService.weight(self.distance);
 
             // Set color of proximity indicator bar (below map)
-            var colorIndex = heatmapService.colorIndex(weight);
-
-            if (colorIndex < gradient.length - 1) {
-              self.proximityColor = gradient[colorIndex];
-            }
+            self.proximityColor = heatmapService.color(weight);
 
             // Add current location to heatmap
-            heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
+            heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight * 10);
             self.pointArray = heatmapService.getPoints(self.id);
           }
       });

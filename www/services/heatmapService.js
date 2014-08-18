@@ -505,23 +505,6 @@
       {location: new google.maps.LatLng(37.751266, -122.403355), weight: 1.5}
     ]};
 
-    var gradient = [
-      'rgba(0, 255, 255, 0)',
-      'rgba(0, 255, 255, 1)',
-      'rgba(0, 191, 255, 1)',
-      'rgba(0, 127, 255, 1)',
-      'rgba(0, 63, 255, 1)',
-      'rgba(0, 0, 255, 1)',
-      'rgba(0, 0, 223, 1)',
-      'rgba(0, 0, 191, 1)',
-      'rgba(0, 0, 159, 1)',
-      'rgba(0, 0, 127, 1)',
-      'rgba(63, 0, 91, 1)',
-      'rgba(127, 0, 63, 1)',
-      'rgba(191, 0, 31, 1)',
-      'rgba(255, 0, 0, 1)'
-    ];
-
     this.addPoint = function(stacheID, lat, lon, dist) {
       var newPoint = {
         location: new google.maps.LatLng(lat, lon),
@@ -552,42 +535,25 @@
     };
 
     this.weight = function(distance) {
-      // Normalize distance in miles to calculate weight of heatmap data point
-      return 1 / (50 * Math.log(1 + distance * 0.000621371192));
+      // The closer the user is to the stache, the greater the weight
+      // Weight is normalized by max distance
+      var maxDistance = 300; // meters
+
+      // Cap distance to maxDistance
+      // (color indicator changes colors within range of 8000 meters/5 miles)
+      if (distance > maxDistance) {
+            distance = maxDistance;
+      }
+
+      var weight = (maxDistance - distance) / maxDistance;
+      return weight;
     };
 
-    this.colorIndex = function(weight) {
-      return Math.floor((Math.ceil(weight) / 11) * gradient.length);
-    };
-
-    this.createHeatLayer = function(heatLayer) {
-      var map, pointarray, heatmap;
-
-      var weight = this.weight(1000);
-      
-      // Set color of proximity indicator bar (below map)
-      // var colorIndex = heatmapService.colorIndex(weight);
-
-      // if (colorIndex < gradient.length - 1) {
-      //   self.proximityColor = gradient[colorIndex];
-      // }
-
-      // Add point to heatmap
-      // this.addPoint(self.id, self.location.lat, self.location.long, weight);
-      // Get all data points for heatmap
-      // $scope.pointArray = heatmapService.getPoints(self.id);
-      // heatLayer.setData($scope.pointArray);
-
-      heatLayer.set('gradient', gradient);
-
-      // function changeRadius() {
-      //     heatmap.set('radius', heatmap.get('radius') ? null : 20);
-      // }
-      
-      // function changeOpacity() {
-      //     heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-      // }
-      return heatLayer;
+    this.color = function(weight) {
+      var r = weight > 0.75 ? Math.ceil(weight * 255) : 0;
+      var g = weight < 0.25 ? Math.ceil((1 - weight) * 255) : 0;
+      var b = Math.ceil((1 - weight) * 255);
+      return 'rgba(' + r + ', ' + g + ', ' + b + ', 1)';
     };
 
   };
