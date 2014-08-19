@@ -25,7 +25,6 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
   });
 })
 .filter('distance', function() {
-
   return function(distance) {
     if (distance === undefined) {
       return "Generating ectoplasm...";
