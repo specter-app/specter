@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', 'google-maps', 'marcopoloDirective'])
+angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', 'google-maps', 'marcopoloDirective', 'firebase'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -25,7 +25,6 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
   });
 })
 .filter('distance', function() {
-
   return function(distance) {
     if (distance === undefined) {
       return "Generating ectoplasm...";
@@ -36,4 +35,4 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
       return distance.toFixed(0) + " meters";
     }
   };
-});
+})
