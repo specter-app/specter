@@ -2,8 +2,8 @@
   'use strict';
 
   var stacheService = function(Restangular){
-    this.getAll = function(){
-      return Restangular.all('staches/').customGET("",{lat: 37.7837, lon: -122.4089, dist: 1000000}).then(function(staches){
+    this.getAll = function(location){
+      return Restangular.all('staches/').customGET("", location).then(function(staches){
         return staches;
       }, function(response){
         return response;
