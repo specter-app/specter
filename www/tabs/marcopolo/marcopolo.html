@@ -4,27 +4,22 @@
       <button class="button" ng-click="doSomething()">My Staches</button>
     </div>
     <h1 class="title">{{marcopolo.currentStache.title}}</h1>
-    <!-- <div class="buttons">
-      <button class="button">Back</button>
-    </div> -->
   </ion-header-bar>
   <ion-content>
-  <google-map
-    style="height:500px;margin:12px;"
-    center="map.center" zoom="map.zoom"
-    draggable="true"
-    dragging="map.dragging"
-    bounds="map.bounds"
-    events="map.events"
-    options="map.options"
-    pan="true"
-    control="map.control"
-    options="map.options">
-    <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="heatLayerCallback"></layer>
-  </google-map>
+    <google-map
+      center="map.center" zoom="map.zoom"
+      draggable="true"
+      dragging="map.dragging"
+      bounds="map.bounds"
+      events="map.events"
+      options="map.options"
+      pan="true"
+      control="map.control" 
+      options="map.options">
+      <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="marcopolo.heatLayerCallback"></layer>
+    </google-map>
+  </ion-content>
+  <ion-footer-bar style="background-color:{{ marcopolo.proximityColor }}">
+  </ion-footer-bar>
   <h6>{{marcopolo.distance | distance}}</h6>
-  <h3>{{marcopolo.currentStache.title}}</h3>
-  {{marcopolo.location.long}}
-  {{marcopolo.location.lat}}
-</ion-content>
 </ion-view>
