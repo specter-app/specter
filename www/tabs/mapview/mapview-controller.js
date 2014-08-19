@@ -3,6 +3,5 @@ angular.module('specter.tab.mapview.controller', [])
   var self = this;
   stacheService.getAll().then(function(staches) {
     self.staches = staches;
-    console.log(staches);
   });
 }]);

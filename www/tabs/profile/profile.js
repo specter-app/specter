@@ -1,4 +1,4 @@
-angular.module('specter.tab.profile', [])
+angular.module('specter.tab.profile', ['specter.tab.profile.controller'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('tab.profile', {
