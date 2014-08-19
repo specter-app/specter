@@ -1,6 +1,6 @@
 module.exports.testStache1 = {
   title: 'Advice From Yoda',
-  author: 'Yoda',
+  created_by: 'Yoda',
   lon: 40,
   lat: 6,
   loc: [40, 6],
@@ -13,7 +13,7 @@ module.exports.testStache1 = {
 
 module.exports.testStache2 = {
   title: 'Wise Words from Darth Vader',
-  author: 'Darth Vader',
+  created_by: 'Darth Vader',
   lon: 40,
   lat: 5,
   loc: [40, 5],
@@ -23,7 +23,7 @@ module.exports.testStache2 = {
 
 module.exports.testStache3 = {
   title: 'Veggie Burger',
-  author: 'Hamburglar',
+  created_by: 'Hamburglar',
   lon: 41,
   lat: 4,
   loc: [41, 4],
