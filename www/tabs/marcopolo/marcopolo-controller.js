@@ -54,13 +54,11 @@ angular.module('specter.tab.marcopolo.controller', [])
       HeatLayer = function (heatLayer) {
         var map, pointarray, heatmap;
 
-        var weight = heatmapService.weight(self.distance);
-
         // Set color of proximity indicator bar (below map)
-        self.proximityColor = heatmapService.color(weight);
+        self.proximityColor = heatmapService.color(self.distance);
 
         // Add point to heatmap
-        heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
+        heatmapService.addPoint(self.id, self.location.lat, self.location.long, self.distance);
         // Get all data points for heatmap
         self.pointArray = heatmapService.getPoints(self.id);
         heatLayer.setData(self.pointArray);
@@ -101,13 +99,13 @@ angular.module('specter.tab.marcopolo.controller', [])
             // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
           } else if (!visited) {
             console.log("User has traveled, adding new location to heatmap.");
-            var weight = heatmapService.weight(self.distance);
+            // var weight = heatmapService.weight(self.distance);
 
             // Set color of proximity indicator bar (below map)
-            self.proximityColor = heatmapService.color(weight);
+            self.proximityColor = heatmapService.color(self.distance);
 
             // Add current location to heatmap
-            heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight * 10);
+            heatmapService.addPoint(self.id, self.location.lat, self.location.long, self.distance);
             self.pointArray = heatmapService.getPoints(self.id);
           }
       });

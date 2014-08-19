@@ -506,9 +506,10 @@
     ]};
 
     this.addPoint = function(stacheID, lat, lon, dist) {
+      var weight = this.weight(dist) * 5;
       var newPoint = {
         location: new google.maps.LatLng(lat, lon),
-        weight: dist
+        weight: weight
       };
 
       var key = lat.toFixed(5) + ", " + lon.toFixed(5);
@@ -542,14 +543,15 @@
       // Cap distance to maxDistance
       // (color indicator changes colors within range of 8000 meters/5 miles)
       if (distance > maxDistance) {
-            distance = maxDistance;
+            distance = maxDistaance;
       }
 
       var weight = (maxDistance - distance) / maxDistance;
       return weight;
     };
 
-    this.color = function(weight) {
+    this.color = function(dist) {
+      var weight = this.weight(dist);
       var r = weight > 0.75 ? Math.ceil(weight * 255) : 0;
       var g = weight < 0.25 ? Math.ceil((1 - weight) * 255) : 0;
       var b = Math.ceil((1 - weight) * 255);
