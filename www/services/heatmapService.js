@@ -534,6 +534,28 @@
       return visited[stacheID][key] ? true : false;
     };
 
+    this.weight = function(distance) {
+      // The closer the user is to the stache, the greater the weight
+      // Weight is normalized by max distance
+      var maxDistance = 300; // meters
+
+      // Cap distance to maxDistance
+      // (color indicator changes colors within range of 8000 meters/5 miles)
+      if (distance > maxDistance) {
+            distance = maxDistance;
+      }
+
+      var weight = (maxDistance - distance) / maxDistance;
+      return weight;
+    };
+
+    this.color = function(weight) {
+      var r = weight > 0.75 ? Math.ceil(weight * 255) : 0;
+      var g = weight < 0.25 ? Math.ceil((1 - weight) * 255) : 0;
+      var b = Math.ceil((1 - weight) * 255);
+      return 'rgba(' + r + ', ' + g + ', ' + b + ', 1)';
+    };
+
   };
 
   angular.module('specter').service('heatmapService', [

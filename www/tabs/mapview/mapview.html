@@ -1,7 +1,9 @@
 <ion-view>
+  <ion-header-bar class="bar-positive">
+    <h1 class="title">Nearby Staches</h1>
+  </ion-header-bar>
   <ion-content>
     <div class="list">
-
       <div ng-repeat="stache in mapview.staches">
         <a class="item item-thumbnail-left" href="#/tab/marcopolo/:{{stache._id}}">
           <img src="http://typeinstereo.com/wp-content/uploads/2013/04/Weezer-Blue-Album-1994.jpg">

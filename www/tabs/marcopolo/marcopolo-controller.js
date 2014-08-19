@@ -14,17 +14,10 @@ angular.module('specter.tab.marcopolo.controller', [])
       self.location.long = location.coords.longitude;
       self.location.lat = location.coords.latitude;
 
-      stacheService.getOne(self.id)
-        .then(function(stache) {
+      stacheService.getOne(self.id).then(function(stache){
           self.currentStache = stache;
-        })
-        .then(function(stache) {
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
-          var weight = 1 / (4 * Math.log(1 + self.distance * 0.000621371192));
-          heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
-          $scope.pointArray = heatmapService.getPoints(self.id);
-        })
-        .catch(function(err) {
+        }, function(err){
           return err;
         });
 
@@ -37,35 +30,40 @@ angular.module('specter.tab.marcopolo.controller', [])
         options: {mapTypeId: google.maps.MapTypeId.SATELLITE }
       };
 
+      var gradient = [
+        'rgba(0, 255, 255, 0)',
+        'rgba(0, 255, 255, 1)',
+        'rgba(0, 191, 255, 1)',
+        'rgba(0, 127, 255, 1)',
+        'rgba(0, 63, 255, 1)',
+        'rgba(0, 0, 255, 1)',
+        'rgba(0, 0, 223, 1)',
+        'rgba(0, 0, 191, 1)',
+        'rgba(0, 0, 159, 1)',
+        'rgba(0, 0, 127, 1)',
+        'rgba(63, 0, 91, 1)',
+        'rgba(127, 0, 63, 1)',
+        'rgba(191, 0, 31, 1)',
+        'rgba(255, 0, 0, 1)'
+      ];
+
+      // Create the heatmap overlay
       HeatLayer = function (heatLayer) {
-          var map, pointarray, heatmap;
+        var map, pointarray, heatmap;
 
-          // Get all data points for heatmap
-          var weight = 1 / (3 * Math.log(1 + self.distance * 0.000621371192));
-          heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
-          $scope.pointArray = heatmapService.getPoints(self.id);
-          heatLayer.setData($scope.pointArray);
+        var weight = heatmapService.weight(self.distance);
+        
+        // Set color of proximity indicator bar (below map)
+        self.proximityColor = heatmapService.color(weight);
 
-      //function changeGradient() {
-      //    var gradient = [
-      //        'rgba(0, 255, 255, 0)',
-      //        'rgba(0, 255, 255, 1)',
-      //        'rgba(0, 191, 255, 1)',
-      //        'rgba(0, 127, 255, 1)',
-      //        'rgba(0, 63, 255, 1)',
-      //        'rgba(0, 0, 255, 1)',
-      //        'rgba(0, 0, 223, 1)',
-      //        'rgba(0, 0, 191, 1)',
-      //        'rgba(0, 0, 159, 1)',
-      //        'rgba(0, 0, 127, 1)',
-      //        'rgba(63, 0, 91, 1)',
-      //        'rgba(127, 0, 63, 1)',
-      //        'rgba(191, 0, 31, 1)',
-      //        'rgba(255, 0, 0, 1)'
-      //    ]
-      //    heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-      //}
-      //
+        // Add point to heatmap
+        heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
+        // Get all data points for heatmap
+        self.pointArray = heatmapService.getPoints(self.id);
+        heatLayer.setData(self.pointArray);
+
+        heatLayer.set('gradient', gradient);
+      
       //function changeRadius() {
       //    heatmap.set('radius', heatmap.get('radius') ? null : 20);
       //}
@@ -76,39 +74,44 @@ angular.module('specter.tab.marcopolo.controller', [])
         return heatLayer;
       };
 
-      $scope.heatLayerCallback = function (layer) {
-        $scope.heatLayer = new HeatLayer(layer);
+      self.heatLayerCallback = function (layer) {
+        self.heatLayer = new HeatLayer(layer);
+        // $scope.heatLayer = new heatmapService.createHeatLayer(layer);
       };
 
       var watch = $cordovaGeolocation.watchPosition({
-        frequency: 10000
+        frequency: 1000
       });
-      watch.promise.then(function(position) {
+
+      watch.promise.then(function() {
+      }, function(err) {
+        return err;
+      }, function(position) {
           self.location.long = position.coords.longitude;
           self.location.lat = position.coords.latitude;
           self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
           var visited = heatmapService.contains(self.id, self.location.lat, self.location.long);
-          
+
           // If user is within 3 meters, reveal stache
           if (self.distance < 3) {
             console.log("You found the stache!");
             // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
           } else if (!visited) {
             console.log("User has traveled, adding new location to heatmap.");
-            // Normalize distance in miles to calculate weight of heatmap data point
-            var weight = 1 / (5 * Math.log(1 + self.distance * 0.000621371192));
+            var weight = heatmapService.weight(self.distance);
+
+            // Set color of proximity indicator bar (below map)
+            self.proximityColor = heatmapService.color(weight);
+
             // Add current location to heatmap
-            heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight);
-            $scope.pointArray = heatmapService.getPoints(self.id);
+            heatmapService.addPoint(self.id, self.location.lat, self.location.long, weight * 10);
+            self.pointArray = heatmapService.getPoints(self.id);
           }
-      })
-      .catch(function(err) {
-        return err;
       });
 
       // Rerender heatmap whenever new data has been added
-      $scope.$watch('pointArray', function (pointArray) {
+      $scope.$watch('marcopolo.pointArray', function (pointArray) {
         console.log('watch on pointArray triggered');
-        $scope.heatLayer.setData(pointArray);
+        self.heatLayer.setData(pointArray);
       }, true);
   }]);
