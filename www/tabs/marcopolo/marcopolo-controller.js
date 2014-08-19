@@ -99,7 +99,6 @@ angular.module('specter.tab.marcopolo.controller', [])
             // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
           } else if (!visited) {
             console.log("User has traveled, adding new location to heatmap.");
-            // var weight = heatmapService.weight(self.distance);
 
             // Set color of proximity indicator bar (below map)
             self.proximityColor = heatmapService.color(self.distance);
