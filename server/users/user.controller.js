@@ -7,21 +7,21 @@
 // 5) expire an auth token
 // 6) modify a user profile/settings/caches
 
-var bcrypt = require('bcrypt-nodejs');
+// var bcrypt = require('bcrypt-nodejs');
 var User = require('./user.model.js');
 
-exports.signup = function(req, res){
+exports.save = function(req, res){
   console.log('user signup req', req.body);
   var user_data = {
     username: req.body.username,
-    salt: Date.now(),
+    // salt: Date.now(),
     firstName: req.body.firstName,
     lastName: req.body.lastName
     //profilePhoto: String
   };
 
-  user_data.hashedPassword = hashPassword(req.body.password, user_data.salt)
-  user_data.token = generateUserToken(user_data.username);
+  // user_data.hashedPassword = hashPassword(req.body.password, user_data.salt)
+  // user_data.token = generateUserToken(user_data.username);
   //generateUserToken();
 
   var user = new User(user_data);

@@ -5,7 +5,7 @@ var request = require('supertest');
 
 //Test helpers
 var fixture = require('./test.fixtures.js');
-var Stache = require('../stache/stache.model.js');
+var Stache = require('../staches/stache.model.js');
 
 //Server
 var server = require('../server.js');

@@ -4,8 +4,8 @@ var should = require('should');
 var assert = require('assert');
 
 // Schemas and fixtures
-var Stache = require('../stache/stache.model.js');
-var User = require('../user/user.model.js');
+var Stache = require('../staches/stache.model.js');
+var User = require('../users/user.model.js');
 var fixtures = require('./test.fixtures.js');
 
 // Use test database

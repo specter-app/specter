@@ -10,7 +10,8 @@ var StacheSchema = new Schema({
     stache: ObjectId,
     title: {type: String, required: true},
     date: {type: Date, default: Date.now},
-    author: {type: String, default: 'Anonymous'},
+    created_by: {type: String, required: true}, //user_id
+    discovered_by: {type: String}, //user_id
     lon: {type: Number, required: true},
     lat: {type: Number, required: true},
     loc: {type: [Number], index: '2dsphere', required: true},
