@@ -8,6 +8,9 @@ angular.module('specter.tab.setting', [])
           templateUrl: "tabs/setting/setting.html",
           // controller: 'MarcopoloCtrl'
         }
+      },
+      data: {
+        logInRequired: false
       }
     })
 });

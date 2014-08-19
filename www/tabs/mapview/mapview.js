@@ -15,6 +15,9 @@ angular.module('specter.tab.mapview', ['specter.tab.mapview.controller'])
         location: function (geoService) {
           return geoService.getLocation();
         }
+      },
+      data: {
+        logInRequired: false
       }
     });
 });

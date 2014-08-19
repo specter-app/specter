@@ -8,6 +8,9 @@ angular.module('specter.tab.profile', ['specter.tab.profile.controller'])
           templateUrl: "tabs/profile/profile.html",
           controller: 'loginCtrl'
         }
+      },
+      data: {
+        logInRequired: false
       }
     })
 });

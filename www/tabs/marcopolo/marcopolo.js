@@ -13,6 +13,9 @@ angular.module('specter.tab.marcopolo', ['specter.tab.marcopolo.controller'])
         location: function (geoService) {
           return geoService.getLocation();
         }
+      },
+      data: {
+        logInRequired: true
       }
     });
 });

@@ -7,7 +7,10 @@ angular.module('specter.tab.marcopolo.controller', [])
       'location',
       '$stateParams',
       'stacheService',
-    function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService) {
+      '$rootScope',
+      '$ionicPopup',
+      '$timeout',
+    function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout) {
       var self = this;
       self.location = {long: "", lat: ""};
       self.id = $stateParams.id.slice(1);
@@ -52,7 +55,7 @@ angular.module('specter.tab.marcopolo.controller', [])
         var map, pointarray, heatmap;
 
         var weight = heatmapService.weight(self.distance);
-        
+
         // Set color of proximity indicator bar (below map)
         self.proximityColor = heatmapService.color(weight);
 
@@ -63,7 +66,7 @@ angular.module('specter.tab.marcopolo.controller', [])
         heatLayer.setData(self.pointArray);
 
         heatLayer.set('gradient', gradient);
-      
+
       //function changeRadius() {
       //    heatmap.set('radius', heatmap.get('radius') ? null : 20);
       //}
@@ -114,4 +117,4 @@ angular.module('specter.tab.marcopolo.controller', [])
         console.log('watch on pointArray triggered');
         self.heatLayer.setData(pointArray);
       }, true);
-  }]);
+}]);
