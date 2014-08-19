@@ -6,7 +6,7 @@ angular.module('specter.tab.profile', [])
       views: {
         'profile-tab': {
           templateUrl: "tabs/profile/profile.html",
-          // controller: 'MarcopoloCtrl'
+          controller: 'loginCtrl'
         }
       }
     })
