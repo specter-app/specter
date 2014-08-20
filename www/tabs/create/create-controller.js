@@ -60,7 +60,7 @@ angular.module('specter.tab.create.controller', ['restangular'])
 
       this.showPopup = function() {
         var myPopup = $ionicPopup.show({
-          template: '<input type="text" ng-model="data.newTag">',
+          template: '<input type="text" ng-model="create.data.newTag">',
           title: 'Enter a new tag',
           scope: $scope,
           buttons: [{
