@@ -31,6 +31,16 @@
         Audio
       </a>
       </div>
+
+      <!-- File upload -->
+      <input class="button item-icon-left" type="file" id="files"/>
+      <p id="status">Please select a file</p>
+      <div style="border:1px solid gray;width:100px;height:100px"  id="preview"><img src="./www/img/ghost.jpg" style="width:100px;" /></div>
+
+      <form method="POST" action="/submit_form/">
+          <input type="hidden" id="avatar_url" name="avatar_url" value="./www/img/ghost.png" />
+          <input class="button item-icon-left" type="submit" value="Submit photo"/>
+      </form>
       
       <!-- <li class="item item-toggle"> -->
          <!-- <label class="toggle toggle-positive">
