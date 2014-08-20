@@ -1,13 +1,3 @@
-// We need a controller for the User schema (which generates a collection) so that our
-// API (REST endpoints / routes) can interact with the database. We need these functions for diff endpoints:
-// 1) store a new user
-// 2) authenticate a login
-// 3) generate an auth token
-// 4) authenticate a request
-// 5) expire an auth token
-// 6) modify a user profile/settings/caches
-
-// var bcrypt = require('bcrypt-nodejs');
 var User = require('./user.model.js');
 
 exports.login = function(req, res){
@@ -30,7 +20,11 @@ exports.login = function(req, res){
       });
     }else{
       console.log('foundUser', foundUser.fbid);
-      res.status(201).json(foundUser);
+      res.status(200).json(foundUser);
     }
   });
+};
+
+exports.addStaches_Discovered = function(discovery, next){
+  next();
 };

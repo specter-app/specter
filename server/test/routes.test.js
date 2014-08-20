@@ -5,8 +5,6 @@ var request = require('supertest');
 
 //Test helpers
 var fixture = require('./test.fixtures.js');
-// var Stache = require('../staches/stache.model.js');
-// var User = require('../users/user.model.js');
 
 //Server
 var server = require('../server.js');
@@ -21,10 +19,10 @@ db.on('error', function(err){
 
 describe('Basic server endpoint tests', function(){
 
-  describe('Stache API', function(){
-
     var postRes1;
     var staches = [fixture.testStache1, fixture.testStache2];
+
+  describe('Stache API', function(){
     
     before(function(done){
       db.collections['staches'].drop(function(err){
@@ -159,17 +157,6 @@ describe('Basic server endpoint tests', function(){
       });
     });
 
-    xit('should accept GET requests via /login/:id', function(done){
-      request(server)
-      .post('/users/login/1234')
-      .send(fixture.testUser1)
-      .expect(201)
-      .end(function(err, res){
-        if(err) throw err;
-        done();
-      })
-    });
-
     it('should create and login new user via POST request via /login/:id', function(done){
       request(server)
       .post('/users/login/1234')
@@ -182,10 +169,10 @@ describe('Basic server endpoint tests', function(){
       })
     });
 
-    it('should login an existing user via POST request via /login/:id', function(done){
+    it('should login an existing user via GET request via /login/:id', function(done){
       request(server)
       .get('/users/login/1234')
-      .expect(201)
+      .expect(200)
       .end(function(err, res){
         if(err) throw err;
         should.equal(res.body.fbid, '1234');
@@ -193,6 +180,20 @@ describe('Basic server endpoint tests', function(){
         should.equal(res.body.last_name, 'Owen');
         done();
       })
+    });
+
+  });
+
+  describe('Discoveries API', function(){
+
+    it('should accept POST requests via /discoveries', function(done){
+      request(server)
+      .post('/discoveries/?sid=' + postRes1._id + '&fbid=1234')
+      .expect(201)
+      .end(function(err, res){
+        if(err) throw err;
+        done();
+      });
     });
 
   });

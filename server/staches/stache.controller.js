@@ -1,6 +1,6 @@
 var Stache = require('./stache.model.js');
 
-// Creates and saves a new stache
+// Creates and saves a new stache, or overwrites a stache
 exports.save = function(req, res) {
   var stache_data = {
     title: req.body.title,
@@ -62,4 +62,8 @@ exports.getNearby = function(req, res) {
   } else {
     res.status(400).json('Query must contain geolocation.');
   }
+};
+
+exports.addDiscovered_By = function(discovery, next){
+  next();
 };
