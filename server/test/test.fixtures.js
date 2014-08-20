@@ -33,21 +33,20 @@ module.exports.testStache3 = {
 };
 
 // New user without user_id
-module.exports.testUser = {
-  username: 'scavenster',
-  password: 'scavengers4evr',
-  firstName: 'Bob',
-  lastName: 'Owen'
+module.exports.testUser1 = {
+  // username: 'scavenster',
+  // password: 'scavengers4evr',
+  first_name: 'Bob',
+  last_name: 'Owen'
   // profilePhoto: 
 };
 
-// // Existing user with user_id
-// module.exports.testUserExisting = {
-//   user_id: 54ed6f986d6a1658b68f6d17
-//   username: 'stachester',
-  
-//   password: 'staches4lyfe',
-//   firstName: 'Indiana',
-//   lastName: 'Jones',
+// Existing user with user_id
+module.exports.testUser2 = {
+  fbid: 'abc123',
+  // username: 'stachester',
+  // password: 'staches4lyfe',
+  first_name: 'Indiana',
+  last_name: 'Jones',
 
-// };
+};
