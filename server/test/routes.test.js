@@ -5,8 +5,6 @@ var request = require('supertest');
 
 //Test helpers
 var fixture = require('./test.fixtures.js');
-// var Stache = require('../staches/stache.model.js');
-// var User = require('../users/user.model.js');
 
 //Server
 var server = require('../server.js');
@@ -174,7 +172,7 @@ describe('Basic server endpoint tests', function(){
     it('should login an existing user via GET request via /login/:id', function(done){
       request(server)
       .get('/users/login/1234')
-      .expect(201)
+      .expect(200)
       .end(function(err, res){
         if(err) throw err;
         should.equal(res.body.fbid, '1234');

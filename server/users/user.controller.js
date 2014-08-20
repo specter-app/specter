@@ -30,7 +30,7 @@ exports.login = function(req, res){
       });
     }else{
       console.log('foundUser', foundUser.fbid);
-      res.status(201).json(foundUser);
+      res.status(200).json(foundUser);
     }
   });
 };
