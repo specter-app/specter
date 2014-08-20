@@ -8,6 +8,9 @@ angular.module('specter.tab.profile.controller', [])
   $scope.user = UserService;
   $scope.login = function(provider) {
     $scope.auth.$login(provider);
+    UserService.login($scope.user.uid).then(function(staches){
+      console.log(staches);
+    });
   };
   $scope.logout = function() {
     $scope.auth.$logout();
