@@ -1,6 +1,5 @@
 (function(){
   'use strict';
-
   angular.module('specter').factory('UserService', function($rootScope){
     var sdo = {
       uid: 0,
@@ -21,9 +20,6 @@
       sdo.isLogged = false;
       sdo.username = "";
       sdo.pic = "";
-      // window.cookies.clear(function() {
-      //   console.log("Cookies cleared!");
-      // });
     });
     // Log any login-related errors to the console
     $rootScope.$on("$firebaseSimpleLogin:error", function(event, error) {

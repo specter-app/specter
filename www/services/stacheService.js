@@ -1,9 +1,14 @@
 (function(){
   'use strict';
+  angular.module('specter').factory('CachedRestangular', function (Restangular) {
+    return Restangular.withConfig(function (RestangularConfigurer) {
+      RestangularConfigurer.setDefaultHttpFields({cache: true});
+    });
+  });
 
-  var stacheService = function(Restangular){
+  var stacheService = function(Restangular, CachedRestangular){
     this.getAll = function(location){
-      return Restangular.all('staches/').customGET("", location).then(function(staches){
+      return CachedRestangular.all('staches/').customGET("", location).then(function(staches){
         return staches;
       }, function(response){
         return response;
@@ -37,6 +42,7 @@
   };
   angular.module('specter').service('stacheService', [
     'Restangular',
+    'CachedRestangular',
     stacheService
   ]);
 })();
