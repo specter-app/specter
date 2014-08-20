@@ -55,34 +55,35 @@
   <body ng-app="specter" animation="slide-left-right-ios7">
     <ion-nav-view animation="slide-left-right"></ion-nav-view>
     <script>
-    function s3_upload(){
-        var status_elem = document.getElementById("status");
-        var url_elem = document.getElementById("avatar_url");
-        var preview_elem = document.getElementById("preview");
-        var s3upload = new S3Upload({
-            file_dom_selector: 'files',
-            s3_sign_put_url: 'staches/sign_s3',
-            onProgress: function(percent, message) {
-                status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
-            },
-            onFinishS3Put: function(public_url) {
-                status_elem.innerHTML = 'Upload completed. Uploaded to: ' + public_url;
-                url_elem.value = public_url;
-                // Store this url in mongodb
-                preview_elem.innerHTML = '<img src="' + public_url + '" style="width:100px;"/>';
-            },
-            onError: function(status) {
-                status_elem.innerHTML = 'Upload error: ' + status;
-            }
-        });
-    }
-    /*
-    * Listen for file selection:
-    */
-    (function() {
-        var input_element = document.getElementById("files");
-        input_element.onchange = s3_upload;
-    })();
+        function s3_upload(){
+            var status_elem = document.getElementById("status");
+            var url_elem = document.getElementById("avatar_url");
+            var preview_elem = document.getElementById("preview");
+            var s3upload = new S3Upload({
+                file_dom_selector: 'files',
+                s3_sign_put_url: '/staches/sign_s3',
+                onProgress: function(percent, message) {
+                    status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+                },
+                onFinishS3Put: function(public_url) {
+                    status_elem.innerHTML = 'Upload completed. Uploaded to: ' + public_url;
+                    url_elem.value = public_url;
+                    // Store this url in mongodb
+                    preview_elem.innerHTML = '<img src="' + public_url + '" style="width:100px;"/>';
+                },
+                onError: function(status) {
+                    status_elem.innerHTML = 'Upload error: ' + status;
+                    console.log(s3_sign_put_url);
+                }
+            });
+        }
+        /*
+        * Listen for file selection:
+        */
+        (function() {
+            var input_element = document.getElementById("files");
+            input_element.onchange = s3_upload;
+        })();
     </script>
   </body>
 </html>
