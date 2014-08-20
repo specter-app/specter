@@ -9,9 +9,11 @@ angular.module('specter.tab.profile.controller', [])
   // Logs a user in with inputted provider
   $scope.login = function(provider) {
     $scope.auth.$login(provider);
+    $scope.$apply();
   };
   // Logs a user out
   $scope.logout = function() {
     $scope.auth.$logout();
+    $scope.$apply();
   };
 });
