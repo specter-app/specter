@@ -19,10 +19,10 @@ db.on('error', function(err){
 
 describe('Basic server endpoint tests', function(){
 
-  describe('Stache API', function(){
-
     var postRes1;
     var staches = [fixture.testStache1, fixture.testStache2];
+
+  describe('Stache API', function(){
     
     before(function(done){
       db.collections['staches'].drop(function(err){
@@ -184,11 +184,11 @@ describe('Basic server endpoint tests', function(){
 
   });
 
-  describe('Relationships API', function(){
+  describe('Discoveries API', function(){
 
-    it('should accept POST requests via /relationships', function(done){
+    it('should accept POST requests via /discoveries', function(done){
       request(server)
-      .post('/relationships/?sid=' + postRes1._id + '&fbid=1234')
+      .post('/discoveries/?sid=' + postRes1._id + '&fbid=1234')
       .expect(201)
       .end(function(err, res){
         if(err) throw err;
