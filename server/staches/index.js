@@ -9,9 +9,9 @@ staches.get('/', function(req, res) {
   stacheController.getNearby(req, res);
 });
 
-staches.get('/sign_s3', function(req, res) {
-  stacheController.sign_s3(req, res);
-});
+// staches.get('/sign_s3', function(req, res) {
+//   stacheController.sign_s3(req, res);
+// });
 
 staches.get('/:id', function(req, res) {
   stacheController.getOne(req, res);
