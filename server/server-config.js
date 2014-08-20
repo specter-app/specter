@@ -30,6 +30,7 @@ console.log('environment:', app.get('env'));
 // routes
 app.use('/staches', require('./staches'));
 app.use('/users', require('./users'));
+app.use('/discoveries', require('./discoveries'));
 
 // create 404 error response for any non-existent REST endpoints
 app.use('*', function(req, res, next) {

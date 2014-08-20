@@ -24,3 +24,7 @@ exports.login = function(req, res){
     }
   });
 };
+
+exports.addStaches_Discovered = function(discovery, next){
+  next();
+};
