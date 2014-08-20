@@ -31,6 +31,7 @@ describe('Basic server endpoint tests', function(){
         .expect(201)
         .end(function(err, res){
           if(err) throw err;
+          console.log('RES', res.body);
           done();
         });
       });
@@ -102,7 +103,7 @@ describe('Basic server endpoint tests', function(){
           if(err) throw err;
           should.equal(getRes.body._id, postRes1._id);
           should.equal(getRes.body.title, postRes1.title);
-          should.equal(getRes.body.author, postRes1.author);
+          should.equal(getRes.body.created_by, postRes1.created_by);
           should.equal(getRes.body.lat, postRes1.lat);
           should.equal(getRes.body.lon, postRes1.lon);
           should.equal(getRes.body.content, postRes1.content);

@@ -123,18 +123,14 @@ describe('Stache model', function() {
       // Test stache1
       should.exist(stache1._id);
       should.exist(stache1.date);
-      should.exist(stache1.author);
+      should.exist(stache1.created_by);
       should.exist(stache1.locked);
-      should.exist(stache1.clue);
-      should.exist(stache1.password);
 
       // Test stache2
       should.exist(stache2._id);
       should.exist(stache2.date);
-      should.exist(stache2.author);
+      should.exist(stache2.created_by);
       should.exist(stache2.locked);
-      should.exist(stache2.clue);
-      should.exist(stache2.password);
       done();
     });
   });

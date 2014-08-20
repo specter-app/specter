@@ -4,7 +4,7 @@ var Stache = require('./stache.model.js');
 exports.save = function(req, res) {
   var stache_data = {
     title: req.body.title,
-    author: req.body.author,
+    created_by: req.body.created_by,
     lon: req.body.lon,
     lat: req.body.lat,
     loc: [req.body.lon, req.body.lat],
