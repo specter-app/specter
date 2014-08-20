@@ -184,6 +184,20 @@ describe('Basic server endpoint tests', function(){
 
   });
 
+  describe('Relationships API', function(){
+
+    it('should accept POST requests via /relationships', function(done){
+      request(server)
+      .post('/relationships/?sid=' + postRes1._id + '&fbid=1234')
+      .expect(201)
+      .end(function(err, res){
+        if(err) throw err;
+        done();
+      });
+    });
+
+  });
+
   after(function(done){
     db.db.dropDatabase(function(err){
       if(err) throw err;
