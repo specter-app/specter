@@ -53,15 +53,16 @@ angular.module('specter.tab.create.controller', ['restangular'])
           content: self.data.content,
           tags: Object.keys(self.data.currentTags),
           lon: self.location.long,
-          lat: self.location.lat
+          lat: self.location.lat,
+          clue: self.data.clue
         });
       };
 
       this.showPopup = function() {
         var myPopup = $ionicPopup.show({
-          template: '<input type="text" ng-model="data.newTag">',
+          template: '<input type="text" ng-model="create.data.newTag">',
           title: 'Enter a new tag',
-          scope: self,
+          scope: $scope,
           buttons: [{
             text: 'Cancel'
           }, {

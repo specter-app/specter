@@ -6,7 +6,7 @@
     });
   });
 
-  var stacheService = function(Restangular, CachedRestangular){
+  var stacheService = function(Restangular, CachedRestangular, UserService){
     this.getAll = function(location){
       return CachedRestangular.all('staches/').customGET("", location).then(function(staches){
         return staches;
@@ -19,12 +19,12 @@
       var staches = Restangular.all('staches');
       var newStache = {
         title: params.title,
-        author: 'cool mitch',
+        created_by: UserService.username,
         lon: params.lon,
         lat: params.lat,
         content: params.content,
         locked: false,
-        clue: '',
+        clue: params.clue,
         password: null,
         tags: params.tags
       };
