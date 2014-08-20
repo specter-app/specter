@@ -16,7 +16,7 @@ var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
 
-s3 = new aws.S3();
+// s3 = new aws.S3();
 
 // Creates and saves a new stache
 exports.save = function(req, res) {
