@@ -11,27 +11,26 @@
 var User = require('./user.model.js');
 
 exports.login = function(req, res){
-  console.log('user login req', req.body);
-  
-  // User.find(function(err, user){
-  //   if(err) throw err;
-  //   if(!user){
-  //     res.status(404).json(message: 'User not found.');
-  //   }else{
-
-  //   }
-  // });
-
   var user_data = {
-    _id: req.body.fbid,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
+    fbid: req.body.fbid,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name
     //profilePhoto: String
   };
 
   var user = new User(user_data);
-  user.save(function(err, savedUser){
+
+  User.findOne({fbid: user.fbid}, function(err, foundUser){
     if(err) throw err;
-    res.status(201).send(savedUser)
+    if(!foundUser){
+      user.save(function(err, savedUser){
+        if(err) throw err;
+        console.log('savedUser', savedUser.fbid);
+        res.status(201).json(savedUser);
+      });
+    }else{
+      console.log('foundUser', foundUser.fbid);
+      res.status(201).json(foundUser);
+    }
   });
 };
