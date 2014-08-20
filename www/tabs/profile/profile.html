@@ -1,27 +1,22 @@
 <ion-view>
   <ion-content>
-
   <button class="button button-full button-positive" ng-click="login('facebook')" ng-hide="user.username">Login with Facebook</button>
   <div ng-show="user.username">
-
     <button class="button button-full button-outline button-assertive" ng-click="logout()">Logout</button>
     <div class="card">
       <h1>{{user.username}}</h1>
       <img src="{{user.pic}}" ng-show="user">
     </div>
 
-<div class="list list-inset">
+  <div class="list list-inset">
   <div class="item item-divider">Profile</div>
-
    <div class="item item-input-inset">
     <label class="item-input-wrapper">
-      <!-- {{user.displayName}} -->
       <input type="text">
     </label>
   </div>
    <div class="item item-input-inset">
     <label class="item-input-wrapper">
-      <!-- <input type="text" placeholder="{{user.thirdPartyUserData.link}}"> -->
     </label>
   </div><div class="item item-input-inset">
     <label class="item-input-wrapper">
@@ -45,8 +40,6 @@
   <button class="button button-large button-block button-assertive" ng-click="create.saveStache()">
     Save Changes
   </button>
-
-
   </div>
 </ion-content>
 </ion-view>

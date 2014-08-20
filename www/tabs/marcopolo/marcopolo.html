@@ -1,10 +1,4 @@
 <ion-view>
-  <ion-header-bar class="bar-positive">
-    <div class="buttons">
-      <button class="button" ng-click="doSomething()">My Staches</button>
-    </div>
-    <h1 class="title">{{marcopolo.currentStache.title}}</h1>
-  </ion-header-bar>
   <ion-content>
     <google-map
       center="map.center" zoom="map.zoom"
@@ -14,7 +8,7 @@
       events="map.events"
       options="map.options"
       pan="true"
-      control="map.control" 
+      control="map.control"
       options="map.options">
       <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="marcopolo.heatLayerCallback"></layer>
     </google-map>
