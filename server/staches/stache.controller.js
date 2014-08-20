@@ -96,8 +96,10 @@ exports.addDiscovered_By = function(discovery, next){
 
 // Get signature for client side direct upload to aws s3
 exports.sign_s3 = function(req, res) {
+  console.log('sign_s3 called from stache controller');
   var object_name = req.query.s3_object_name;
   var mime_type = req.query.s3_object_type;
+  console.dir(req.query);
 
   var now = new Date();
   var expires = Math.ceil((now.getTime() + 10000)/1000); // 10 seconds from now
@@ -118,6 +120,8 @@ exports.sign_s3 = function(req, res) {
       signed_request: url + "?AWSAccessKeyId=" + AWS_ACCESS_KEY + "&Expires=" + expires + "&Signature=" + signature,
       url: url
   };
+  
   res.write(JSON.stringify(credentials));
-  res.end();
+  res.send();
+  // res.end();
 };

@@ -36,6 +36,13 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
   });
 
 })
+.config(function(RestangularProvider) {
+  RestangularProvider.setBaseUrl('http://specter-staging.azurewebsites.net/');
+  RestangularProvider.setDefaultHeaders({
+    "Content-Type": "application/json",
+    "X-Requested-With": "XMLHttpRequest"
+  });
+})
 .filter('distance', function() {
   return function(distance) {
     if (distance === undefined) {
