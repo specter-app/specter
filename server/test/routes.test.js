@@ -159,17 +159,6 @@ describe('Basic server endpoint tests', function(){
       });
     });
 
-    xit('should accept GET requests via /login/:id', function(done){
-      request(server)
-      .post('/users/login/1234')
-      .send(fixture.testUser1)
-      .expect(201)
-      .end(function(err, res){
-        if(err) throw err;
-        done();
-      })
-    });
-
     it('should create and login new user via POST request via /login/:id', function(done){
       request(server)
       .post('/users/login/1234')
@@ -182,7 +171,7 @@ describe('Basic server endpoint tests', function(){
       })
     });
 
-    it('should login an existing user via POST request via /login/:id', function(done){
+    it('should login an existing user via GET request via /login/:id', function(done){
       request(server)
       .get('/users/login/1234')
       .expect(201)
