@@ -120,7 +120,7 @@ exports.sign_s3 = function(req, res) {
       signed_request: url + "?AWSAccessKeyId=" + AWS_ACCESS_KEY + "&Expires=" + expires + "&Signature=" + signature,
       url: url
   };
-  
+  console.log('credentials: ', credentials);
   res.write(JSON.stringify(credentials));
   res.send();
   // res.end();
