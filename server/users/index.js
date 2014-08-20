@@ -12,12 +12,12 @@ users.post('/signup', function(req, res){
 });
 
 users.get('/login/:fbid', function(req, res){
-  req.body.fbid = params.fbid;
+  req.body.fbid = req.params.fbid;
   userController.login(req, res)
 });
 
 users.post('/login/:fbid', function(req, res){
-  req.body.fbid = params.fbid;
+  req.body.fbid = req.params.fbid;
   userController.login(req, res);
 });
 
