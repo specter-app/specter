@@ -5,7 +5,8 @@ var request = require('supertest');
 
 //Test helpers
 var fixture = require('./test.fixtures.js');
-var Stache = require('../staches/stache.model.js');
+// var Stache = require('../staches/stache.model.js');
+// var User = require('../users/user.model.js');
 
 //Server
 var server = require('../server.js');
@@ -22,6 +23,24 @@ describe('Basic server endpoint tests', function(){
 
   describe('Stache API', function(){
 
+    var postRes1;
+    var staches = [fixture.testStache1, fixture.testStache2];
+    
+    before(function(done){
+      db.collections['staches'].drop(function(err){
+        if(err) throw err;
+        db.collections['staches'].insert(staches, function(err, docs){
+          if(err) throw err;
+          postRes1 = docs[0];
+          //call ensureIndex to guard against lat/lon indexing failure for $geoNear queries
+          db.collections['staches'].ensureIndex({ loc: '2dsphere' }, function(err){
+            if(err) throw err;
+            done();
+          });
+        });
+      });
+    });
+
     //TO DO: add user to
     describe('POST /staches', function(){
       it('should post a stache', function(done){
@@ -31,34 +50,12 @@ describe('Basic server endpoint tests', function(){
         .expect(201)
         .end(function(err, res){
           if(err) throw err;
-          console.log('RES', res.body);
           done();
         });
       });
     });
 
     describe('GET /staches', function(){
-
-      var stachesRes, postRes1, postRes2, postRes3;
-      var staches = [fixture.testStache1, fixture.testStache2, fixture.testStache3];
-      
-      before(function(done){
-        db.collections['staches'].drop(function(err){
-          if(err) throw err;
-          db.collections['staches'].insert(staches, function(err, docs){
-            if(err) throw err;
-            stachesRes = docs;
-            postRes1 = docs[0];
-            postRes2 = docs[1];
-            postRes3 = docs[2];
-            // console.log('DOCS', docs);
-            //call ensureIndex to guard against lat/long indexing failure for $geoNear queries
-            db.collections['staches'].ensureIndex({ loc: "2dsphere" }, function(err){
-              done();
-            });
-          });
-        });
-      });
 
       it('should retrieve nearby staches with geolocation in query string', function(done){
         request(server)
@@ -119,10 +116,29 @@ describe('Basic server endpoint tests', function(){
   });
 
   describe('User API', function(){
+
+    // before(function(done){
+      // db.collections['users'].drop(function(err){
+      //   if(err){
+      //     console.log('HERE');
+      //     throw err;
+      //   }
+        // db.collections['users'].insert(fixture.testUser2, function(err, docs){
+        //   if(err){
+        //     console.log('YO');
+        //     throw err;
+        //   }
+        //   db.collections['users'].ensureIndex({ fbid: 'text' }, function(err){
+        //     done();
+        //   });
+        // });
+      // });
+    // });
+
     xit('should accept requests via /signup', function(done){
       request(server)
       .post('/users/signup')
-      .send(fixture.testUser)
+      .send(fixture.testUser1)
       .expect(201)
       .end(function(err, res){
         if(err) throw err;
@@ -133,20 +149,20 @@ describe('Basic server endpoint tests', function(){
     xit('should successfully sign up a new user via /signup', function(done){
       request(server)
       .post('/users/signup')
-      .send(fixture.testUser)
+      .send(fixture.testUser1)
       .expect(201)
       .end(function(err, res){
         if(err) throw err;
-        //should.equal(fixture.testUser.username, res.body.username);
+        //should.equal(fixture.testUser1.username, res.body.username);
         //should receive message confirming success of signup and token
         done();
       });
     });
 
-    it('should accept GET requests via /login/:id', function(done){
+    xit('should accept GET requests via /login/:id', function(done){
       request(server)
       .post('/users/login/1234')
-      .send(fixture.testUser)
+      .send(fixture.testUser1)
       .expect(201)
       .end(function(err, res){
         if(err) throw err;
@@ -154,28 +170,31 @@ describe('Basic server endpoint tests', function(){
       })
     });
 
-    it('should accept POST requests via /login/:id', function(done){
+    it('should create and login new user via POST request via /login/:id', function(done){
       request(server)
       .post('/users/login/1234')
-      .send(fixture.testUser)
+      .send(fixture.testUser1)
       .expect(201)
       .end(function(err, res){
         if(err) throw err;
+        should.equal(res.body.fbid, '1234');
         done();
       })
     });
 
-    xit('should successfully log in an existing user via /login', function(done){
+    it('should login an existing user via POST request via /login/:id', function(done){
       request(server)
-      .post('/users/login')
-      .send(fixture.testUser)
+      .get('/users/login/1234')
       .expect(201)
       .end(function(err, res){
         if(err) throw err;
-        //should confirm login somehow
+        should.equal(res.body.fbid, '1234');
+        should.equal(res.body.first_name, 'Bob');
+        should.equal(res.body.last_name, 'Owen');
         done();
       })
     });
+
   });
 
   after(function(done){
