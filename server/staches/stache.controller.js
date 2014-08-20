@@ -84,7 +84,7 @@ exports.getNearby = function(req, res) {
 
 exports.addDiscovered_By = function(discovery, next){
   next();
-
+};
 // Get signature for client side direct upload to aws s3
 exports.sign_s3 = function(req, res) {
   console.log('sign_s3 called from stache controller');
