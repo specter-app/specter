@@ -1,4 +1,18 @@
 var Stache = require('./stache.model.js');
+var Busboy = require('busboy');
+var aws = require('aws-sdk');
+var fs = require('fs');
+
+// aws_credentials = process.env.aws_credentials;
+env = process.env;
+
+aws.config.update = {
+  accessKeyId: env.S3_KEY,
+  secretAccessKey: env.S3_SECRET
+  // region:          env.S3_REGION  
+};
+
+s3 = new aws.S3();
 
 // Creates and saves a new stache
 exports.save = function(req, res) {
@@ -63,3 +77,9 @@ exports.getNearby = function(req, res) {
     res.status(400).json('Query must contain geolocation.');
   }
 };
+
+// Save a new photo
+exports.savePhoto = function(req, res) {
+
+};
+
