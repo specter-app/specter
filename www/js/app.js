@@ -14,7 +14,6 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
       StatusBar.styleDefault();
     }
   });
-
   $rootScope.$on('$stateChangeStart', function (event, next) {
     var logInRequired = next.data.logInRequired;
     var loggedIn = UserService.isLogged;

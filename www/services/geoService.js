@@ -12,7 +12,7 @@
       var from = new google.maps.LatLng(lat1, lon1);
       var to = new google.maps.LatLng(lat2, lon2);
       var dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
-        return dist;
+      return dist;
     };
   };
   angular.module('specter').service('geoService', [
