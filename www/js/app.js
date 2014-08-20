@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', 'google-maps', 'marcopoloDirective', 'firebase'])
 
-.run(function($ionicPlatform, UserService, $rootScope) {
+.run(function($ionicPlatform, UserService, $rootScope, $state) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -19,7 +19,7 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
     var loggedIn = UserService.isLogged;
     if (!loggedIn && logInRequired) {
        event.preventDefault();
-       $rootScope.$emit('$showPopup');
+      $state.go('tab.profile');
     }
   });
 

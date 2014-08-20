@@ -1,6 +1,10 @@
 <ion-view>
   <ion-content>
-  <button class="button button-full button-positive" ng-click="login('facebook')" ng-hide="user.username">Login with Facebook</button>
+  <div ng-hide="user.username">
+    <button class="button button-full button-positive" ng-click="login('facebook')">Login with Facebook</button>
+    <h1>Please log in</h1>
+  </div>
+
   <div ng-show="user.username">
     <button class="button button-full button-outline button-assertive" ng-click="logout()">Logout</button>
     <div class="card">
