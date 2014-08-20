@@ -6,6 +6,7 @@ var assert = require('assert');
 // Schemas and fixtures
 var Stache = require('../staches/stache.model.js');
 var User = require('../users/user.model.js');
+var Discovery = require('../discoveries/discovery.model.js');
 var fixtures = require('./test.fixtures.js');
 
 // Use test database
@@ -142,20 +143,19 @@ describe('User model', function(){
     User.remove(done);
   });
 
-  describe('Signup', function(){
-    xit('should save new user without error', function(done){
-
-    });
-  });
-
   describe('Login', function(){
-    xit('should authenticate a user upon login', function(done){
-
+    it('should save a new user without error', function(done){
+      var user2 = new User(fixtures.testUser2);
+      user2.save(function(err, savedUser){
+        should.equal(user2.fbid, savedUser.fbid);
+        should.equal(user2.first_name, savedUser.first_name);
+        should.equal(user2.last_name, savedUser.last_name);
+        done();
+      });
     });
   });
 
 });
-
 
 // After tests are done, 
 // drop the database and close the connection
