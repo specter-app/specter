@@ -43,6 +43,7 @@
   angular.module('specter').service('stacheService', [
     'Restangular',
     'CachedRestangular',
+    'UserService',
     stacheService
   ]);
 })();
