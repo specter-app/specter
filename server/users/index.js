@@ -11,7 +11,13 @@ users.post('/signup', function(req, res){
   userController.signup(req, res);
 });
 
-users.post('/login', function(req, res){
+users.get('/login/:fbid', function(req, res){
+  req.body.fbid = params.fbid;
+  userController.login(req, res)
+});
+
+users.post('/login/:fbid', function(req, res){
+  req.body.fbid = params.fbid;
   userController.login(req, res);
 });
 
