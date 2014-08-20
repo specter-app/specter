@@ -119,53 +119,62 @@ describe('Basic server endpoint tests', function(){
   });
 
   describe('User API', function(){
-    describe('POST /users', function(){
-      it('should accept requests via /signup', function(done){
-        request(server)
-        .post('/users/signup')
-        .send(fixture.testUser)
-        .expect(201)
-        .end(function(err, res){
-          if(err) throw err;
-          done();
-        });
+    xit('should accept requests via /signup', function(done){
+      request(server)
+      .post('/users/signup')
+      .send(fixture.testUser)
+      .expect(201)
+      .end(function(err, res){
+        if(err) throw err;
+        done();
       });
+    });
 
-      xit('should successfully sign up a new user via /signup', function(done){
-        request(server)
-        .post('/users/signup')
-        .send(fixture.testUser)
-        .expect(201)
-        .end(function(err, res){
-          if(err) throw err;
-          //should.equal(fixture.testUser.username, res.body.username);
-          //should receive message confirming success of signup and token
-          done();
-        });
+    xit('should successfully sign up a new user via /signup', function(done){
+      request(server)
+      .post('/users/signup')
+      .send(fixture.testUser)
+      .expect(201)
+      .end(function(err, res){
+        if(err) throw err;
+        //should.equal(fixture.testUser.username, res.body.username);
+        //should receive message confirming success of signup and token
+        done();
       });
+    });
 
-      it('should accept requests via /login', function(done){
-        request(server)
-        .post('/users/login')
-        .send(fixture.testUser)
-        .expect(201)
-        .end(function(err, res){
-          if(err) throw err;
-          done();
-        })
-      });
+    it('should accept GET requests via /login/:id', function(done){
+      request(server)
+      .post('/users/login/1234')
+      .send(fixture.testUser)
+      .expect(201)
+      .end(function(err, res){
+        if(err) throw err;
+        done();
+      })
+    });
 
-      xit('should successfully log in an existing user via /login', function(done){
-        request(server)
-        .post('/users/login')
-        .send(fixture.testUser)
-        .expect(201)
-        .end(function(err, res){
-          if(err) throw err;
-          //should confirm login somehow
-          done();
-        })
-      });
+    it('should accept POST requests via /login/:id', function(done){
+      request(server)
+      .post('/users/login/1234')
+      .send(fixture.testUser)
+      .expect(201)
+      .end(function(err, res){
+        if(err) throw err;
+        done();
+      })
+    });
+
+    xit('should successfully log in an existing user via /login', function(done){
+      request(server)
+      .post('/users/login')
+      .send(fixture.testUser)
+      .expect(201)
+      .end(function(err, res){
+        if(err) throw err;
+        //should confirm login somehow
+        done();
+      })
     });
   });
 
