@@ -133,30 +133,6 @@ describe('Basic server endpoint tests', function(){
       // });
     // });
 
-    xit('should accept requests via /signup', function(done){
-      request(server)
-      .post('/users/signup')
-      .send(fixture.testUser1)
-      .expect(201)
-      .end(function(err, res){
-        if(err) throw err;
-        done();
-      });
-    });
-
-    xit('should successfully sign up a new user via /signup', function(done){
-      request(server)
-      .post('/users/signup')
-      .send(fixture.testUser1)
-      .expect(201)
-      .end(function(err, res){
-        if(err) throw err;
-        //should.equal(fixture.testUser1.username, res.body.username);
-        //should receive message confirming success of signup and token
-        done();
-      });
-    });
-
     it('should create and login new user via POST request via /login/:id', function(done){
       request(server)
       .post('/users/login/1234')
