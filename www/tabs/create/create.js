@@ -8,6 +8,9 @@ angular.module('specter.tab.create', ['specter.tab.create.controller'])
         templateUrl: "tabs/create/create.html",
         controller: 'createCtrl as create'
       }
+    },
+    data: {
+      logInRequired: true
     }
   });
 });

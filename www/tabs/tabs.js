@@ -11,5 +11,5 @@ angular.module('specter.tab', [
       abstract: true,
       templateUrl: "tabs/tabs.html"
     });
-  $urlRouterProvider.otherwise('/tab/marcopolo');
+  $urlRouterProvider.otherwise('/tab/profile');
 });

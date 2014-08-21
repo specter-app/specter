@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx
+xmlns="http://www.topografix.com/GPX/1/1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+version="1.1" 
+creator="gpx-poi.com">
+
+   <wpt lat="37.784481" lon="-122.407464">
+      <name>Powell Bart Station</name>
+   </wpt>
+   <wpt lat="37.7843" lon="-122.4076">
+   </wpt>
+   <wpt lat="37.7842" lon="-122.4078">
+   </wpt>
+   <wpt lat="37.7841" lon="-122.4080">
+   </wpt>
+   <wpt lat="37.7840" lon="-122.4082">
+   </wpt>
+   <wpt lat="37.7839" lon="-122.4084">
+   </wpt>
+   <wpt lat="37.7838" lon="-122.4086">
+   </wpt>
+   <wpt lat="37.7837" lon="-122.4088">
+   </wpt>
+   <wpt lat="37.78365" lon="-122.40887">
+   </wpt>
+   <wpt lat="37.783621" lon="-122.408926"> 
+      <name>Hack Reactor</name>
+   </wpt>
+
+</gpx>

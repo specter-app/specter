@@ -3,9 +3,9 @@
 
 var timeConversion = function(){
   return function(time) {
-    var convertedTime = new Date(time);
+    var convertedTime = new Date(String(time));
     var system_date = new Date();
-    var diff = Math.floor((system_date - time) / 1000);
+    var diff = Math.floor((system_date - convertedTime) / 1000);
     if (diff <= 90) return '1m';
     if (diff <= 3540) return Math.round(diff / 60) + 'm';
     if (diff <= 5400) return '1h';

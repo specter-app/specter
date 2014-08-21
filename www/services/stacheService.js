@@ -1,27 +1,24 @@
 (function(){
   'use strict';
-
-  var stacheService = function(Restangular){
-    this.getAll = function(){
-      return Restangular.all('staches').getList().then(function(staches){
-        // stacheService.staches = staches;
+  var stacheService = function(Restangular, CachedRestangular, UserService){
+    this.getAll = function(location){
+      return CachedRestangular.all('staches/').customGET("", location).then(function(staches){
         return staches;
       }, function(response){
-        // return ('error with status', response);
+        return response;
       });
     };
 
     this.saveStache = function(params) {
-      console.log(params);
       var staches = Restangular.all('staches');
       var newStache = {
         title: params.title,
-        author: 'cool mitch',
-        lon: 37.7837,
-        lat: -122.4089,
-        content: 'this is a cool test stache',
+        created_by: UserService.username,
+        lon: params.lon,
+        lat: params.lat,
+        content: params.content,
         locked: false,
-        clue: '',
+        clue: params.clue,
         password: null,
         tags: params.tags
       };
@@ -29,9 +26,23 @@
       staches.post(newStache);
     };
 
+    this.getOne = function(id){
+      return Restangular.one('staches/', id).get().then(function(stache){
+        return stache;
+      }, function(err){
+        return err;
+      });
+    };
   };
-  angular.module('specter').service('stacheService', [
-    'Restangular',
-    stacheService
-  ]);
+  stacheService.$inject = ['Restangular', 'CachedRestangular', 'UserService'];
+  angular.module('specter').service('stacheService', stacheService);
+})();
+
+
+(function(){
+angular.module('specter').factory('CachedRestangular', function (Restangular) {
+  return Restangular.withConfig(function (RestangularConfigurer) {
+    RestangularConfigurer.setDefaultHttpFields({cache: true});
+  });
+});
 })();

@@ -1,4 +1,4 @@
-angular.module('specter.tab.profile', [])
+angular.module('specter.tab.profile', ['specter.tab.profile.controller'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('tab.profile', {
@@ -6,8 +6,11 @@ angular.module('specter.tab.profile', [])
       views: {
         'profile-tab': {
           templateUrl: "tabs/profile/profile.html",
-          // controller: 'MarcopoloCtrl'
+          controller: 'profileCtrl'
         }
+      },
+      data: {
+        logInRequired: false
       }
     })
 });

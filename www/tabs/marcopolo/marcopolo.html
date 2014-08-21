@@ -1,5 +1,19 @@
 <ion-view>
-  <google-map center="map.center" zoom="map.zoom"></google-map>
-  {{marcopolo.location.long}}
-  {{marcopolo.location.lat}}
+  <ion-content>
+    <google-map
+      center="map.center" zoom="map.zoom"
+      draggable="true"
+      dragging="map.dragging"
+      bounds="map.bounds"
+      events="map.events"
+      options="map.options"
+      pan="true"
+      control="map.control"
+      options="map.options">
+      <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="marcopolo.heatLayerCallback"></layer>
+    </google-map>
+  </ion-content>
+  <ion-footer-bar style="background-color:{{ marcopolo.proximityColor }}">
+  </ion-footer-bar>
+  <h6>{{marcopolo.distance | distance}}</h6>
 </ion-view>
