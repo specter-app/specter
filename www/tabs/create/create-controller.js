@@ -64,7 +64,6 @@
           }, ]
         });
         myPopup.then(function(res) {
-          // console.log('Tapped!', res);
         });
       };
 
