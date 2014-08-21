@@ -11,20 +11,18 @@
      });
 
      var firebaseRef = new Firebase("https://specter-app.firebaseio.com/");
-     // Create a Firebase Simple Login object
      $scope.auth = $firebaseSimpleLogin(firebaseRef);
-     // Initially set no user to be logged in
      $scope.user = UserService;
+
      $scope.login = function(provider) {
        $scope.auth.$login(provider);
        $scope.modal.hide();
        $state.go('tab.profile', {}, {reload: true});
-       //get all staches and pick the first one for marcopolo stache
      };
      $scope.logout = function() {
        $scope.auth.$logout();
      };
   };
-  appController.$inject = ['$scope', '$rootScope', '$ionicModal', '$state', '$firebaseSimpleLogin', 'UserService', 'stacheService'];
+  appController.$inject = ['$scope', '$rootScope', '$ionicModal', '$state', '$firebaseSimpleLogin', 'UserService'];
   angular.module('specter').controller('appController', appController);
 })();
