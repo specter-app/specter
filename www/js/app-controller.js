@@ -19,11 +19,12 @@
        $scope.auth.$login(provider);
        $scope.modal.hide();
        $state.go('tab.profile', {}, {reload: true});
+       //get all staches and pick the first one for marcopolo stache
      };
      $scope.logout = function() {
        $scope.auth.$logout();
      };
   };
-  appController.$inject = ['$scope', '$rootScope', '$ionicModal', '$state', '$firebaseSimpleLogin', 'UserService'];
+  appController.$inject = ['$scope', '$rootScope', '$ionicModal', '$state', '$firebaseSimpleLogin', 'UserService', 'stacheService'];
   angular.module('specter').controller('appController', appController);
 })();
