@@ -26,5 +26,12 @@ exports.login = function(req, res){
 };
 
 exports.addStaches_Discovered = function(discovery, next){
-  next();
+  User.update(
+              { fbid: discovery.user_fbid },
+              { $addToSet: { staches_discovered: discovery.stache_id } },
+              function(err, count){
+                 if(err) throw err;
+                 next();
+               }
+             );
 };
