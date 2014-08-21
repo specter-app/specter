@@ -89,6 +89,7 @@
       this.takePicture = function() {
         cameraService.takePicture().then(function(imageData) {
           self.imageData = imageData;
+          // this.s3Upload();
         }, function(err) {
           self.imageData = err;
         });
@@ -103,6 +104,32 @@
           self.audioData = audioData;
         }, function(err) {
           self.audioData = err;
+        });
+      };
+
+      this.s3Upload = function() {
+        console.log('Im in s3 upload in create-controller');
+        var status_elem = document.getElementById("status");
+        var url_elem = document.getElementById("avatar_url");
+        var preview_elem = document.getElementById("preview");
+        console.log('url elem: ');
+        console.dir(url_elem);
+        var s3upload = new S3Upload({
+          file_dom_selector: 'files',
+          s3_sign_put_url: '/staches/sign_s3/',
+          onProgress: function(percent, message) {
+              status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+          },
+          onFinishS3Put: function(public_url) {
+              status_elem.innerHTML = 'Upload completed. Uploaded to: ' + public_url;
+              url_elem.value = public_url;
+              // Store this url in mongodb
+              preview_elem.innerHTML = '<img src="' + public_url + '" style="width:100px;"/>';
+          },
+          onError: function(status) {
+              status_elem.innerHTML = 'Upload error: ' + status;
+              console.log(s3_sign_put_url);
+          }
         });
       };
 

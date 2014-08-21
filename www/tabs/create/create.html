@@ -32,14 +32,15 @@
       </div>
 
       <!-- File upload -->
-      <input class="button item-icon-left" type="file" id="files"/>
+      <input type="file" id="files"/>
       <p id="status">Please select a file</p>
       <div style="width:100px;"  id="preview"><img src="./img/ghost.jpg" style="width:100px;" /></div>
 
-      <form method="POST" action="/submit_form/">
+      <form method="POST" action="">
           <input type="hidden" id="avatar_url" name="avatar_url" value="./img/ghost.jpg"/>
           <input class="button item-icon-left" type="submit" value="Submit photo"/>
       </form>
+<<<<<<< HEAD
       
       <!-- <li class="item item-toggle"> -->
          <!-- <label class="toggle toggle-positive">
@@ -51,13 +52,16 @@
          <ion-checkbox ng-model="checked" ng-click="create.openPrivateModal()">
           Locked stache?
          </ion-checkbox>
+=======
+
+      <ion-checkbox ng-model="checked" ng-click="create.openPrivateModal()">Locked stache?</ion-checkbox>
+>>>>>>> (feat) Fix route handling for submit
     </div>
       <button class="button button-large button-block button-assertive" ng-click="create.saveStache()">
       MAKE STACHE
       </button>
   </ion-content>
 </ion-view>
-
 
 <script id="private-modal.html" type="text/ng-template">
   <ion-modal-view>
