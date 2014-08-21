@@ -29,6 +29,7 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
        $rootScope.$emit('$showPopup');
     }
   });
+
 })
 .filter('distance', function() {
   return function(distance) {

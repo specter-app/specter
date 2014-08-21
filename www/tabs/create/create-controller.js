@@ -1,16 +1,5 @@
-angular.module('specter.tab.create.controller', ['restangular'])
-  .controller('createCtrl', [
-    '$ionicActionSheet',
-    '$ionicPopup',
-    'Restangular',
-    'cameraService',
-    'stacheService',
-    '$cordovaCapture',
-    '$cordovaGeolocation',
-    'geoService',
-    "$ionicModal",
-    '$scope',
-    function($ionicActionSheet, $ionicPopup, Restangular, cameraService,
+(function(){
+    var createCtrl = function($ionicActionSheet, $ionicPopup, Restangular, cameraService,
       stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope) {
       var self = this;
       this.data = {
@@ -128,5 +117,9 @@ angular.module('specter.tab.create.controller', ['restangular'])
         self.location = err;
       });
 
-    }
-  ]);
+    };
+  createCtrl.$inject = [ '$ionicActionSheet', '$ionicPopup', 'Restangular', 'cameraService',
+    'stacheService', '$cordovaCapture', '$cordovaGeolocation', 'geoService', "$ionicModal",'$scope'];
+  angular.module('specter.tab.create.controller', ['restangular'])
+    .controller('createCtrl', createCtrl);
+})();
