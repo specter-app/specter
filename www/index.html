@@ -65,7 +65,7 @@
             var preview_elem = document.getElementById("preview");
             var s3upload = new S3Upload({
                 file_dom_selector: 'files',
-                s3_sign_put_url: '/sign_s3',
+                s3_sign_put_url: 'http://specter-staging.azurewebsites.net/staches/sign_s3',
                 onProgress: function(percent, message) {
                     status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
                 },
