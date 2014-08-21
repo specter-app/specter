@@ -1,4 +1,5 @@
 var Stache = require('./stache.model.js');
+var crypto = require('crypto');
 // var Busboy = require('busboy');
 // var aws = require('aws-sdk');
 // var fs = require('fs');
