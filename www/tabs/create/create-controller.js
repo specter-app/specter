@@ -35,7 +35,7 @@
           }
         });
       };
-      
+
       this.showTagsPopup = function() {
         var myPopup = $ionicPopup.show({
           template: '<input type="text" ng-model="create.data.newTag">',
@@ -77,6 +77,7 @@
 
 
       this.saveStache = function() {
+        this.s3Upload();
         stacheService.saveStache({
           title: self.data.titleText,
           content: self.data.content,
@@ -89,7 +90,6 @@
       this.takePicture = function() {
         cameraService.takePicture().then(function(imageData) {
           self.imageData = imageData;
-          // this.s3Upload();
         }, function(err) {
           self.imageData = err;
         });
@@ -108,14 +108,13 @@
       };
 
       this.s3Upload = function() {
-        console.log('Im in s3 upload in create-controller');
         var status_elem = document.getElementById("status");
         var url_elem = document.getElementById("avatar_url");
         var preview_elem = document.getElementById("preview");
-        console.log('url elem: ');
-        // console.dir(url_elem);
-        // debugger;
+        var rString = this.randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
         var s3upload = new S3Upload({
+          s3_object_name: rString,
           file_dom_selector: 'files',
           s3_sign_put_url: 'http://specter-staging.azurewebsites.net/staches/sign_s3/',
           onProgress: function(percent, message) {
@@ -131,6 +130,12 @@
               status_elem.innerHTML = 'Upload error: ' + status;
           }
         });
+      };
+
+      this.randomString = function(length, chars) {
+        var result = '';
+        for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+        return result;
       };
 
       $ionicModal.fromTemplateUrl('private-modal.html', {

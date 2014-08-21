@@ -1,7 +1,6 @@
 (function() {
 
   window.S3Upload = (function() {
-    console.log('inside S3Upload in s3upload.js');
 
     S3Upload.prototype.s3_object_name = 'default_name';
 
