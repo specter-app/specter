@@ -538,12 +538,12 @@
     this.weight = function(distance) {
       // The closer the user is to the stache, the greater the weight
       // Weight is normalized by max distance
-      var maxDistance = 300; // meters
+      var maxDistance = 500; // meters
 
       // Cap distance to maxDistance
       // (color indicator changes colors within range of 8000 meters/5 miles)
       if (distance > maxDistance) {
-            distance = maxDistaance;
+            distance = maxDistance;
       }
 
       var weight = (maxDistance - distance) / maxDistance;
