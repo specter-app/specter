@@ -20,8 +20,6 @@
       });
     };
   };
-  angular.module('specter').service('cameraService', [
-    '$cordovaCamera',
-    cameraService
-  ]);
+  cameraService.$inject = ['$cordovaCamera'];
+  angular.module('specter').service('cameraService', cameraService);
 })();

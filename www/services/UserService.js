@@ -1,5 +1,4 @@
 (function(){
-  'use strict';
   angular.module('specter').factory('UserService', function($rootScope){
     var sdo = {
       uid: 0,
