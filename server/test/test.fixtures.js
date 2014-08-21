@@ -34,8 +34,6 @@ module.exports.testStache3 = {
 
 // New user without user_id
 module.exports.testUser1 = {
-  // username: 'scavenster',
-  // password: 'scavengers4evr',
   first_name: 'Bob',
   last_name: 'Owen'
   // profilePhoto: 
@@ -44,9 +42,11 @@ module.exports.testUser1 = {
 // Existing user with user_id
 module.exports.testUser2 = {
   fbid: 'abc123',
-  // username: 'stachester',
-  // password: 'staches4lyfe',
   first_name: 'Indiana',
   last_name: 'Jones',
+};
 
+module.exports.testDiscovery1 = {
+  stache_id: '53f518f97d755d043989cf81',
+  user_fbid: '1234'
 };
