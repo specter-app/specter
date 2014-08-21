@@ -33,6 +33,7 @@
         return err;
       });
     };
+    this.selectedStache = '';
   };
   stacheService.$inject = ['Restangular', 'CachedRestangular', 'UserService'];
   angular.module('specter').service('stacheService', stacheService);

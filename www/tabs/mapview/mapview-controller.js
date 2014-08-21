@@ -18,4 +18,8 @@ angular.module('specter.tab.mapview.controller', [])
     stacheService.getAll(params).then(function(staches) {
       self.staches = staches;
     });
+    self.redirect = function(id){
+      stacheService.selectedStache = id;
+      $state.go('tab.marcopolo')
+    }
 }]);
