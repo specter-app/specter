@@ -4,7 +4,7 @@
 
     S3Upload.prototype.s3_object_name = 'default_name';
 
-    S3Upload.prototype.s3_sign_put_url = 'http://specter-staging.azurewebsites.net';
+    S3Upload.prototype.s3_sign_put_url = '';
 
     S3Upload.prototype.file_dom_selector = 'file_upload';
 
@@ -59,6 +59,7 @@
       var this_s3upload, xhr;
       this_s3upload = this;
       xhr = new XMLHttpRequest();
+      console.log(this.s3_sign_put_url + '?s3_object_type=' + file.type + '&s3_object_name=' + this.s3_object_name);
       xhr.open('GET', this.s3_sign_put_url + '?s3_object_type=' + file.type + '&s3_object_name=' + this.s3_object_name, true);
       xhr.overrideMimeType('text/plain; charset=x-user-defined');
       xhr.onreadystatechange = function(e) {
