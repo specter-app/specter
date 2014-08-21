@@ -157,6 +157,71 @@ describe('User model', function(){
 
 });
 
+describe('Discovery model', function(){
+
+  before(function(done){
+    Stache.remove(function(err){
+      if(err) throw err;
+      User.remove(function(err){
+        if(err) throw err;
+        done();
+      });
+    });
+  });
+
+  beforeEach(function(done){
+    Discovery.remove(function(err){
+      if(err) throw err;
+      done();
+    });
+  });
+
+  describe('Discover', function(){
+    it('should save a new discovery to the Discovery collection without error', function(done){
+      var discovery1 = new Discovery(fixtures.testDiscovery1);
+      discovery1.save(function(err, savedDiscovery){
+        if(err) throw err;
+        should.equal(discovery1.stache_id, savedDiscovery.stache_id);
+        should.equal(discovery1.user_fbid, savedDiscovery.user_fbid);
+        done();
+      });
+    });
+  });
+
+  describe('Add to user and stache models', function(){
+
+    var testStache;
+    var testUser;
+
+    before(function(done){
+      testStache = new Stache(fixtures.testStache3);
+      testUser = new User(fixtures.testUser2);
+      testStache.save(function(err, savedStache){
+        testUser.save(function(err, savedUser){
+          done();
+        });
+      });
+    });
+
+    it('should add a user to respective stache upon discover', function(done){
+      var discovery1 = new Discovery( { stache_id: testStache._id, user_fbid: testUser.fbid } );
+      discovery1.save(function(err, savedDiscovery){
+        if(err) throw err;
+        should.equal(discovery1.stache_id, savedDiscovery.stache_id);
+        should.equal(discovery1.user_fbid, savedDiscovery.user_fbid);
+        User.find({fbid: savedDiscovery.user_fbid}, function(err, user){
+          user[0].staches_discovered.should.containEql(testStache._id);
+          Stache.find({_id: savedDiscovery.stache_id}, function(err, stache){
+            stache[0].discovered_by.should.containEql(testUser.fbid);
+            done();
+          });
+        });
+      });
+    });
+  });
+
+});
+
 // After tests are done, 
 // drop the database and close the connection
 after(function(done) {
