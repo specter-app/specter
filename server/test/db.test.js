@@ -8,6 +8,9 @@ var Stache = require('../staches/stache.model.js');
 var User = require('../users/user.model.js');
 var Discovery = require('../discoveries/discovery.model.js');
 var fixtures = require('./test.fixtures.js');
+var userController = require('../users/user.controller.js');
+var stacheController = require('../staches/stache.controller.js');
+var discoveryController = require('../discoveries/discovery.controller.js');
 
 // Use test database
 var config = require('../config/test.js');
@@ -192,6 +195,8 @@ describe('Discovery model', function(){
 
     var testStache;
     var testUser;
+    var testDiscovery;
+    var savedDiscovery;
 
     before(function(done){
       testStache = new Stache(fixtures.testStache3);
@@ -203,20 +208,36 @@ describe('Discovery model', function(){
       });
     });
 
-    it('should add a user to respective stache upon discover', function(done){
-      var discovery1 = new Discovery( { stache_id: testStache._id, user_fbid: testUser.fbid } );
-      discovery1.save(function(err, savedDiscovery){
+    beforeEach(function(done){
+      testDiscovery = new Discovery( { stache_id: testStache._id, user_fbid: testUser.fbid } );
+      testDiscovery.save(function(err, doc){
         if(err) throw err;
-        should.equal(discovery1.stache_id, savedDiscovery.stache_id);
-        should.equal(discovery1.user_fbid, savedDiscovery.user_fbid);
+        savedDiscovery = doc;
+        done();
+      });
+    });
+
+    it('should add a new user to respective stache upon discover', function(done){      
+      should.equal(testDiscovery.stache_id, savedDiscovery.stache_id);
+      should.equal(testDiscovery.user_fbid, savedDiscovery.user_fbid);
+      userController.addStaches_Discovered(testDiscovery, function(){
         User.find({fbid: savedDiscovery.user_fbid}, function(err, user){
-          user[0].staches_discovered.should.containEql(testStache._id);
-          Stache.find({_id: savedDiscovery.stache_id}, function(err, stache){
-            stache[0].discovered_by.should.containEql(testUser.fbid);
-            done();
-          });
+          user[0].staches_discovered.should.containEql(String(testStache._id)); //convert to String since type is Object since id
+          done();
         });
       });
+    });
+
+    it('should add a new stache to respective user upon discover', function(done){
+      should.equal(testDiscovery.stache_id, savedDiscovery.stache_id);
+      should.equal(testDiscovery.user_fbid, savedDiscovery.user_fbid);
+      stacheController.addDiscovered_By(testDiscovery, function(){
+        Stache.find({_id: savedDiscovery.stache_id}, function(err, stache){
+          console.log('HERE', stache[0].discovered_by[0] === String(testStache._id));
+          stache[0].discovered_by.should.containEql(String(testUser.fbid));
+          done();
+        });
+      });    
     });
   });
 
