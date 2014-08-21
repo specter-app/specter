@@ -5,7 +5,7 @@
 
     S3Upload.prototype.s3_object_name = 'default_name';
 
-    S3Upload.prototype.s3_sign_put_url = '';
+    S3Upload.prototype.s3_sign_put_url = 'http://specter-staging.azurewebsites.net/staches/sign_s3';
 
     S3Upload.prototype.file_dom_selector = 'file_upload';
 
@@ -60,6 +60,7 @@
       var this_s3upload, xhr;
       this_s3upload = this;
       xhr = new XMLHttpRequest();
+      console.log('get request route from s3upload: ');
       console.log(this.s3_sign_put_url + '?s3_object_type=' + file.type + '&s3_object_name=' + this.s3_object_name);
       xhr.open('GET', this.s3_sign_put_url + '?s3_object_type=' + file.type + '&s3_object_name=' + this.s3_object_name, true);
       xhr.overrideMimeType('text/plain; charset=x-user-defined');
@@ -67,6 +68,8 @@
         var result;
         if (this.readyState === 4 && this.status === 200) {
           try {
+            console.log('responseText: ');
+            console.log(this.responseText);
             result = JSON.parse(this.responseText);
           } catch (error) {
             this_s3upload.onError('Signing server returned some ugly/empty JSON: "' + this.responseText + '"');

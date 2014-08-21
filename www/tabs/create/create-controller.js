@@ -113,10 +113,11 @@
         var url_elem = document.getElementById("avatar_url");
         var preview_elem = document.getElementById("preview");
         console.log('url elem: ');
-        console.dir(url_elem);
+        // console.dir(url_elem);
+        // debugger;
         var s3upload = new S3Upload({
           file_dom_selector: 'files',
-          s3_sign_put_url: '/staches/sign_s3/',
+          s3_sign_put_url: 'http://specter-staging.azurewebsites.net/staches/sign_s3/',
           onProgress: function(percent, message) {
               status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
           },
@@ -128,7 +129,6 @@
           },
           onError: function(status) {
               status_elem.innerHTML = 'Upload error: ' + status;
-              console.log(s3_sign_put_url);
           }
         });
       };

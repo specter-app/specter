@@ -97,9 +97,8 @@ exports.addDiscovered_By = function(discovery, next){
 
 // Get signature for client side direct upload to aws s3
 exports.sign_s3 = function(req, res) {
-  console.log('sign_s3 called from stache controller');
-  // var object_name = req.query.s3_object_name;
-  var object_name = 'somename';
+  console.log('sign_s3 called from stache controller on server!');
+  var object_name = req.query.s3_object_name;
   var mime_type = req.query.s3_object_type;
   console.log('req.query: ', req.query);
 
@@ -124,6 +123,6 @@ exports.sign_s3 = function(req, res) {
   };
   console.log('credentials: ', credentials);
   // res.write(JSON.stringify(credentials));
-  res.send();
-  // res.end();
+  // res.send();
+  res.end();
 };
