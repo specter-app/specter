@@ -2,14 +2,16 @@
   var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout) {
     var self = this;
     self.location = {long: "", lat: ""};
+    self.id = $stateParams.id.slice(1);
     self.location.long = location.coords.longitude;
     self.location.lat = location.coords.latitude;
 
-    stacheService.getOne(stacheService.selectedStache).then(function(stache){
+    stacheService.getOne(self.id).then(function(stache){
         self.currentStache = stache;
         self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
       }, function(err){
         return err;
+
       }, function(position) {
           self.location.long = position.coords.longitude;
           self.location.lat = position.coords.latitude;
