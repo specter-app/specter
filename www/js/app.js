@@ -37,7 +37,7 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
       dist: 1000000000000
     };
   stacheService.getAll(params).then(function(staches) {
-    stacheService.selectedStache = staches[0]._id
+    stacheService.selectedStache = staches[0]._id;
   });
   });
   //after that i can pass in the params and then call stacheService
