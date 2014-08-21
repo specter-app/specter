@@ -4,7 +4,8 @@
     <img src="{{user.thirdPartyUserData.picture.data.url}}" ng-show="user">
     <div class="list">
       <div ng-repeat="stache in mapview.staches">
-        <a class="item item-thumbnail-left" href="#/tab/marcopolo/:{{stache._id}}">
+        <a class="item item-thumbnail-left" ng-click="mapview.redirect(stache._id)">
+          <!-- href="#/tab/marcopolo/:{{stache._id}}" -->
           <img src="http://typeinstereo.com/wp-content/uploads/2013/04/Weezer-Blue-Album-1994.jpg">
           <h2>{{stache.author}}</h2>
           <p>{{stache.title}}</p>
