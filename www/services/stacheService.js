@@ -40,10 +40,6 @@
       });
     };
   };
-  angular.module('specter').service('stacheService', [
-    'Restangular',
-    'CachedRestangular',
-    'UserService',
-    stacheService
-  ]);
+  stacheService.$inject = ['Restangular', 'CachedRestangular', 'UserService'];
+  angular.module('specter').service('stacheService', stacheService);
 })();
