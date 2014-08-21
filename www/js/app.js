@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', 'google-maps', 'marcopoloDirective', 'firebase'])
 .config(function(RestangularProvider) {
-  RestangularProvider.setBaseUrl('http://specter-staging.azurewebsites.net/');
+  RestangularProvider.setBaseUrl('http://localhost:8000/');
   RestangularProvider.setDefaultHeaders({
     "Content-Type": "application/json",
     "X-Requested-With": "XMLHttpRequest"
@@ -32,7 +32,7 @@ angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', '
 
 })
 .config(function(RestangularProvider) {
-  RestangularProvider.setBaseUrl('http://specter-staging.azurewebsites.net/');
+  RestangularProvider.setBaseUrl('http://localhost:8000/');
   RestangularProvider.setDefaultHeaders({
     "Content-Type": "application/json",
     "X-Requested-With": "XMLHttpRequest"
