@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var cors = require('cors'); // middleware for CORS headers
 var mongoose = require('mongoose');
-var stacheController = require('./staches/stache.controller.js');
 
 var app = express(); // create our server instance
 
@@ -15,9 +14,6 @@ app.use(methodOverride());
 app.use(express.static(__dirname + '/../www')); // serve static HTML files from a dedicated directory and bypasses remaining routes
 app.use(cors());
 
-app.get('/sign_s3', function(req, res) {
-  stacheController.sign_s3(req, res);
-});
 // configure based on environment
 var config = require('./config/' + app.get('env') + '.js');
 
