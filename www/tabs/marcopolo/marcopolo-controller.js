@@ -148,8 +148,8 @@
       console.log('watch on pointArray triggered');
       self.heatLayer.setData(pointArray);
     }, true);
-  }
-  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout']
+  };
+  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout'];
 
-  angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl)
+  angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl);
 })();
