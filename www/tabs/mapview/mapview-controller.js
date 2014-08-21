@@ -13,7 +13,7 @@ angular.module('specter.tab.mapview.controller', [])
     var params = {
       lat: location.coords.latitude,
       lon: location.coords.longitude,
-      dist: 1000000
+      dist: 1000000000
     };
     stacheService.getAll(params).then(function(staches) {
       self.staches = staches;
