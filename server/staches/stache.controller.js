@@ -114,6 +114,5 @@ exports.sign_s3 = function(req, res) {
   };
   console.log('credentials: ', credentials);
   res.write(JSON.stringify(credentials));
-  // res.send();
   res.end();
 };
