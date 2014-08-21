@@ -513,7 +513,7 @@
       };
 
       var key = lat.toFixed(5) + ", " + lon.toFixed(5);
-      
+
       if (dataPoints.hasOwnProperty(stacheID)) {
         dataPoints[stacheID].push(newPoint);
         visited[stacheID][key] = true;
@@ -560,7 +560,5 @@
 
   };
 
-  angular.module('specter').service('heatmapService', [
-      heatmapService
-    ]);
+  angular.module('specter').service('heatmapService', heatmapService);
 })();
