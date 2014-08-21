@@ -15,8 +15,6 @@
       return dist;
     };
   };
-  angular.module('specter').service('geoService', [
-    '$cordovaGeolocation',
-    geoService
-  ]);
+   geoService.$inject = ['$cordovaGeolocation'];
+  angular.module('specter').service('geoService', geoService);
 })();
