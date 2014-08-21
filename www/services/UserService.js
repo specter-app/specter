@@ -1,11 +1,11 @@
 (function(){
-  angular.module('specter').factory('UserService', function($rootScope){
+  var UserService = function($rootScope){
     var sdo = {
       uid: 0,
-		  isLogged: false,
-		  username: '',
+      isLogged: false,
+      username: '',
       pic: ''
-	  };
+    };
     // Upon successful login, set the user object
     $rootScope.$on("$firebaseSimpleLogin:login", function(event, user) {
       sdo.uid = user.uid;
@@ -24,6 +24,8 @@
     $rootScope.$on("$firebaseSimpleLogin:error", function(event, error) {
       console.log("Error logging user in: ", error);
     });
-	  return sdo;
-  });
+    return sdo;
+  };
+  UserService.$inject = ['$rootScope'];
+  angular.module('specter').factory('UserService', UserService);
 })();
