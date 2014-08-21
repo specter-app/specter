@@ -26,5 +26,4 @@
   };
   appController.$inject = ['$scope', '$rootScope', '$ionicModal', '$state', '$firebaseSimpleLogin', 'UserService'];
   angular.module('specter').controller('appController', appController);
-
 })();
