@@ -69,7 +69,7 @@
         if (this.readyState === 4 && this.status === 200) {
           try {
             console.log('responseText: ');
-            console.log(this.responseText);
+            console.dir(this.responseText);
             result = JSON.parse(this.responseText);
           } catch (error) {
             this_s3upload.onError('Signing server returned some ugly/empty JSON: "' + this.responseText + '"');
