@@ -36,12 +36,13 @@
           {{key}}&nbsp
         </span>
       </a>
-
-      <br>
+      <ion-checkbox ng-model="checked" ng-click="create.openPrivateModal()">
+        Locked stache?
+      </ion-checkbox>
       
       <!-- File upload -->
-      <p id="status" ng-show=false></p>
-      <div style="width:100px;" ng-show=false id="preview"><img src="./img/ghost.jpg" style="width:100px;" /></div>
+      <p id="status" ng-show=true></p>
+      <div style="width:100px;" ng-show=true id="preview"><img src="./img/ghost.jpg" style="width:100px;" /></div>
 
       <form method="POST" action="">
           <input type="hidden" id="avatar_url" name="avatar_url" value="./img/ghost.jpg"/ ng-model="create.data.url">
@@ -51,7 +52,7 @@
           Locked stache?
          </ion-checkbox>
     </div>
-      <button class="button button-large button-block button-assertive" ng-click="create.saveStache()">
+      <button class="button button-large button-block button-assertive" ng-click="create.s3Upload()">
       Stache
       </button>
   </ion-content>
