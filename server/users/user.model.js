@@ -9,8 +9,8 @@ var UserSchema = new Schema({
   last_name: String,
   profile_photo: String,
   // username: {type: String, required: true, validate: /\S+/},
-  staches_created: [String],
-  staches_discovered: [String, Date], // [stache, date]
+  staches_created: {type: [String], default: []},
+  staches_discovered: {type: [String, Date], default: []}, // [stache, date]
   current_heatmap: [Number, Number, String, Date] // [lon, lat, color hex, date]
 });
 

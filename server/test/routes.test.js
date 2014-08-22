@@ -105,10 +105,6 @@ describe('Basic server endpoint tests', function(){
           done();
         });
 
-      xit('should retrieve staches by user', function(done){
-
-      });
-
       });
     });
   });
@@ -116,66 +112,42 @@ describe('Basic server endpoint tests', function(){
   describe('User API', function(){
 
     // before(function(done){
-      // db.collections['users'].drop(function(err){
-      //   if(err){
-      //     console.log('HERE');
-      //     throw err;
-      //   }
-        // db.collections['users'].insert(fixture.testUser2, function(err, docs){
-        //   if(err){
-        //     console.log('YO');
-        //     throw err;
-        //   }
-        //   db.collections['users'].ensureIndex({ fbid: 'text' }, function(err){
-        //     done();
-        //   });
-        // });
-      // });
+    //   db.collections['users'].drop(function(err){
+    //     if(err){
+    //       console.log('HERE');
+    //       throw err;
+    //     }
+    //     db.collections['users'].insert(fixture.testUser2, function(err, docs){
+    //       if(err){
+    //         console.log('YO');
+    //         throw err;
+    //       }
+    //       db.collections['users'].ensureIndex({ fbid: 'text' }, function(err){
+    //         done();
+    //       });
+    //     });
+    //   });
     // });
 
-    xit('should accept requests via /signup', function(done){
+    it('should create and login new user via POST request via /login', function(done){
       request(server)
-      .post('/users/signup')
+      .post('/users/login')
       .send(fixture.testUser1)
       .expect(201)
       .end(function(err, res){
         if(err) throw err;
-        done();
-      });
-    });
-
-    xit('should successfully sign up a new user via /signup', function(done){
-      request(server)
-      .post('/users/signup')
-      .send(fixture.testUser1)
-      .expect(201)
-      .end(function(err, res){
-        if(err) throw err;
-        //should.equal(fixture.testUser1.username, res.body.username);
-        //should receive message confirming success of signup and token
-        done();
-      });
-    });
-
-    it('should create and login new user via POST request via /login/:id', function(done){
-      request(server)
-      .post('/users/login/1234')
-      .send(fixture.testUser1)
-      .expect(201)
-      .end(function(err, res){
-        if(err) throw err;
-        should.equal(res.body.fbid, '1234');
+        should.equal(res.body.fbid, 'def456');
         done();
       })
     });
 
     it('should login an existing user via GET request via /login/:id', function(done){
       request(server)
-      .get('/users/login/1234')
+      .get('/users/login/def456')
       .expect(200)
       .end(function(err, res){
         if(err) throw err;
-        should.equal(res.body.fbid, '1234');
+        should.equal(res.body.fbid, 'def456');
         should.equal(res.body.first_name, 'Bob');
         should.equal(res.body.last_name, 'Owen');
         done();

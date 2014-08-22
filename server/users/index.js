@@ -8,9 +8,12 @@ users.get('/login/:fbid', function(req, res){
   userController.login(req, res)
 });
 
-users.post('/login/:fbid', function(req, res){
-  req.body.fbid = req.params.fbid;
+users.post('/login', function(req, res){
   userController.login(req, res);
+});
+
+users.get('/:fbid', function(req, res){
+  userController.getOne(req, res);
 });
 
 module.exports = users;
