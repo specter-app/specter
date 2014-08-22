@@ -13,7 +13,7 @@
       var staches = Restangular.all('staches');
       var newStache = {
         title: params.title,
-        created_by: UserService.username,
+        created_by: UserService.uid,
         lon: params.lon,
         lat: params.lat,
         content: params.content,
@@ -25,6 +25,15 @@
       console.log('saving', newStache);
       var savedStache = staches.post(newStache);
       return savedStache;
+    };
+
+
+    this.getUserStaches = function(facebookid){
+      return Restangular.one('users', facebookid).getList().then(function(staches){
+        return staches;
+      }, function(err){
+        return err;
+      })
     };
 
     this.getOne = function(id){

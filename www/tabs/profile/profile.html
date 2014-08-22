@@ -18,18 +18,15 @@
       </div>
     </div>
 
-  <div class="button-bar">
+  <div class="button-bar" ng-show="user.username">
     <a class="button ion-chatbox-working"></a>
     <a class="button ion-person-stalker"></a>
     <a class="button ion-cube"></a>
     <a class="button ion-ios7-unlocked"></a>
 </div>
 
-  <button class="button button-block button-assertive" ng-click="logout()">Logout</button>
+  <button class="button button-block button-assertive" ng-click="logout()" ng-show="user.username">Logout</button>
 </div>
-  <!-- <button class="button button-medium button-block button-assertive" ng-click="create.saveStache()">
-    Save Changes
-  </button> -->
   </div>
 </ion-content>
 </ion-view>
