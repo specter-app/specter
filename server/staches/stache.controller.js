@@ -1,4 +1,5 @@
 var Stache = require('./stache.model.js');
+var userController = require('../users/user.controller.js');
 var crypto = require('crypto');
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
@@ -22,8 +23,9 @@ exports.save = function(req, res) {
   var stache = new Stache(stache_data);
   stache.save(function(err, savedStache) {
     if (err) throw err;
-    console.log('Stache saved with id:', savedStache._id);
-    res.status(201).json(savedStache);
+    userController.addStaches_Created(savedStache, function(){
+      res.status(201).json(savedStache);
+    })
   });
 };
 
