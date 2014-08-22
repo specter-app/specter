@@ -35,3 +35,11 @@ exports.addStaches_Discovered = function(discovery, next){
                }
              );
 };
+
+exports.getOne = function(req, res){
+  User.find({ fbid: req.params.fbid }, function(err, docs){
+    if(err) throw err;
+    console.log('getOne DOCS', docs);
+    res.status(200).json(docs[0]);
+  });
+};
