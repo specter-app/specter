@@ -1,4 +1,9 @@
 var Stache = require('./stache.model.js');
+var crypto = require('crypto');
+
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+var S3_BUCKET = process.env.S3_BUCKET;
 
 // Creates and saves a new stache, or overwrites a stache
 exports.save = function(req, res) {
@@ -73,4 +78,35 @@ exports.addDiscovered_By = function(discovery, next){
                   next();
                 }
                );
+  next();
+};
+
+// Get signature for client side direct upload to aws s3
+exports.sign_s3 = function(req, res) {
+  var object_name = req.query.s3_object_name;
+  var mime_type = req.query.s3_object_type;
+  console.log('req.query: ', req.query);
+
+  var now = new Date();
+  var expires = Math.ceil((now.getTime() + 10000)/1000); // 10 seconds from now
+  var amz_headers = "x-amz-acl:public-read"; // the object will be publicly available for download
+
+  var put_request = "PUT\n\n" + mime_type + "\n" + expires + "\n" + amz_headers + "\n/" + S3_BUCKET + "/" + object_name;
+
+  // Generate signature as a SHA hash of the compiled AWS secret key and the PUT request
+  var signature = crypto.createHmac('sha1', AWS_SECRET_KEY).update(put_request).digest('base64');
+  // Strip surrounding whitespace from signature, escape special characters
+  signature = encodeURIComponent(signature.trim());
+  // preserve '+' characters
+  signature = signature.replace('%2B','+');
+
+  var url = 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + object_name;
+
+  var credentials = {
+      signed_request: url + "?AWSAccessKeyId=" + AWS_ACCESS_KEY + "&Expires=" + expires + "&Signature=" + signature,
+      url: url
+  };
+  console.log('credentials: ', credentials);
+  res.write(JSON.stringify(credentials));
+  res.end();
 };

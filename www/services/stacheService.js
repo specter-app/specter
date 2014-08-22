@@ -23,7 +23,8 @@
         tags: params.tags
       };
       console.log('saving', newStache);
-      staches.post(newStache);
+      var savedStache = staches.post(newStache);
+      return savedStache;
     };
 
     this.getOne = function(id){

@@ -27,7 +27,6 @@ db.on('error', console.error.bind(console, 'connection error: '));
 console.log('config.mongodb:', mongoUri);
 console.log('environment:', app.get('env'));
 
-// routes
 app.use('/staches', require('./staches'));
 app.use('/users', require('./users'));
 app.use('/discoveries', require('./discoveries'));
