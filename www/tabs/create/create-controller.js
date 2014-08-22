@@ -108,6 +108,7 @@
       };
 
       this.s3Upload = function() {
+        // See status of upload (% complete, public url)
         var status_elem = document.getElementById("status");
         var url_elem = document.getElementById("avatar_url");
         var preview_elem = document.getElementById("preview");

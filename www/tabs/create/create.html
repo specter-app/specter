@@ -3,9 +3,10 @@
 </div>
   <ion-content>
     <div class="list list-inset">
+      <!-- Name of stache -->
       <label class="item item-input item-stacked-label">
-        <span class="input-label">Title</span>
-        <input type="text" placeholder="Give it a name" ng-model="create.data.titleText">
+        <span class="input-label">Name</span>
+        <input type="text" placeholder="Name your stache" ng-model="create.data.titleText">
       </label>
       <a class="item item-divider">Content</a>
       <a class="item item-icon-left" ng-click="create.showTextPopup()" >
@@ -19,6 +20,8 @@
       <a class="item item-icon-left" ng-click="create.captureAudio()" >
         <i class="icon ion-mic-a"></i>
         Audio
+        <!-- <div><p style="margin-left:220px;margin-right:220px;"><center>Audio<center></p></div> -->
+        <!-- <div><p><center>Audio<center></p></div> -->
       </a>
 
       <a class="item item-icon-left" ng-click="create.show()">
@@ -29,32 +32,28 @@
         </span>
       </a>
 
+      <br>
+
+      <div style="position:relative;">
+        <a class="button item-icon-left button-block" id="file" style="position:absolute;">
+          <i class="icon ion-ios7-camera" style="margin-right:100px"></i>
+          <!-- <div><p style="margin-left:220px;margin-right:220px;"><center>Picture<center></p></div> -->
+          Picture
+        </a>
+        <input type="file" name="file" id="files" style="height:60px; width:100%; border-style: solid;opacity:0; z-index:1;"/>
       </div>
 
       <!-- File upload -->
-      <input class="button item-icon-left" type="file" id="files"/>
-      <p id="status">Please select a file</p>
-      <div style="width:100px;"  id="preview"><img src="./img/ghost.jpg" style="width:100px;" /></div>
+      <p id="status" ng-show=false></p>
+      <div style="width:100px;" ng-show=false id="preview"><img src="./img/ghost.jpg" style="width:100px;" /></div>
 
       <form method="POST" action="">
           <input type="hidden" id="avatar_url" name="avatar_url" value="./img/ghost.jpg"/>
       </form>
-<<<<<<< HEAD
-      
-      <!-- <li class="item item-toggle"> -->
-         <!-- <label class="toggle toggle-positive">
-           <input type="checkbox">
-           <div class="track">
-             <div class="handle"></div>
-           </div>
-         </label> -->
+
          <ion-checkbox ng-model="checked" ng-click="create.openPrivateModal()">
           Locked stache?
          </ion-checkbox>
-=======
-
-      <ion-checkbox ng-model="checked" ng-click="create.openPrivateModal()">Locked stache?</ion-checkbox>
->>>>>>> (feat) Fix route handling for submit
     </div>
       <button class="button button-large button-block button-assertive" ng-click="create.saveStache()">
       MAKE STACHE

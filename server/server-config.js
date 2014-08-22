@@ -27,15 +27,6 @@ db.on('error', console.error.bind(console, 'connection error: '));
 console.log('config.mongodb:', mongoUri);
 console.log('environment:', app.get('env'));
 
-// routes
-// app.post('/submit_form', function(req, res){
-//     avatar_url = req.body.avatar_url;
-//     console.log('submit_form handled: ', avatar_url);
-//     res.send(avatar_url);
-//     // update_account(avatar_url); // TODO: create this function
-//     // TODO: Return something useful or redirect
-// });
-
 app.use('/staches', require('./staches'));
 app.use('/users', require('./users'));
 app.use('/discoveries', require('./discoveries'));

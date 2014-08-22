@@ -1,23 +1,9 @@
 var Stache = require('./stache.model.js');
 var crypto = require('crypto');
-// var Busboy = require('busboy');
-// var aws = require('aws-sdk');
-// var fs = require('fs');
-
-// aws_credentials = process.env.aws_credentials;
-// env = process.env;
-
-// aws.config.update = {
-//   accessKeyId: env.S3_KEY,
-//   secretAccessKey: env.S3_SECRET
-//   // region:          env.S3_REGION  
-// };
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
-
-// s3 = new aws.S3();
 
 // Creates and saves a new stache, or overwrites a stache
 exports.save = function(req, res) {
