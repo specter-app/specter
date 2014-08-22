@@ -28,7 +28,7 @@
           },
           buttonClicked: function(index, data) {
             if (index === 3) {
-              self.showPopup();
+              self.showTagsPopup();
             } else {
               self.data.currentTags[data.text] = true;
             }
@@ -132,7 +132,7 @@
       });
 
       this.openPrivateModal = function() {
-        if($scope.checked) {
+        if(self.checked) {
           $scope.modal.show();
         }
       };
