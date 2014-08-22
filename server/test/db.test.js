@@ -142,17 +142,23 @@ describe('Stache model', function() {
 
 describe('User model', function(){
 
-  beforeEach(function(done){
-    User.remove(done);
-  });
+  var testUser;
 
   describe('Login', function(){
+    
+    before(function(done){
+      User.remove(function(err){
+        if(err) throw err;
+        done();
+      });
+    });
+
     it('should save a new user without error', function(done){
-      var user2 = new User(fixtures.testUser2);
-      user2.save(function(err, savedUser){
-        should.equal(user2.fbid, savedUser.fbid);
-        should.equal(user2.first_name, savedUser.first_name);
-        should.equal(user2.last_name, savedUser.last_name);
+      testUser = new User(fixtures.testUser1);
+      testUser.save(function(err, savedUser){
+        should.equal(testUser.fbid, savedUser.fbid);
+        should.equal(testUser.first_name, savedUser.first_name);
+        should.equal(testUser.last_name, savedUser.last_name);
         done();
       });
     });
