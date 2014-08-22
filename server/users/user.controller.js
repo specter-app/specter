@@ -25,6 +25,17 @@ exports.login = function(req, res){
   });
 };
 
+exports.addStaches_Created = function(stache, next){
+  User.update(
+              { fbid: stache.created_by },
+              { $addToSet: { staches_created: stache._id } },
+              function(err, count){
+                if(err) throw err;
+                next();
+              }
+             );
+};
+
 exports.addStaches_Discovered = function(discovery, next){
   User.update(
               { fbid: discovery.user_fbid },
