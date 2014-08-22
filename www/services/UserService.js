@@ -8,7 +8,7 @@
     };
     // Upon successful login, set the user object
     $rootScope.$on("$firebaseSimpleLogin:login", function(event, user) {
-      sdo.uid = user.uid;
+      sdo.uid = user.id;
       sdo.isLogged = true;
       sdo.username = user.displayName;
       sdo.pic = user.thirdPartyUserData.picture.data.url;
