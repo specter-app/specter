@@ -28,14 +28,15 @@
           },
           buttonClicked: function(index, data) {
             if (index === 3) {
-              self.showPopup();
+              self.showTagsPopup();
             } else {
               self.data.currentTags[data.text] = true;
             }
           }
         });
       };
-      this.showPopup = function() {
+      
+      this.showTagsPopup = function() {
         var myPopup = $ionicPopup.show({
           template: '<input type="text" ng-model="create.data.newTag">',
           title: 'Enter a new tag',
@@ -48,6 +49,25 @@
             onTap: function(e) {
               self.data.currentTags[self.data.newTag] = true;
               self.data.newTag = '';
+            }
+          }, ]
+        });
+        myPopup.then(function(res) {
+        });
+      };
+
+      this.showTextPopup = function() {
+        var myPopup = $ionicPopup.show({
+            template: '<input type="text" ng-model="create.data.textContent">',
+            title: 'Enter text content',
+            scope: $scope,
+            buttons: [{
+            text: 'Cancel'
+          }, {
+            text: '<b>Save text</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              // self.data.textContent = true;
             }
           }, ]
         });
