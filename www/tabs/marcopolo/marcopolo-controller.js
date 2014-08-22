@@ -7,6 +7,7 @@
 
     stacheService.getOne(stacheService.selectedStache).then(function(stache){
         self.currentStache = stache;
+        console.log(self.currentStache);
         self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
       }, function(err){
         return err;
@@ -78,7 +79,9 @@
     }, function(position) {
         self.location.long = position.coords.longitude;
         self.location.lat = position.coords.latitude;
-        self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
+        if (self.currentStache){
+          self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
+        }
         var visited = heatmapService.contains(self.id, self.location.lat, self.location.long);
 
         // If user is within 3 meters, reveal stache
