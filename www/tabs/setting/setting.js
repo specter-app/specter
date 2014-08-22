@@ -6,7 +6,6 @@ angular.module('specter.tab.setting', [])
       views: {
         'setting-tab': {
           templateUrl: "tabs/setting/setting.html",
-          // controller: 'MarcopoloCtrl'
         }
       },
       data: {
