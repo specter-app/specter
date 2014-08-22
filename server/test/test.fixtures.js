@@ -34,6 +34,7 @@ module.exports.testStache3 = {
 
 // New user without user_id
 module.exports.testUser1 = {
+  fbid: 'def456',
   first_name: 'Bob',
   last_name: 'Owen'
   // profilePhoto: 
