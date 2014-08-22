@@ -1,45 +1,15 @@
 (function(){
-  var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout, $ionicModal) {
+  var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout) {
     var self = this;
     self.location = {long: "", lat: ""};
-    // self.id = $stateParams.id.slice(1);
     self.location.long = location.coords.longitude;
     self.location.lat = location.coords.latitude;
 
-    stacheService.getOne(self.id).then(function(stache){
+    stacheService.getOne(stacheService.selectedStache).then(function(stache){
         self.currentStache = stache;
         self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
       }, function(err){
         return err;
-
-      }, function(position) {
-          self.location.long = position.coords.longitude;
-          self.location.lat = position.coords.latitude;
-          self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
-          var visited = heatmapService.contains(self.id, self.location.lat, self.location.long);
-
-          // If user is within 3 meters, reveal stache
-          if (self.distance < 3) {
-            console.log("You found the stache!");
-            $cordovaGeolocation.clearWatch(watch);
-            var discoveries = Restangular.all('discoveries');
-            var newDiscovery = {
-              stache_id: stache.id,
-              fb_id: UserService.uid
-            };
-            console.log('saving', newDiscovery);
-            staches.post(newDiscovery);
-            // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
-          } else if (!visited) {
-            console.log("User has traveled, adding new location to heatmap.");
-
-            // Set color of proximity indicator bar (below map)
-            self.proximityColor = heatmapService.color(self.distance);
-
-            // Add current location to heatmap
-            heatmapService.addPoint(self.id, self.location.lat, self.location.long, self.distance);
-            self.pointArray = heatmapService.getPoints(self.id);
-          }
       });
 
     $scope.map = {
@@ -98,25 +68,6 @@
       // $scope.heatLayer = new heatmapService.createHeatLayer(layer);
     };
 
-    $ionicModal.fromTemplateUrl('found-modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-
-    $scope.$on('$destroy', function() {
-      $scope.modal.remove();
-    });
-
-    this.openFoundModal = function() {
-      $scope.modal.show();
-    };
-
-    this.closeModal = function() {
-      $scope.modal.hide();
-    };
-
     var watch = $cordovaGeolocation.watchPosition({
       frequency: 1000
     });
@@ -140,28 +91,10 @@
           // Set color of proximity indicator bar (below map)
           self.proximityColor = heatmapService.color(self.distance);
 
-          // If user is within 3 meters, reveal stache
-          if (self.distance < 3) {
-            console.log("You found the stache!");
-            $cordovaGeolocation.clearWatch(watch);
-            var discoveries = Restangular.all('discoveries');
-            var newDiscovery = {
-              stache_id: stache.id,
-              fb_id: UserService.uid
-            };
-            console.log('saving', newDiscovery);
-            staches.post(newDiscovery);
-            self.openFoundModal();
-            watch.clearWatch();
-            // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
-          } else if (!visited) {
-            console.log("User has traveled, adding new location to heatmap.");
-
           // Add current location to heatmap
           heatmapService.addPoint(self.id, self.location.lat, self.location.long, self.distance);
           self.pointArray = heatmapService.getPoints(self.id);
         }
-      }
     });
 
     // Rerender heatmap whenever new data has been added
@@ -169,8 +102,8 @@
       console.log('watch on pointArray triggered');
       self.heatLayer.setData(pointArray);
     }, true);
-  };
-  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout', '$ionicModal'];
+  }
+  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout']
 
-  angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl);
+  angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl)
 })();
