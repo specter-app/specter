@@ -7,10 +7,11 @@
         <span class="input-label">Title</span>
         <input type="text" placeholder="Give it a name" ng-model="create.data.titleText">
       </label>
-      <label class="item item-input item-stacked-label">
+     <!--  <label class="item item-input item-stacked-label">
         <span class="input-label">Description</span>
         <input type="text" placeholder="Input your text" ng-model="create.data.content">
       </label>
+<<<<<<< HEAD
       <a class="item item-icon-left" ng-click="create.show()">
         <i class="icon ion-ios7-pricetag"></i>
           Tags
@@ -20,14 +21,44 @@
       </a>
       <div class="item button-bar">
       <a class="button item-icon-left" ng-click="create.takePicture()">
+=======
+      -->
+     <!--  <label class="item item-input item-stacked-label">
+        <span class="input-label">Clue</span>
+        <input type="text" placeholder="Input your text" ng-model="create.data.content">
+      </label> -->
+      <!-- <div class="item button-bar"> -->
+      <a class="item item-divider">Content</a>
+      <a class="item item-icon-left" ng-click="create.captureAudio()" >
+        <i class="icon ion-chatbox-working"></i>
+        Text
+      </a>
+      <a class="item item-icon-left" ng-click="create.takePicture()">
         <i class="icon ion-ios7-camera"></i>
         Picture
       </a>
-      <a class="button item-icon-left" ng-click="create.captureAudio()" >
+      <a class="item item-icon-left" ng-click="create.captureAudio()" >
         <i class="icon ion-mic-a"></i>
         Audio
       </a>
-      </div>
+
+      <!-- </div> -->
+      <!-- <div class="item button-bar"> -->
+      <!-- </div> -->
+      <a class="item item-icon-left" ng-click="create.show()">
+        <i class="icon ion-ios7-pricetag"></i>
+          Tags
+        <span class="item-note" ng-repeat="(key, val) in create.data.currentTags">
+          {{key}}&nbsp
+        </span>
+      </a>
+      <!-- <li class="item item-toggle"> -->
+         <!-- <label class="toggle toggle-positive">
+           <input type="checkbox">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label> -->
          <ion-checkbox ng-model="checked" ng-click="create.openPrivateModal()">
           Locked stache?
          </ion-checkbox>
@@ -46,6 +77,10 @@
        <span class="input-label">Clue</span>
        <input type="text" placeholder="{{create.data.clue !== undefined ? create.data.clue : 'Type a clue'}}" ng-model="create.data.clue">
      </label>
+     <label class="item item-input item-stacked-label">
+        <span class="input-label">Password</span>
+        <input type="text" placeholder="{{create.data.password !== undefined ? create.data.password : 'Type a password'}}" ng-model="create.data.password">
+      </label>
     </div>
     <button class="button button-large button-full button-assertive" ng-click="create.closeModal()">
     Save

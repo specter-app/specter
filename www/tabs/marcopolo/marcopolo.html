@@ -14,8 +14,18 @@
       options="map.options">
       <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="marcopolo.heatLayerCallback"></layer>
     </google-map>
+    <button class="button" ng-click="marcopolo.openFoundModal()">hi</button>
   </ion-content>
   <ion-footer-bar style="background-color:{{ marcopolo.proximityColor }}">
   </ion-footer-bar>
   <h6>{{marcopolo.distance | distance}}</h6>
 </ion-view>
+
+<script id="found-modal.html" type="text/ng-template">
+  <ion-modal-view>  
+    <div class="list list-inset">
+    YOU DONE FOUND IT
+    </div>
+    <img ng-src="http://images.apple.com/macbook-pro/performance-retina/images/hero.jpg"></img>
+  </ion-modal-view>
+</script>
