@@ -2,7 +2,7 @@
   var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout, $ionicModal) {
     var self = this;
     self.location = {long: "", lat: ""};
-    self.id = $stateParams.id.slice(1);
+    // self.id = $stateParams.id.slice(1);
     self.location.long = location.coords.longitude;
     self.location.lat = location.coords.latitude;
 
