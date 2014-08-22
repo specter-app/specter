@@ -4,7 +4,7 @@
 
     S3Upload.prototype.s3_object_name = 'default_name';
 
-    S3Upload.prototype.s3_sign_put_url = 'http://specter-staging.azurewebsites.net/staches/sign_s3';
+    S3Upload.prototype.s3_sign_put_url = 'http://specter.azurewebsites.net/staches/sign_s3';
 
     S3Upload.prototype.file_dom_selector = 'file_upload';
 

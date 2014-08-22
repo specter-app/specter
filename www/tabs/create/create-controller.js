@@ -78,9 +78,11 @@
 
       this.saveStache = function() {
         this.s3Upload();
+        console.log('self.data: ');
+        console.dir(self.data);
         stacheService.saveStache({
           title: self.data.titleText,
-          content: self.data.content,
+          content: self.data.textContent,
           tags: Object.keys(self.data.currentTags),
           lon: self.location.long,
           lat: self.location.lat,
@@ -117,7 +119,7 @@
         var s3upload = new S3Upload({
           s3_object_name: rString,
           file_dom_selector: 'files',
-          s3_sign_put_url: 'http://specter-staging.azurewebsites.net/staches/sign_s3/',
+          s3_sign_put_url: 'http://specter.azurewebsites.net/staches/sign_s3/',
           onProgress: function(percent, message) {
               status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
           },

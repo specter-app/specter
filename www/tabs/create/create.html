@@ -44,7 +44,7 @@
       <div style="width:100px;" ng-show=false id="preview"><img src="./img/ghost.jpg" style="width:100px;" /></div>
 
       <form method="POST" action="">
-          <input type="hidden" id="avatar_url" name="avatar_url" value="./img/ghost.jpg"/>
+          <input type="hidden" id="avatar_url" name="avatar_url" value="./img/ghost.jpg"/ ng-model="create.data.url">
       </form>
 
          <ion-checkbox ng-model="checked" ng-click="create.openPrivateModal()">
