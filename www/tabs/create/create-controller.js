@@ -76,18 +76,18 @@
         });
       };
 
-
       this.saveStache = function() {
-        this.s3Upload();
         stacheService.saveStache({
           title: self.data.titleText,
           content: self.data.textContent,
+          aws_url: self.data.aws_url,
           tags: Object.keys(self.data.currentTags),
           lon: self.location.long,
           lat: self.location.lat,
           clue: self.data.clue
         });
       };
+
       this.takePicture = function() {
         cameraService.takePicture().then(function(imageData) {
           self.imageData = imageData;
@@ -126,6 +126,8 @@
               status_elem.innerHTML = 'Upload completed. Uploaded to: ' + public_url;
               url_elem.value = public_url;
               // Store this url in mongodb
+              self.data.aws_url = public_url;
+              self.saveStache();
               preview_elem.innerHTML = '<img src="' + public_url + '" style="width:100px;"/>';
           },
           onError: function(status) {
