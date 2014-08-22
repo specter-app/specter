@@ -8,13 +8,17 @@
   </div>
 
   <div>
-    <button class="button button-block button-assertive" ng-click="logout()">Logout</button>
-    <div class="card">
-      <h1 style="float:left">{{user.username}}</h1>
-      <img style="float:right" src="{{user.pic}}">
+    <div class="card" ng-show="user.username">
+      <div>
+        <img class="circle" style="float:left; margin: 5px" src="{{user.pic}}">
+        <div style="text-align:center; padding-top: 20px; padding-bottom: 20px; padding-left: 20px">
+        <h3>{{user.username}}</h3>
+        <button class="button button-medium button-calm" style="height: 90%;">&nbsp&nbsp&nbsp&nbspEdit Profile&nbsp&nbsp&nbsp&nbsp</button>
+      </div>
+      </div>
     </div>
 
-  <div class="list list-inset">
+  <!-- <div class="list list-inset">
   <div class="item item-divider">Profile</div>
    <div class="item item-input-inset">
     <label class="item-input-wrapper">
@@ -39,13 +43,14 @@
     <button class="button button-small">
       Change
     </button>
-  </div>
+  </div> -->
 <!--   <div class="item">Change password
   </div> -->
+  <button class="button button-block button-assertive" ng-click="logout()">Logout</button>
 </div>
-  <button class="button button-medium button-block button-assertive" ng-click="create.saveStache()">
+  <!-- <button class="button button-medium button-block button-assertive" ng-click="create.saveStache()">
     Save Changes
-  </button>
+  </button> -->
   </div>
 </ion-content>
 </ion-view>
