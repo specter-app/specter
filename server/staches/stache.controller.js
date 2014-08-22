@@ -65,5 +65,12 @@ exports.getNearby = function(req, res) {
 };
 
 exports.addDiscovered_By = function(discovery, next){
-  next();
+  Stache.update(
+                { _id: discovery.stache_id },
+                { $addToSet: { discovered_by: discovery.user_fbid } },
+                function(err, count){
+                  if(err) throw err;
+                  next();
+                }
+               );
 };
