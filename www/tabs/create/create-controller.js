@@ -28,7 +28,7 @@
           },
           buttonClicked: function(index, data) {
             if (index === 3) {
-              self.showPopup();
+              self.showTagsPopup();
             } else {
               self.data.currentTags[data.text] = true;
             }
@@ -49,6 +49,26 @@
             onTap: function(e) {
               self.data.currentTags[self.data.newTag] = true;
               self.data.newTag = '';
+            }
+          }, ]
+        });
+        myPopup.then(function(res) {
+        });
+      };
+
+      this.showTextPopup = function() {
+        var myPopup = $ionicPopup.show({
+          template: '<input type="text" ng-model="create.data.textContent">',
+          // template: '<label class="item item-input"><span class="input-label">Username</span><input type="text"></label>',
+          title: 'Enter text',
+          scope: $scope,
+          buttons: [{
+            text: 'Cancel'
+          }, {
+            text: '<b>Save</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+
             }
           }, ]
         });
@@ -132,7 +152,7 @@
       });
 
       this.openPrivateModal = function() {
-        if($scope.checked) {
+        if(self.checked) {
           $scope.modal.show();
         }
       };
