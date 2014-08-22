@@ -164,6 +164,27 @@ describe('User model', function(){
     });
   });
 
+  describe('Get one', function(){
+
+    before(function(done){
+      testUser.save(function(err, savedUser){
+        if(err) throw err;
+        done();
+      });
+    });
+
+    it('should retrieve a user without error', function(done){
+      User.find({fbid: testUser.fbid}, function(err, foundUser){
+        foundUser = foundUser[0];
+        should.equal(testUser.fbid, foundUser.fbid);
+        should.equal(testUser.first_name, foundUser.first_name);
+        should.equal(testUser.last_name, foundUser.last_name);
+        done();
+      });
+    });
+
+  });
+
 });
 
 describe('Discovery model', function(){
