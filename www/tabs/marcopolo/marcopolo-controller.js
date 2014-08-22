@@ -4,8 +4,9 @@
     self.location = {long: "", lat: ""};
     self.location.long = location.coords.longitude;
     self.location.lat = location.coords.latitude;
+    self.id = stacheService.selectedStache;
 
-    stacheService.getOne(stacheService.selectedStache).then(function(stache){
+    stacheService.getOne(self.id).then(function(stache){
         self.currentStache = stache;
         console.log(self.currentStache);
         self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
@@ -87,6 +88,7 @@
         // If user is within 3 meters, reveal stache
         if (self.distance < 3) {
           console.log("You found the stache!");
+
           // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
         } else if (!visited) {
           console.log("User has traveled, adding new location to heatmap.");

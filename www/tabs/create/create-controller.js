@@ -59,8 +59,6 @@
 
       this.saveStache = function() {
         this.s3Upload();
-        console.log('self.data: ');
-        console.dir(self.data);
         stacheService.saveStache({
           title: self.data.titleText,
           content: self.data.textContent,
