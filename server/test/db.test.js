@@ -233,7 +233,6 @@ describe('Discovery model', function(){
       should.equal(testDiscovery.user_fbid, savedDiscovery.user_fbid);
       stacheController.addDiscovered_By(testDiscovery, function(){
         Stache.find({_id: savedDiscovery.stache_id}, function(err, stache){
-          console.log('HERE', stache[0].discovered_by[0] === String(testStache._id));
           stache[0].discovered_by.should.containEql(String(testUser.fbid));
           done();
         });
