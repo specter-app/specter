@@ -4,7 +4,6 @@
     self.location = {long: "", lat: ""};
     self.location.long = location.coords.longitude;
     self.location.lat = location.coords.latitude;
-    console.log(stacheService.selectedStache, 'this is from mapview');
 
     stacheService.getOne(stacheService.selectedStache).then(function(stache){
         self.currentStache = stache;

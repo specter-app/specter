@@ -1,5 +1,7 @@
 <ion-view>
-  <!-- <ion-content> -->
+<div class="bar bar-header bar-light">
+</div>
+  <ion-content>
     <div class="list list-inset">
       <label class="item item-input item-stacked-label">
         <span class="input-label">Title</span>
@@ -16,35 +18,21 @@
           {{key}}&nbsp
         </span>
       </a>
-     <!--  <label class="item item-input item-stacked-label">
-        <span class="input-label">Clue</span>
-        <input type="text" placeholder="Input your text" ng-model="create.data.content">
-      </label> -->
       <div class="item button-bar">
       <a class="button item-icon-left" ng-click="create.takePicture()">
         <i class="icon ion-ios7-camera"></i>
         Picture
-        <!-- <img src="{{create.imageData}}" height="100" width="100"> -->
       </a>
       <a class="button item-icon-left" ng-click="create.captureAudio()" >
         <i class="icon ion-mic-a"></i>
         Audio
       </a>
       </div>
-      
-      <!-- <li class="item item-toggle"> -->
-         <!-- <label class="toggle toggle-positive">
-           <input type="checkbox">
-           <div class="track">
-             <div class="handle"></div>
-           </div>
-         </label> -->
          <ion-checkbox ng-model="checked" ng-click="create.openPrivateModal()">
           Locked stache?
          </ion-checkbox>
-      <!-- </li> -->
     </div>
-      <button class="button button-large button-full button-assertive" ng-click="create.saveStache()">
+      <button class="button button-large button-block button-assertive" ng-click="create.saveStache()">
       MAKE STACHE
       </button>
   </ion-content>
@@ -52,7 +40,7 @@
 
 
 <script id="private-modal.html" type="text/ng-template">
-  <ion-modal-view>  
+  <ion-modal-view>
     <div class="list list-inset">
     <label class="item item-input item-stacked-label">
        <span class="input-label">Clue</span>

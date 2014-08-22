@@ -28,7 +28,6 @@
           },
           buttonClicked: function(index, data) {
             if (index === 3) {
-              // clicked add tags button
               self.showPopup();
             } else {
               self.data.currentTags[data.text] = true;
@@ -36,17 +35,6 @@
           }
         });
       };
-      this.saveStache = function() {
-        stacheService.saveStache({
-          title: self.data.titleText,
-          content: self.data.content,
-          tags: Object.keys(self.data.currentTags),
-          lon: self.location.long,
-          lat: self.location.lat,
-          clue: self.data.clue
-        });
-      };
-
       this.showPopup = function() {
         var myPopup = $ionicPopup.show({
           template: '<input type="text" ng-model="create.data.newTag">',
@@ -67,6 +55,17 @@
         });
       };
 
+
+      this.saveStache = function() {
+        stacheService.saveStache({
+          title: self.data.titleText,
+          content: self.data.content,
+          tags: Object.keys(self.data.currentTags),
+          lon: self.location.long,
+          lat: self.location.lat,
+          clue: self.data.clue
+        });
+      };
       this.takePicture = function() {
         cameraService.takePicture().then(function(imageData) {
           self.imageData = imageData;
