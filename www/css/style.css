@@ -31,3 +31,7 @@
   margin-left: auto !important;
   margin-right: auto !important;
 }
+
+.circle {
+  border-radius: 50%;
+}
