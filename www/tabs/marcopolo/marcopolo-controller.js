@@ -1,5 +1,5 @@
 (function(){
-  var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout) {
+  var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout, $ionicModal) {
     var self = this;
     self.location = {long: "", lat: ""};
     self.id = $stateParams.id.slice(1);
@@ -98,6 +98,25 @@
       // $scope.heatLayer = new heatmapService.createHeatLayer(layer);
     };
 
+    $ionicModal.fromTemplateUrl('found-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
+
+    this.openFoundModal = function() {
+      $scope.modal.show();
+    };
+
+    this.closeModal = function() {
+      $scope.modal.hide();
+    };
+
     var watch = $cordovaGeolocation.watchPosition({
       frequency: 1000
     });
@@ -132,6 +151,8 @@
             };
             console.log('saving', newDiscovery);
             staches.post(newDiscovery);
+            self.openFoundModal();
+            watch.clearWatch();
             // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
           } else if (!visited) {
             console.log("User has traveled, adding new location to heatmap.");
@@ -149,7 +170,7 @@
       self.heatLayer.setData(pointArray);
     }, true);
   };
-  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout'];
+  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout', '$ionicModal'];
 
   angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl);
 })();
