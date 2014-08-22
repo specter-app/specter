@@ -56,6 +56,26 @@
         });
       };
 
+      this.showTextPopup = function() {
+        var myPopup = $ionicPopup.show({
+          template: '<input type="text" ng-model="create.data.textContent">',
+          // template: '<label class="item item-input"><span class="input-label">Username</span><input type="text"></label>',
+          title: 'Enter text',
+          scope: $scope,
+          buttons: [{
+            text: 'Cancel'
+          }, {
+            text: '<b>Save</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+
+            }
+          }, ]
+        });
+        myPopup.then(function(res) {
+        });
+      };
+
 
       this.saveStache = function() {
         this.s3Upload();
