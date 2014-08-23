@@ -166,7 +166,7 @@
       $scope.$on('$destroy', function() {
         $scope.privateModal.remove();
       });
-       
+
       this.openCreatedModal = function() {
         $scope.createdModal.show();
       };
@@ -198,6 +198,6 @@
     };
   createCtrl.$inject = [ '$ionicActionSheet', '$ionicPopup', 'Restangular', 'cameraService',
     'stacheService', '$cordovaCapture', '$cordovaGeolocation', 'geoService', '$ionicModal','$scope', 'usSpinnerService'];
-  angular.module('specter.tab.create.controller', ['restangular', 'angularSpinner'])
+  angular.module('specter.tab.create.controller', [])
     .controller('createCtrl', createCtrl);
 })();
