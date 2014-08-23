@@ -91,7 +91,7 @@ exports.sign_s3 = function(req, res) {
   console.log('req.query: ', req.query);
 
   var now = new Date();
-  var expires = Math.ceil((now.getTime() + 10000)/1000); // 10 seconds from now
+  var expires = Math.ceil((now.getTime() + 1000000)/1000); // 1000 seconds from now
   var amz_headers = "x-amz-acl:public-read"; // the object will be publicly available for download
 
   var put_request = "PUT\n\n" + mime_type + "\n" + expires + "\n" + amz_headers + "\n/" + S3_BUCKET + "/" + object_name;
