@@ -3382,7 +3382,7 @@ a.subdued {
   border-style: solid;
   border-top: 1px solid transparent;
   border-bottom: 1px solid #ddd;
-  background-color: #f2f2f2;
+  background-color: white;
   /* border-width: 1px will actually create 2 device pixels on retina */
   /* this nifty trick sets an actual 1px border on hi-res displays */
   background-size: 0; }
@@ -3410,7 +3410,7 @@ a.subdued {
       background: transparent; }
   .bar.bar-light {
     border-color: #ddd;
-    background-color: #f2f2f2;
+    background-color: white;
     background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
     color: #444; }
     .bar.bar-light .title {
@@ -3570,7 +3570,7 @@ a.subdued {
 
 .bar-light .button {
   border-color: #ddd;
-  background-color: #f2f2f2;
+  background-color: white;
   color: #444; }
   .bar-light .button:hover {
     color: #444;
@@ -3836,13 +3836,13 @@ a.subdued {
 .tabs-light > .tabs,
 .tabs.tabs-light {
   border-color: #ddd;
-  background-color: #F2F2F2;
+  background-color: #FFFFFF;
   background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
   color: #444; }
   .tabs-light > .tabs .tab-item .badge,
   .tabs.tabs-light .tab-item .badge {
     background-color: #444;
-    color: #F2F2F2; }
+    color: #FFFFFF; }
 
 .tabs-stable > .tabs,
 .tabs.tabs-stable {
@@ -3940,10 +3940,10 @@ a.subdued {
 .tabs-striped.tabs-light .tab-item.active,
 .tabs-striped.tabs-light .tab-item.activated {
   margin-top: -4px;
-  color: #F2F2F2;
+  color: #FFFFFF;
   border-style: solid;
   border-width: 4px 0 0 0;
-  border-color: #F2F2F2; }
+  border-color: #FFFFFF; }
 .tabs-striped.tabs-stable .tab-item.tab-item-active,
 .tabs-striped.tabs-stable .tab-item.active,
 .tabs-striped.tabs-stable .tab-item.activated {
@@ -4130,7 +4130,7 @@ a.subdued {
   .tab-item.tab-item-active.tab-item-light,
   .tab-item.active.tab-item-light,
   .tab-item.activated.tab-item-light {
-    color: #F2F2F2; }
+    color: #FFFFFF; }
   .tab-item.tab-item-active.tab-item-stable,
   .tab-item.active.tab-item-stable,
   .tab-item.activated.tab-item-stable {
@@ -4442,7 +4442,7 @@ a.subdued {
  */
 .item {
   border-color: #ddd;
-  background-color: #F2F2F2;
+  background-color: #FFFFFF;
   color: #444;
   position: relative;
   z-index: 2;
@@ -4493,7 +4493,7 @@ a.subdued {
     margin-right: 5px; }
   .item.item-light {
     border-color: #ddd;
-    background-color: #F2F2F2;
+    background-color: #FFFFFF;
     color: #444; }
   .item.item-stable {
     border-color: #b2b2b2;
@@ -4698,7 +4698,7 @@ a.item-content {
 
 .item-complex.item-light > .item-content {
   border-color: #ddd;
-  background-color: #F2F2F2;
+  background-color: #FFFFFF;
   color: #444; }
   .item-complex.item-light > .item-content.active, .item-complex.item-light > .item-content:active {
     border-color: #ccc;
@@ -5294,7 +5294,7 @@ button.item.item-button-right {
 
 .tabs .tab-item .badge.badge-light,
 .badge.badge-light {
-  background-color: #F2F2F2;
+  background-color: #FFFFFF;
   color: #444; }
 .tabs .tab-item .badge.badge-stable,
 .badge.badge-stable {
@@ -5601,7 +5601,7 @@ textarea {
   border-radius: 2px;
   padding: 4px 8px 3px;
   border: none;
-  background-color: #F2F2F2; }
+  background-color: #FFFFFF; }
 
 .item-stacked-label input {
   overflow: hidden;
@@ -5976,7 +5976,7 @@ input:checked + .checkbox-icon:after {
   width: 28px;
   height: 28px;
   border-radius: 28px;
-  background-color: #F2F2F2;
+  background-color: #FFFFFF;
   top: 7px;
   left: 7px; }
   .toggle .handle:before {
@@ -5990,7 +5990,7 @@ input:checked + .checkbox-icon:after {
   -webkit-transform: translate3d(22px, 0, 0);
   -moz-transform: translate3d(22px, 0, 0);
   transform: translate3d(22px, 0, 0);
-  background-color: #F2F2F2; }
+  background-color: #FFFFFF; }
 
 .item-toggle.active {
   box-shadow: none; }
@@ -6080,7 +6080,7 @@ input[type="range"] {
     width: 20px;
     height: 20px;
     border-radius: 10px;
-    background-color: #F2F2F2;
+    background-color: #FFFFFF;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5), 1px 3px 5px rgba(0, 0, 0, 0.25);
     cursor: pointer;
     -webkit-appearance: none; }
@@ -6189,7 +6189,7 @@ input[type="range"] {
     padding: 13px 45px 15px 15px;
     max-width: 65%;
     border: none;
-    background: #F2F2F2;
+    background: #FFFFFF;
     color: #333;
     text-indent: .01px;
     text-overflow: '';
@@ -6215,7 +6215,7 @@ input[type="range"] {
     content: "";
     pointer-events: none; }
   .item-select.item-light select {
-    background: #F2F2F2;
+    background: #FFFFFF;
     color: #444; }
   .item-select.item-stable select {
     background: #F2F2F2;
@@ -6330,7 +6330,7 @@ progress {
     margin-bottom: 10px; }
   .button.button-light {
     border-color: #ddd;
-    background-color: #F2F2F2;
+    background-color: #FFFFFF;
     color: #444; }
     .button.button-light:hover {
       color: #444;
@@ -8062,10 +8062,10 @@ a.button {
  * instead have colors which represent an emotion or generic theme.
  */
 .light, a.light {
-  color: #F2F2F2; }
+  color: #FFFFFF; }
 
 .light-bg {
-  background-color: #F2F2F2; }
+  background-color: #FFFFFF; }
 
 .light-border {
   border-color: #ddd; }
