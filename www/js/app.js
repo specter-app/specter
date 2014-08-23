@@ -1,5 +1,5 @@
 
-angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', 'google-maps', 'marcopoloDirective', 'firebase'])
+angular.module('specter', ['ionic', 'specter.tab', 'restangular', 'ngCordova', 'google-maps', 'marcopoloDirective', 'firebase', 'ngProgress'])
 .config(function(RestangularProvider) {
   RestangularProvider.setBaseUrl('http://specter.azurewebsites.net/');
   RestangularProvider.setDefaultHeaders({
