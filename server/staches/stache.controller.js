@@ -88,8 +88,6 @@ exports.getStachesById = function(stacheIdArray, next){
               { _id: { $in: stacheIdArray } }, //need to convert to ObjectIds via map?
               function(err, staches){
                 if(err) throw err;
-                staches = JSON.stringify(staches[0]);
-                console.log('retrieved staches', staches);
                 next(staches);
               }
              );
