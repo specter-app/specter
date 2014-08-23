@@ -7,6 +7,8 @@
   "dependencies": {
     "angular-google-maps": "~1.2.0",
     "ng-cordova": "~0.0.3",
-    "ngCordova": "~0.1.3-alpha"
+    "ngCordova": "~0.1.3-alpha",
+    "angular-spinner": "~0.5.1",
+    "spin": "~1.1.6"
   }
 }

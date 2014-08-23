@@ -1,15 +1,13 @@
 
     <div class="list" ui-view>
-    testing123
       <div ng-repeat="discovered_stache in staches_discovered">
-        <a class="item item-thumbnail-left" ng-click="">
-          <h2>{{discovered_stache.author}}</h2>
-          <p>{{discovered_stache.title}}</p>
-          <p>{{discovered_stache.date | timeConversion}}</p>
-          <span class="item-note ion-ios7-pricetag" ng-show="discovered_stache.tags.length">
-          <span ng-repeat="tag in discovered_stache.tags">
-            {{tag}}&nbsp
-          </span>
+        <a class="item item-stable" ng-click="">
+          <p style="font-size:14pt;font-weight:bold;">{{discovered_stache.title}}</p>
+          <p>Created {{discovered_stache.date | timeConversion}}</p>
+          <span style="float:left" class="item-note ion-ios7-pricetag" ng-show="stache.tags.length">
+            <span ng-repeat="tag in discovered_stache.tags">
+              {{tag}}&nbsp
+            </span>
           </span>
         </a>
       </div>
