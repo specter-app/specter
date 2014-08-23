@@ -2,47 +2,31 @@
   <div class="bar bar-header bar-light">
   </div>
   <ion-content>
-
-  <div ng-hide="user.username">
-    <button class="button button-block button-positive" ng-click="login('facebook')">Login with Facebook</button>
-  </div>
-
-  <div>
-    <div class="card" ng-show="user.username">
-      <div>
-        <img class="circle" style="float:left; margin: 5px" src="{{user.pic}}">
-        <div style="text-align:center; padding-top: 20px; padding-bottom: 20px; padding-left: 20px">
-        <h3>{{user.username}}</h3>
-        <button class="button button-medium button-calm" style="height: 90%;">&nbsp&nbsp&nbsp&nbspEdit Profile&nbsp&nbsp&nbsp&nbsp</button>
-      </div>
-      </div>
+    <div ng-hide="user.username">
+      <button class="button button-block button-positive" ng-click="login('facebook')">Login with Facebook</button>
     </div>
 
-  <div class="button-bar" ng-show="user.username">
-    <a class="button ion-chatbox-working"></a>
-    <a class="button ion-person-stalker"></a>
-    <a class="button ion-cube"></a>
-    <a class="button ion-ios7-unlocked"></a>
-</div>
+    <div  ng-show="user.username">
+      <div class="card">
+        <div>
+          <img class="circle" style="float:left; margin: 5px" src="{{user.pic}}">
+          <div style="text-align:center; padding-top: 20px; padding-bottom: 20px; padding-left: 20px">
+          <h3>{{user.username}}</h3>
+          <button class="button button-medium button-calm" style="height: 90%;">&nbsp&nbsp&nbsp&nbspEdit Profile&nbsp&nbsp&nbsp&nbsp</button>
+        </div>
+        </div>
+      </div>
 
-  <div class="list">
-    <div ng-repeat="discovered_stache in staches_discovered">
-      <a class="item item-thumbnail-left" ng-click="">
-        <h2>{{discovered_stache.author}}</h2>
-        <p>{{discovered_stache.title}}</p>
-        <p>{{discovered_stache.date | timeConversion}}</p>
-        <span class="item-note ion-ios7-pricetag" ng-show="discovered_stache.tags.length">
-        <span ng-repeat="tag in discovered_stache.tags">
-          {{tag}}&nbsp
-        </span>
-        </span>
-      </a>
+      <div class="button-bar" ng-show="user.username">
+        <a ng-class="{'active': isActive1}" ng-init="isActive = false"
+        ng-click="isActive1 = !isActive1"  ui-sref="tab.profile.created" class= "button ion-chat-working">&nbsp&nbspCreated</a>
+
+        <a ng-class="{'active': isActive}" ng-init="isActive = false"
+        ng-click="isActive = !isActive" ui-sref="tab.profile.discovered" class= "button ion-chat-working">&nbsp&nbspDiscovered</a>
+      </div>
+
+      <div ui-view></div>
     </div>
-  </div>
-
-
-  <button class="button button-block button-assertive" ng-click="logout()" ng-show="user.username">Logout</button>
-</div>
-  </div>
-</ion-content>
+    <button class="button button-block button-assertive" ng-click="logout()" ng-show="user.username">Logout</button>
+  </ion-content>
 </ion-view>
