@@ -83,6 +83,18 @@ exports.addDiscovered_By = function(discovery, next){
   next();
 };
 
+exports.getStachesById = function(stacheIdArray, next){
+  Stache.find(
+              { _id: { $in: stacheIdArray } }, //need to convert to ObjectIds via map?
+              function(err, staches){
+                if(err) throw err;
+                staches = JSON.stringify(staches[0]);
+                console.log('retrieved staches', staches);
+                next(staches);
+              }
+             );
+};
+
 // Get signature for client side direct upload to aws s3
 exports.sign_s3 = function(req, res) {
   var object_name = req.query.s3_object_name;
