@@ -7,7 +7,7 @@ angular.module('specter.tab.profile.controller', [])
       $scope.staches_discovered = staches.staches_discovered;
       $scope.staches_created = staches.staches_created;
       console.log($scope.staches_discovered, "discovered")
-      console.log($scope.staches_created, "discovered")
+      console.log($scope.staches_created, "created")
     })
   });
 });
