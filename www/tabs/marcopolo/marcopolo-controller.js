@@ -1,5 +1,5 @@
 (function(){
-  var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout) {
+    var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout, $ionicModal, $state) {
     var self = this;
     self.location = {long: "", lat: ""};
     self.location.long = location.coords.longitude;
@@ -69,6 +69,27 @@
       self.heatLayer = new HeatLayer(layer);
       // $scope.heatLayer = new heatmapService.createHeatLayer(layer);
     };
+      
+    self.goToProfileTab = function() {
+      $state.go('tab.profile');
+    };
+    $ionicModal.fromTemplateUrl('found-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
+
+    this.openFoundModal = function() {
+      $scope.modal.show();
+    };
+
+    this.closeModal = function() {
+      $scope.modal.hide();
+    };
 
     var watch = $cordovaGeolocation.watchPosition({
       frequency: 1000
@@ -88,6 +109,8 @@
         // If user is within 3 meters, reveal stache
         if (self.distance < 3) {
           console.log("You found the stache!");
+          $cordovaGeolocation.clearWatch(watch);
+          self.openFoundModal();
 
           // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
         } else if (!visited) {
@@ -107,8 +130,8 @@
       console.log('watch on pointArray triggered');
       self.heatLayer.setData(pointArray);
     }, true);
-  }
-  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout']
-
-  angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl)
+  };
+  
+  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout', '$ionicModal', '$state'];
+  angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl);
 })();

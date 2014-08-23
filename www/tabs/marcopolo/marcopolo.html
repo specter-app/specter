@@ -19,3 +19,12 @@
   </ion-footer-bar>
   <h6>{{marcopolo.distance | distance}}</h6>
 </ion-view>
+
+<script id="found-modal.html" type="text/ng-template">
+  <ion-modal-view>
+  you found it, champ
+  <button class="button button-large button-full button-assertive" ng-click="marcopolo.goToProfileTab()">
+  cool...
+  </button>
+  </ion-modal-view>
+</script>
