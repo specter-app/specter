@@ -192,7 +192,7 @@
 
     };
   createCtrl.$inject = [ '$ionicActionSheet', '$ionicPopup', 'Restangular', 'cameraService',
-    'stacheService', '$cordovaCapture', '$cordovaGeolocation', 'geoService', "$ionicModal",'$scope', '$state'];
+    'stacheService', '$cordovaCapture', '$cordovaGeolocation', 'geoService', "$ionicModal",'$scope', 'ngProgress', '$state'];
   angular.module('specter.tab.create.controller', ['restangular'])
     .controller('createCtrl', createCtrl);
 })();
