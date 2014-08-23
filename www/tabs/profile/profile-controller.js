@@ -9,7 +9,7 @@ angular.module('specter.tab.profile.controller', [])
     })
   });
   $rootScope.$on('$stateChangeStart', function (event, next) {
-    if ($state.current.url === '/discovered' || $state.current.url === '/created'){
+    if ($state.current.url === '/discovered' || $state.current.url === "/created"){
       stacheService.getUserStaches(UserService.uid).then(function(staches){
         $scope.staches_discovered = staches.staches_discovered;
         $scope.staches_created = staches.staches_created;
