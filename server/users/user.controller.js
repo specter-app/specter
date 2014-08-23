@@ -1,4 +1,5 @@
 var User = require('./user.model.js');
+var stacheController = require('../staches/stache.controller.js');
 
 exports.login = function(req, res){
   User.findOne({fbid: req.body.fbid}, function(err, foundUser){
@@ -16,13 +17,47 @@ exports.login = function(req, res){
       user.save(function(err, savedUser){
         if(err) throw err;
         console.log('savedUser', savedUser.fbid);
-        res.status(201).json(savedUser);
+        mapUserStacheIdsToStaches(savedUser, function(mappedUser){
+          res.status(201).json(mappedUser);
+        });
       });
     }else{
       console.log('foundUser', foundUser.fbid);
-      res.status(200).json(foundUser);
+      mapUserStacheIdsToStaches(foundUser, function(mappedUser){
+        res.status(200).json(mappedUser);
+      });
     }
   });
+};
+
+//Replace all user staches_created and staches_discovered ids with actual staches
+var mapUserStacheIdsToStaches = function(user, next){
+  console.log('pre-mapped user', user);
+
+  if(user.staches_created.length > 0){
+    stacheController.getStachesById(user.staches_created, function(staches){
+      user.staches_created = staches;
+      if(user.staches_discovered.length > 0){
+        stacheController.getStachesById(user.staches_discovered, function(staches){
+          user.staches_discovered = staches;
+          console.log('mappedUser', user);
+          next(user);
+        });
+      }else{
+        console.log('mappedUser', user);
+        next(user);
+      }
+    });
+  }else if(user.staches_discovered.length > 0){
+    stacheController.getStachesById(user.staches_discovered, function(staches){
+      user.staches_discovered = staches;
+      console.log('mappedUser', user);
+      next(user);
+    });
+  }else{
+    console.log('mappedUser', user);
+    next(user);
+  }
 };
 
 exports.addStaches_Created = function(stache, next){
@@ -50,7 +85,9 @@ exports.addStaches_Discovered = function(discovery, next){
 exports.getOne = function(req, res){
   User.find({ fbid: req.params.fbid }, function(err, docs){
     if(err) throw err;
-    console.log('getOne DOCS', docs);
-    res.status(200).json(docs[0]);
+    var user = docs[0];
+    mapUserStacheIdsToStaches(user, function(mappedUser){
+      res.status(200).json(mappedUser);
+    });
   });
 };
