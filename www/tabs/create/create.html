@@ -52,7 +52,7 @@
           <input type="hidden" id="avatar_url" name="avatar_url" value="./img/ghost.jpg"/ ng-model="create.data.url">
       </form>
     </div>
-      <button class="button button-large button-block button-assertive" ng-click="create.s3Upload()">
+      <button class="button button-large button-block button-assertive" ng-click="create.s3Upload(); create.saveStache(); create.openCreatedModal()">
       Stache it!
       </button>
   </ion-content>
@@ -69,5 +69,14 @@
     <button class="button button-large button-full button-assertive" ng-click="create.closeModal()">
     Save
     </button>
+  </ion-modal-view>
+</script>
+
+<script id="created-modal.html" type="text/ng-template">
+  <ion-modal-view>
+  you made it. youre the best.
+  <button class="button button-large button-full button-assertive" ng-click="create.goToProfile()">
+  Back to profile
+  </button>
   </ion-modal-view>
 </script>
