@@ -1,6 +1,6 @@
 (function(){
     var createCtrl = function($ionicActionSheet, $ionicPopup, Restangular, cameraService,
-      stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope, usSpinnerService) {
+      stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope, usSpinnerService, $state, $timeout) {
       var self = this;
       this.data = {
         currentTags: {}
@@ -86,6 +86,8 @@
           lat: self.location.lat,
           clue: self.data.clue
         });
+
+
       };
 
       this.takePicture = function() {
@@ -141,6 +143,9 @@
               preview_elem.innerHTML = 'Try again!';
           }
         });
+        $timeout(function(){
+          $state.go('tab.profile.created')
+        },2000);
       };
 
       this.randomString = function(length, chars) {
@@ -197,7 +202,7 @@
 
     };
   createCtrl.$inject = [ '$ionicActionSheet', '$ionicPopup', 'Restangular', 'cameraService',
-    'stacheService', '$cordovaCapture', '$cordovaGeolocation', 'geoService', '$ionicModal','$scope', 'usSpinnerService'];
+    'stacheService', '$cordovaCapture', '$cordovaGeolocation', 'geoService', '$ionicModal','$scope', 'usSpinnerService', '$state', '$timeout'];
   angular.module('specter.tab.create.controller', [])
     .controller('createCtrl', createCtrl);
 })();
