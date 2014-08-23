@@ -6,17 +6,17 @@ var Schema = mongoose.Schema;
 // Stache collection
 // ToDo: validation middleware
 var StacheSchema = new Schema({
-    title: {type: String, required: true},
-    date: {type: Date, default: Date.now},
-    created_by: String, //user_id
-    discovered_by: {type: [String], default: []}, //user_id
-    lon: {type: Number, required: true},
-    lat: {type: Number, required: true},
-    loc: {type: [Number], index: '2dsphere', required: true},
-    content: {type: String, required: false},
+    title: { type: String, required: true },
+    date: { type: Date, default: Date.now },
+    created_by: { type: String, ref: 'User', required: true }, //user fbid
+    discovered_by: [{ type: String, ref: 'User' }], //possibly more than one user fbid
+    lon: { type: Number, required: true },
+    lat: { type: Number, required: true },
+    loc: { type: [Number], index: '2dsphere', required: true },
+    content: { type: String, required: false },
     aws_url: String,
     tags: [String],
-    locked: {type: Boolean, default: false},
+    locked: { type: Boolean, default: false },
     clue: String,
     password: String
 });

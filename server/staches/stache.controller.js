@@ -10,7 +10,7 @@ var S3_BUCKET = process.env.S3_BUCKET;
 exports.save = function(req, res) {
   var stache_data = {
     title: req.body.title,
-    created_by: req.body.created_by,
+    created_by: String(req.body.created_by),
     lon: req.body.lon,
     lat: req.body.lat,
     loc: [req.body.lon, req.body.lat],
@@ -25,7 +25,7 @@ exports.save = function(req, res) {
     if (err) throw err;
     userController.addStaches_Created(savedStache, function(){
       res.status(201).json(savedStache);
-    })
+    });
   });
 };
 
@@ -74,23 +74,13 @@ exports.getNearby = function(req, res) {
 exports.addDiscovered_By = function(discovery, next){
   Stache.update(
                 { _id: discovery.stache_id },
-                { $addToSet: { discovered_by: discovery.user_fbid } },
+                { $addToSet: { discovered_by: discovery.user_fbid } }, //refactor to Mongoose
                 function(err, count){
                   if(err) throw err;
                   next();
                 }
                );
   next();
-};
-
-exports.getStachesById = function(stacheIdArray, next){
-  Stache.find(
-              { _id: { $in: stacheIdArray } }, //need to convert to ObjectIds via map?
-              function(err, staches){
-                if(err) throw err;
-                next(staches);
-              }
-             );
 };
 
 // Get signature for client side direct upload to aws s3
