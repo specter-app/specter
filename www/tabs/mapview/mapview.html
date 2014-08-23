@@ -2,16 +2,15 @@
 <div class="bar bar-header bar-light">
 </div>
   <ion-content>
-    <div class="list">
+    <div style="margin-top:20px" class="list">
       <div ng-repeat="stache in mapview.staches">
-        <a class="item item-thumbnail-left" ng-click="mapview.redirect(stache._id)">
-          <h2>{{stache.author}}</h2>
-          <p>{{stache.title}}</p>
-          <p>{{stache.date | timeConversion}}</p>
-          <span class="item-note ion-ios7-pricetag" ng-show="stache.tags.length">
-          <span ng-repeat="tag in stache.tags">
-            {{tag}}&nbsp
-          </span>
+        <a class="item item-stable" ng-click="mapview.redirect(stache._id)">
+          <p style="font-size:14pt;font-weight:bold;">{{stache.title}}</p>
+          <p>Created {{stache.date | timeConversion}}</p>
+          <span style="float:left" class="item-note ion-ios7-pricetag" ng-show="stache.tags.length">
+            <span ng-repeat="tag in stache.tags">
+              {{tag}}&nbsp
+            </span>
           </span>
         </a>
       </div>

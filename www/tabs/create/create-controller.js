@@ -113,6 +113,7 @@
         var status_elem = document.getElementById("status");
         var url_elem = document.getElementById("avatar_url");
         var preview_elem = document.getElementById("preview");
+        var save_elem = document.getElementById("save");
         var rString = this.randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
         var s3upload = new S3Upload({
@@ -131,12 +132,13 @@
               self.data.aws_url = public_url;
               self.saveStache();
               usSpinnerService.stop('spinner-1');
+              save_elem.innerHTML = "Stache saved!";
               preview_elem.innerHTML = '<img src="' + public_url + '" style="height:45px;border: #455059 4px solid;"/>';
           },
           onError: function(status) {
               status_elem.innerHTML = 'Upload error: ' + status;
               usSpinnerService.stop('spinner-1');
-              preview_elem.innerHTML = 'Could not upload photo.';
+              preview_elem.innerHTML = 'Try again!';
           }
         });
       };

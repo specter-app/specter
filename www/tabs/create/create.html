@@ -2,7 +2,7 @@
 <div class="bar bar-header bar-light">
 </div>
   <ion-content>
-    <div class="list list-inset">
+    <div style="margin-top:30px" class="list list-inset">
       <!-- Name of stache -->
       <label class="item item-input item-stacked-label">
         <span class="input-label">Name</span>
@@ -44,17 +44,17 @@
       </ion-checkbox>
       
       <!-- File upload -->
-      <p id="status" ng-show=true></p>
+      <p id="status" ng-show=false></p>
       <form method="POST" action="">
           <input type="hidden" id="avatar_url" name="avatar_url" value="./img/ghost.jpg"/ ng-model="create.data.url">
       </form>
     </div>
 
     <!-- Spinner -->
-    <span us-spinner="{radius:30, width:3, length: 8, speed: 15, top: 80%, left: 80%}" spinner-key="spinner-1"></span>
+    <span us-spinner="{radius:30, width:3, length: 8, speed:2}" spinner-key="spinner-1"></span>
 
     <!-- Save Button -->
-    <button class="button button-large button-block button-assertive" ng-click="create.s3Upload()">
+    <button class="button button-large button-block button-assertive" id="save" ng-click="create.s3Upload()">
     Stache it!
     </button>
 
