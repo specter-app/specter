@@ -29,7 +29,7 @@
 
 
     this.getUserStaches = function(facebookid){
-      return Restangular.one('users', facebookid).getList().then(function(staches){
+      return Restangular.one('users/login', facebookid).get().then(function(staches){
         return staches;
       }, function(err){
         return err;

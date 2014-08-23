@@ -2,8 +2,6 @@
 <div class="bar bar-header bar-light">
 </div>
   <ion-content>
-    <img src="{{user.thirdPartyUserData.picture.data.url}}" ng-show="user">
-    <img src="{{user.thirdPartyUserData.picture.data.url}}" ng-show="user">
     <div class="list">
       <div ng-repeat="stache in mapview.staches">
         <a class="item item-thumbnail-left" ng-click="mapview.redirect(stache._id)">
