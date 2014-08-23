@@ -23,9 +23,9 @@
 /*.bar {
   height: 20px !important;
 }*/
-.bar-header {
+/*.bar-header {
   height: 20px !important;
-}
+}*/
 
 .button-block {
   width: 95% !important;
@@ -36,4 +36,3 @@
 .circle {
   border-radius: 50%;
 }
-

@@ -187,10 +187,7 @@
         $scope.createdModal.hide();
       };
 
-      this.goToProfile = function() {
-        self.closeModal();
-        $state.go('tab.profile');
-      };
+
 
       //call get location on click of the create button
       geoService.getLocation().then(function(position) {

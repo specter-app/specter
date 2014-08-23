@@ -1,7 +1,8 @@
-<ion-view>
-<div class="bar bar-header bar-light">
-</div>
-  <ion-content>
+<ion-header-bar align-title="left" class="bar-assertive">
+  <h1 class="title">Title!</h1>
+</ion-header-bar>
+
+<ion-content>
     <google-map
       center="map.center" zoom="map.zoom"
       draggable="true"
@@ -14,15 +15,14 @@
       options="map.options">
       <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="marcopolo.heatLayerCallback"></layer>
     </google-map>
-  </ion-content>
+</ion-content>
   <ion-footer-bar style="background-color:{{ marcopolo.proximityColor }}">
   </ion-footer-bar>
   <!-- <h6>{{marcopolo.distance | distance}}</h6> -->
-</ion-view>
+
 
 <script id="found-modal.html" type="text/ng-template">
   <ion-modal-view>
-    <div style="margin-top:40px">
         <div style="float:right" class="button button-clear" ng-click="modal.hide()">
           <span class="icon ion-close"></span>
         </div>
