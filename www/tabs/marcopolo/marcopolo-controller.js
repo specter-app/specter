@@ -69,9 +69,9 @@
       self.heatLayer = new HeatLayer(layer);
       // $scope.heatLayer = new heatmapService.createHeatLayer(layer);
     };
-      
+
     self.goToProfileTab = function() {
-      $state.go('tab.profile');
+      $state.go('tab.profile.discovered');
     };
     $ionicModal.fromTemplateUrl('found-modal.html', {
       scope: $scope,
@@ -131,7 +131,7 @@
       self.heatLayer.setData(pointArray);
     }, true);
   };
-  
+
   marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout', '$ionicModal', '$state'];
   angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl);
 })();
