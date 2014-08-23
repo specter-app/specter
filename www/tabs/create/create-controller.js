@@ -1,7 +1,6 @@
 (function(){
     var createCtrl = function($ionicActionSheet, $ionicPopup, Restangular, cameraService,
-      stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope, ngProgress, $state) {
-      var progressBar = ngProgress;
+      stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope, usSpinnerService) {
       var self = this;
       this.data = {
         currentTags: {}
@@ -121,8 +120,9 @@
           file_dom_selector: 'files',
           s3_sign_put_url: 'http://specter.azurewebsites.net/staches/sign_s3/',
           onProgress: function(percent, message) {
+              preview_elem.innerHTML = '';
               status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
-              // progressBar.set(percent);
+              usSpinnerService.spin('spinner-1');
           },
           onFinishS3Put: function(public_url) {
               status_elem.innerHTML = 'Upload completed. Uploaded to: ' + public_url;
@@ -130,10 +130,13 @@
               // Store this url in mongodb
               self.data.aws_url = public_url;
               self.saveStache();
+              usSpinnerService.stop('spinner-1');
               preview_elem.innerHTML = '<img src="' + public_url + '" style="height:45px;border: #455059 4px solid;"/>';
           },
           onError: function(status) {
               status_elem.innerHTML = 'Upload error: ' + status;
+              usSpinnerService.stop('spinner-1');
+              preview_elem.innerHTML = 'Could not upload photo.';
           }
         });
       };
@@ -192,7 +195,7 @@
 
     };
   createCtrl.$inject = [ '$ionicActionSheet', '$ionicPopup', 'Restangular', 'cameraService',
-    'stacheService', '$cordovaCapture', '$cordovaGeolocation', 'geoService', "$ionicModal",'$scope', 'ngProgress', '$state'];
-  angular.module('specter.tab.create.controller', ['restangular'])
+    'stacheService', '$cordovaCapture', '$cordovaGeolocation', 'geoService', '$ionicModal','$scope', 'usSpinnerService'];
+  angular.module('specter.tab.create.controller', ['restangular', 'angularSpinner'])
     .controller('createCtrl', createCtrl);
 })();

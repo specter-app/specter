@@ -21,8 +21,7 @@
         <i class="icon ion-ios7-camera" style="position:absolute;margin-right:100px"></i>
         <div style="position:absolute;margin-top:10px">Picture</div>
         <div style="position:absolute;margin-left:150px;" ng-show=true id="preview">
-          <div id="ngProgress" style="height: 2px; color: rgb(178, 34, 34); width: 20%; opacity: 1; background-color: rgb(178, 34, 34);"></div>
-          <img src="./img/ghost.jpg" style="height:45px;border: #455059 4px solid;"/>
+          <!-- <img src="./img/ghost.jpg" style="height:45px;border: #455059 4px solid;"/> -->
         </div>
         <input type="file" name="file" id="files" style="height:100%;width:100%;border-style:solid;opacity:0; z-index:1;"/>
       </div>
@@ -46,15 +45,19 @@
       
       <!-- File upload -->
       <p id="status" ng-show=true></p>
-      <!-- <div style="width:100px;" ng-show=true id="preview"><img src="./img/ghost.jpg" style="width:100px;" /></div> -->
-
       <form method="POST" action="">
           <input type="hidden" id="avatar_url" name="avatar_url" value="./img/ghost.jpg"/ ng-model="create.data.url">
       </form>
     </div>
-      <button class="button button-large button-block button-assertive" ng-click="create.s3Upload(); create.saveStache(); create.openCreatedModal()">
-      Stache it!
-      </button>
+
+    <!-- Spinner -->
+    <span us-spinner="{radius:30, width:3, length: 8, speed: 15, top: 80%, left: 80%}" spinner-key="spinner-1"></span>
+
+    <!-- Save Button -->
+    <button class="button button-large button-block button-assertive" ng-click="create.s3Upload()">
+    Stache it!
+    </button>
+
   </ion-content>
 </ion-view>
 
