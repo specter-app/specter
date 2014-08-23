@@ -1,6 +1,7 @@
 (function(){
     var createCtrl = function($ionicActionSheet, $ionicPopup, Restangular, cameraService,
-      stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope) {
+      stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope, ngProgress) {
+      var progressBar = ngProgress;
       var self = this;
       this.data = {
         currentTags: {}
@@ -121,6 +122,7 @@
           s3_sign_put_url: 'http://specter.azurewebsites.net/staches/sign_s3/',
           onProgress: function(percent, message) {
               status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+              // progressBar.set(percent);
           },
           onFinishS3Put: function(public_url) {
               status_elem.innerHTML = 'Upload completed. Uploaded to: ' + public_url;
@@ -128,7 +130,7 @@
               // Store this url in mongodb
               self.data.aws_url = public_url;
               self.saveStache();
-              preview_elem.innerHTML = '<img src="' + public_url + '" style="width:100px;"/>';
+              preview_elem.innerHTML = '<img src="' + public_url + '" style="height:45px;border: #455059 4px solid;"/>';
           },
           onError: function(status) {
               status_elem.innerHTML = 'Upload error: ' + status;
