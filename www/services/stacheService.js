@@ -17,6 +17,7 @@
         lon: params.lon,
         lat: params.lat,
         content: params.content,
+        aws_url: params.aws_url,
         locked: false,
         clue: params.clue,
         password: null,
@@ -26,7 +27,6 @@
       var savedStache = staches.post(newStache);
       return savedStache;
     };
-
 
     this.getUserStaches = function(facebookid){
       return Restangular.one('users/login', facebookid).get().then(function(staches){

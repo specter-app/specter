@@ -15,6 +15,7 @@ exports.save = function(req, res) {
     lat: req.body.lat,
     loc: [req.body.lon, req.body.lat],
     content: req.body.content,
+    aws_url: req.body.aws_url,
     tags: req.body.tags,
     locked: req.body.locked,
     clue: req.body.clue,
