@@ -1,6 +1,7 @@
 (function(){
     var createCtrl = function($ionicActionSheet, $ionicPopup, Restangular, cameraService,
-      stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope) {
+      stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope, ngProgress) {
+      var progressBar = ngProgress;
       var self = this;
       this.data = {
         currentTags: {}
@@ -76,18 +77,18 @@
         });
       };
 
-
       this.saveStache = function() {
-        this.s3Upload();
         stacheService.saveStache({
           title: self.data.titleText,
           content: self.data.textContent,
+          aws_url: self.data.aws_url,
           tags: Object.keys(self.data.currentTags),
           lon: self.location.long,
           lat: self.location.lat,
           clue: self.data.clue
         });
       };
+
       this.takePicture = function() {
         cameraService.takePicture().then(function(imageData) {
           self.imageData = imageData;
@@ -121,12 +122,15 @@
           s3_sign_put_url: 'http://specter.azurewebsites.net/staches/sign_s3/',
           onProgress: function(percent, message) {
               status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+              // progressBar.set(percent);
           },
           onFinishS3Put: function(public_url) {
               status_elem.innerHTML = 'Upload completed. Uploaded to: ' + public_url;
               url_elem.value = public_url;
               // Store this url in mongodb
-              preview_elem.innerHTML = '<img src="' + public_url + '" style="width:100px;"/>';
+              self.data.aws_url = public_url;
+              self.saveStache();
+              preview_elem.innerHTML = '<img src="' + public_url + '" style="height:45px;border: #455059 4px solid;"/>';
           },
           onError: function(status) {
               status_elem.innerHTML = 'Upload error: ' + status;
