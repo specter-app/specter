@@ -25,6 +25,22 @@
     <a class="button ion-ios7-unlocked"></a>
 </div>
 
+  <div class="list">
+    <div ng-repeat="discovered_stache in staches_discovered">
+      <a class="item item-thumbnail-left" ng-click="">
+        <h2>{{discovered_stache.author}}</h2>
+        <p>{{discovered_stache.title}}</p>
+        <p>{{discovered_stache.date | timeConversion}}</p>
+        <span class="item-note ion-ios7-pricetag" ng-show="discovered_stache.tags.length">
+        <span ng-repeat="tag in discovered_stache.tags">
+          {{tag}}&nbsp
+        </span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+
   <button class="button button-block button-assertive" ng-click="logout()" ng-show="user.username">Logout</button>
 </div>
   </div>
