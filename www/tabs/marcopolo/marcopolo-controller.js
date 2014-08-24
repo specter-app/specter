@@ -118,6 +118,7 @@
 
           // Set color of proximity indicator bar (below map)
           self.proximityColor = heatmapService.color(self.distance);
+          self.barStyle = {background: String(self.proximityColor)};
 
           // Add current location to heatmap
           heatmapService.addPoint(self.id, self.location.lat, self.location.long, self.distance);

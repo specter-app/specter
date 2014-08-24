@@ -15,9 +15,8 @@
       options="map.options">
       <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="marcopolo.heatLayerCallback"></layer>
     </google-map>
-</ion-content>
-  <ion-footer-bar style="background-color:{{ marcopolo.proximityColor }}">
-  </ion-footer-bar>
+    <div id="proximityColorBar" ng-style="marcopolo.barStyle"></div>
+  </ion-content>
   <!-- <h6>{{marcopolo.distance | distance}}</h6> -->
 
 
