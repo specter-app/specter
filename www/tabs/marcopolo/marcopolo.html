@@ -1,5 +1,5 @@
-<ion-header-bar align-title="left" class="bar-assertive">
-  <h1 class="title">Title!</h1>
+<ion-header-bar align-title="center" class="bar-assertive">
+  <h1 class="title">Discover Stache</h1>
 </ion-header-bar>
 
 <ion-content>
@@ -15,9 +15,8 @@
       options="map.options">
       <layer namespace="visualization" type="HeatmapLayer" show=true onCreated="marcopolo.heatLayerCallback"></layer>
     </google-map>
-</ion-content>
-  <ion-footer-bar style="background-color:{{ marcopolo.proximityColor }}">
-  </ion-footer-bar>
+    <div id="proximityColorBar" ng-style="marcopolo.barStyle"></div>
+  </ion-content>
   <!-- <h6>{{marcopolo.distance | distance}}</h6> -->
 
 
