@@ -44,3 +44,23 @@
     transition: background 1s linear 0.1s;
 }
 
+.bar.bar-assertive {
+  border-color: #E05151!important;
+  background-color: #E05151!important;
+}
+
+.button.button-assertive {
+  border-color: #E05151!important;
+  background-color: #E05151!important;
+}
+
+.button.button-positive {
+  border-color: #E05151!important;
+  background-color: #E05151!important;
+}
+
+
+.item.item-calm {
+  border-color: #121D2B!important;
+  background-color: #121D2B!important;
+}

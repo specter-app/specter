@@ -8,6 +8,7 @@
 
     stacheService.getOne(self.id).then(function(stache){
         self.currentStache = stache;
+        $scope.currentStache = stache;
         console.log(self.currentStache);
         self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
       }, function(err){
