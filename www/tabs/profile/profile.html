@@ -2,7 +2,12 @@
   <h1 class="title">Profile</h1>
 </ion-header-bar>
   <ion-content>
-    <div style="margin-top:250px" ng-hide="user.username">
+    <div ng-hide="user.username">
+      <center>
+        <img src="./img/specter-name.png" style="height:65px; margin-top: 70px;"/>
+        <br>
+        <img src="./img/specter-ghost.png" style="height:240px; margin-top: 30px;"/>
+      </center>
       <button class="button button-block button-positive" ng-click="login('facebook')">Login with Facebook</button>
     </div>
 
