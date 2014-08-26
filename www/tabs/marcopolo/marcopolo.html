@@ -21,16 +21,18 @@
 
 
 <script id="found-modal.html" type="text/ng-template">
-  <ion-modal-view style="margin-top:30px">
+  <ion-modal-view style="margin-top:30px;">
         <div style="float:right;" class="button button-clear" ng-click="modal.hide()">
           <span class="icon ion-close"></span>
         </div>
-        <center><p style="font-size:14pt;font-weight:bold;">You discovered the stache!</p></center>
+        <center><p style="font-size:14pt;font-weight:bold; margin-top:30px; text-align: center;">You discovered the stache!</p></center>
         <center ng-show=true>
-          <img src="./img/ghost.jpg" style="height:100px;border:#455059 4px solid;"/>
-        </cente>
+          <img src="./img/ghost-1600.png" style="height:120px; margin-top: 30px;"/>
+          <h3>{{currentStache.title}}</h3>
+          <h4>{{currentStache.content}}</h4>
+        </center>
     </div>
-      <button class="button button-large button-full button-assertive" ng-click="marcopolo.goToProfileTab()">
+      <button class="button button-large button-block button-assertive" ng-click="marcopolo.goToProfileTab()">
         My Staches
       </button>
   </ion-modal-view>
