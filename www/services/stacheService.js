@@ -79,6 +79,9 @@
               usSpinnerService.stop('spinner-1');
               save_elem.innerHTML = "Stache saved!";
               preview_elem.innerHTML = '<img src="' + public_url + '" style="height:45px;border: #455059 4px solid;"/>';
+              $timeout(function(){
+                $state.go('tab.profile.created');
+              }, 3000);
           },
           onError: function(status) {
               status_elem.innerHTML = 'Upload error: ' + status;
@@ -86,9 +89,9 @@
               preview_elem.innerHTML = 'Try again!';
           }
         });
-        $timeout(function(){
-          $state.go('tab.profile.created');
-        }, 3000);
+        // $timeout(function(){
+        //   $state.go('tab.profile.created');
+        // }, 3000);
       };
 
   };
