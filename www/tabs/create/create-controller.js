@@ -1,15 +1,14 @@
 (function(){
-    var createCtrl = function($ionicActionSheet, $ionicPopup, Restangular, cameraService,
-      stacheService, $cordovaCapture, $cordovaGeolocation, geoService, $ionicModal, $scope, usSpinnerService, $state, $timeout) {
+    var createCtrl = function($ionicActionSheet, $ionicPopup, cameraService,
+      stacheService, $cordovaCapture, $ionicModal, $scope, usSpinnerService, $state, $timeout, location) {
       var self = this;
-      this.data = {
+      self.data = {
         currentTags: {}
       };
-      this.location = {
-        long: "",
-        lat: ""
+      self.location = {
+        long: location.coords.longitude,
+        lat: location.coords.latitude
       };
-
       this.show = function() {
         var hideSheet = $ionicActionSheet.show({
           buttons: [{
@@ -145,7 +144,7 @@
         });
         $timeout(function(){
           $state.go('tab.profile.created')
-        },2000);
+        }, 3000);
       };
 
       this.randomString = function(length, chars) {
@@ -187,19 +186,9 @@
         $scope.createdModal.hide();
       };
 
-
-
-      //call get location on click of the create button
-      geoService.getLocation().then(function(position) {
-        self.location.long = position.coords.longitude;
-        self.location.lat = position.coords.latitude;
-      }, function(err) {
-        self.location = err;
-      });
-
     };
-  createCtrl.$inject = [ '$ionicActionSheet', '$ionicPopup', 'Restangular', 'cameraService',
-    'stacheService', '$cordovaCapture', '$cordovaGeolocation', 'geoService', '$ionicModal','$scope', 'usSpinnerService', '$state', '$timeout'];
+  createCtrl.$inject = [ '$ionicActionSheet', '$ionicPopup', 'cameraService',
+    'stacheService', '$cordovaCapture', '$ionicModal','$scope', 'usSpinnerService', '$state', '$timeout', 'location'];
   angular.module('specter.tab.create.controller', [])
     .controller('createCtrl', createCtrl);
 })();
