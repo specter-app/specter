@@ -4,14 +4,17 @@
 </div>
   <ion-content>
       <div ng-repeat="stache in mapview.staches">
-        <a class="item item-stable" ng-click="mapview.redirect(stache._id)">
-          <p style="font-size:14pt;font-weight:bold;">{{stache.title}}</p>
-          <p>Created {{stache.date | timeConversion}}</p>
-          <span style="float:left" class="item-note ion-ios7-pricetag" ng-show="stache.tags.length">
+          <a class="item item-stable" ng-click="mapview.redirect(stache._id)">
+            <div style="float: left;">
+              <p style="font-size:14pt;font-weight:bold;">{{stache.title}}</p>
+              <p>Created {{stache.date | timeConversion}}</p>
+            </div>
+            <span style="float:right" class="item-note ion-ios7-pricetag" ng-show="stache.tags.length">
             <span ng-repeat="tag in stache.tags">
               {{tag}}&nbsp
             </span>
           </span>
+      </div>
         </a>
       </div>
     </div>
