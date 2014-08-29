@@ -2,7 +2,6 @@ angular.module('specter.tab', [
   'specter.tab.marcopolo',
   'specter.tab.create',
   'specter.tab.profile',
-  'specter.tab.setting',
   'specter.tab.mapview'
   ]).config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
