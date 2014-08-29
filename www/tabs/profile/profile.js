@@ -16,12 +16,9 @@ angular.module('specter.tab.profile', ['specter.tab.profile.controller'])
     .state('tab.profile.discovered', {
       url: "/discovered",
       templateUrl: "tabs/profile/profile-discovered.html"
-      // controller: 'profileCtrl'
     })
     .state('tab.profile.created', {
       url: "/created",
-      // templateUrl: "tabs/profile/profile-created.html",
-      // controller: 'profileCtrl'
       templateUrl: "tabs/profile/profile-created.html"
 
     })
