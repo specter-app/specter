@@ -1,5 +1,5 @@
 (function(){
-    var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout, $ionicModal, $state) {
+    var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, stacheService, $timeout, $ionicModal, $state) {
     var self = this;
     self.location = {
       long: location.coords.longitude,
@@ -10,7 +10,7 @@
     stacheService.getOne(self.id).then(function(stache){
         self.currentStache = stache;
         $scope.currentStache = stache;
-        self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
+        self.distance = geoService.calculateDistance(self.currentStache, self.location);
       }, function(err){
         return err;
       });
@@ -95,7 +95,7 @@
         self.location.long = position.coords.longitude;
         self.location.lat = position.coords.latitude;
         if (self.currentStache){
-          self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
+          self.distance = geoService.calculateDistance(self.currentStache, self.location);
         }
         var visited = heatmapService.contains(self.id, self.location.lat, self.location.long);
 
@@ -116,6 +116,6 @@
     }, true);
   };
 
-  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout', '$ionicModal', '$state'];
+  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', 'stacheService', '$timeout', '$ionicModal', '$state'];
   angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl);
 })();
