@@ -1,5 +1,5 @@
 (function(){
-  var mapviewCtrl = function(stacheService, geoService, location, $state) {
+  var mapviewCtrl = function(stacheService, location, $state) {
       var self = this;
       var params = {
         lat: location.coords.latitude,
@@ -14,6 +14,6 @@
         $state.go('tab.marcopolo');
       }
   };
-  mapviewCtrl.$inject = ['stacheService', 'geoService', 'location', '$state'];
+  mapviewCtrl.$inject = ['stacheService', 'location', '$state'];
   angular.module('specter.tab.mapview.controller', []).controller('mapviewCtrl', mapviewCtrl);
 })();
