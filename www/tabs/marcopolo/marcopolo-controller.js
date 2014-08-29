@@ -1,16 +1,16 @@
 (function(){
-    var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, $stateParams, stacheService, $rootScope, ionicPopup, $timeout, $ionicModal, $state) {
+    var marcopoloCtrl = function(heatmapService, geoService, $cordovaGeolocation, $scope, location, stacheService, $timeout, $ionicModal, $state) {
     var self = this;
-    self.location = {long: "", lat: ""};
-    self.location.long = location.coords.longitude;
-    self.location.lat = location.coords.latitude;
+    self.location = {
+      long: location.coords.longitude,
+      lat: location.coords.latitude
+    };
     self.id = stacheService.selectedStache;
 
     stacheService.getOne(self.id).then(function(stache){
         self.currentStache = stache;
         $scope.currentStache = stache;
-        console.log(self.currentStache);
-        self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
+        self.distance = geoService.calculateDistance(self.currentStache, self.location);
       }, function(err){
         return err;
       });
@@ -53,16 +53,7 @@
       // Get all data points for heatmap
       self.pointArray = heatmapService.getPoints(self.id);
       heatLayer.setData(self.pointArray);
-
       heatLayer.set('gradient', gradient);
-
-    //function changeRadius() {
-    //    heatmap.set('radius', heatmap.get('radius') ? null : 20);
-    //}
-    //
-    //function changeOpacity() {
-    //    heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-    //}
       return heatLayer;
     };
 
@@ -74,6 +65,7 @@
     self.goToProfileTab = function() {
       $state.go('tab.profile.discovered');
     };
+
     $ionicModal.fromTemplateUrl('found-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -103,37 +95,27 @@
         self.location.long = position.coords.longitude;
         self.location.lat = position.coords.latitude;
         if (self.currentStache){
-          self.distance = geoService.calculateDistance(self.currentStache.loc[0], self.currentStache.loc[1], self.location.long, self.location.lat);
+          self.distance = geoService.calculateDistance(self.currentStache, self.location);
         }
         var visited = heatmapService.contains(self.id, self.location.lat, self.location.long);
 
-        // If user is within 3 meters, reveal stache
         if (self.distance < 3) {
-          console.log("You found the stache!");
           $cordovaGeolocation.clearWatch(watch);
           self.openFoundModal();
-
-          // Route to mah' staches view, newest stache is highlighted and can be clicked on for viewing
         } else if (!visited) {
-          console.log("User has traveled, adding new location to heatmap.");
-
-          // Set color of proximity indicator bar (below map)
           self.proximityColor = heatmapService.color(self.distance);
           self.barStyle = {background: String(self.proximityColor)};
-
-          // Add current location to heatmap
           heatmapService.addPoint(self.id, self.location.lat, self.location.long, self.distance);
           self.pointArray = heatmapService.getPoints(self.id);
         }
     });
 
-    // Rerender heatmap whenever new data has been added
     $scope.$watch('marcopolo.pointArray', function (pointArray) {
       console.log('watch on pointArray triggered');
       self.heatLayer.setData(pointArray);
     }, true);
   };
 
-  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', '$stateParams', 'stacheService', '$rootScope', '$ionicPopup', '$timeout', '$ionicModal', '$state'];
+  marcopoloCtrl.$inject = ['heatmapService', 'geoService', '$cordovaGeolocation', '$scope', 'location', 'stacheService', '$timeout', '$ionicModal', '$state'];
   angular.module('specter.tab.marcopolo.controller', []).controller('marcopoloCtrl', marcopoloCtrl);
 })();

@@ -3,7 +3,7 @@
     <div ng-repeat="created_stache in staches_created">
        <a class="item item-thumbnail-left" href="#">
          <img src={{created_stache.aws_url}}>
-          <p>{{created_stache.title}}</p>
+          <p style="font-weight:bold;" >{{created_stache.title}}</p>
           <p>Created {{created_stache.date | timeConversion}}</p>
           <span style="float:left" class="item-note ion-ios7-pricetag" ng-show="stache.tags.length">
             <span ng-repeat="tag in created_stache.tags">

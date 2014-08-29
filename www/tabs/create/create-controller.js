@@ -122,13 +122,6 @@
         stacheService.s3Upload(newStache);
       };
 
-      $ionicModal.fromTemplateUrl('private-modal.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-      }).then(function(modal) {
-        $scope.privateModal = modal;
-      });
-
       $ionicModal.fromTemplateUrl('created-modal.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -136,22 +129,12 @@
           $scope.createdModal = modal;
       });
 
-      $scope.$on('$destroy', function() {
-        $scope.privateModal.remove();
-      });
 
       this.openCreatedModal = function() {
         $scope.createdModal.show();
       };
 
-      this.openPrivateModal = function() {
-        if(self.checked) {
-          $scope.privateModal.show();
-        }
-      };
-
       this.closeModal = function() {
-        $scope.privateModal.hide();
         $scope.createdModal.hide();
       };
 
