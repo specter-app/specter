@@ -1,6 +1,6 @@
 (function(){
     var createCtrl = function($ionicActionSheet, $ionicPopup, cameraService,
-      stacheService, $cordovaCapture, $ionicModal, $scope, usSpinnerService, $state, $timeout, location) {
+      stacheService, $cordovaCapture, $ionicModal, $scope, location) {
       var self = this;
       self.data = {
         currentTags: {}
@@ -110,47 +110,16 @@
       };
 
       this.s3Upload = function() {
-        // See status of upload (% complete, public url)
-        var status_elem = document.getElementById("status");
-        var url_elem = document.getElementById("avatar_url");
-        var preview_elem = document.getElementById("preview");
-        var save_elem = document.getElementById("save");
-        var rString = this.randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        var newStache = {
+          title: self.data.titleText,
+          content: self.data.textContent,
+          tags: Object.keys(self.data.currentTags),
+          lon: self.location.long,
+          lat: self.location.lat,
+          clue: self.data.clue
+        };
 
-        var s3upload = new S3Upload({
-          s3_object_name: rString,
-          file_dom_selector: 'files',
-          s3_sign_put_url: 'http://specter.azurewebsites.net/staches/sign_s3/',
-          onProgress: function(percent, message) {
-              preview_elem.innerHTML = '';
-              status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
-              usSpinnerService.spin('spinner-1');
-          },
-          onFinishS3Put: function(public_url) {
-              status_elem.innerHTML = 'Upload completed. Uploaded to: ' + public_url;
-              url_elem.value = public_url;
-              // Store this url in mongodb
-              self.data.aws_url = public_url;
-              self.saveStache();
-              usSpinnerService.stop('spinner-1');
-              save_elem.innerHTML = "Stache saved!";
-              preview_elem.innerHTML = '<img src="' + public_url + '" style="height:45px;border: #455059 4px solid;"/>';
-          },
-          onError: function(status) {
-              status_elem.innerHTML = 'Upload error: ' + status;
-              usSpinnerService.stop('spinner-1');
-              preview_elem.innerHTML = 'Try again!';
-          }
-        });
-        $timeout(function(){
-          $state.go('tab.profile.created')
-        }, 3000);
-      };
-
-      this.randomString = function(length, chars) {
-        var result = '';
-        for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
-        return result;
+        stacheService.s3Upload(newStache);
       };
 
       $ionicModal.fromTemplateUrl('private-modal.html', {
@@ -188,7 +157,7 @@
 
     };
   createCtrl.$inject = [ '$ionicActionSheet', '$ionicPopup', 'cameraService',
-    'stacheService', '$cordovaCapture', '$ionicModal','$scope', 'usSpinnerService', '$state', '$timeout', 'location'];
+    'stacheService', '$cordovaCapture', '$ionicModal','$scope', 'location'];
   angular.module('specter.tab.create.controller', [])
     .controller('createCtrl', createCtrl);
 })();
