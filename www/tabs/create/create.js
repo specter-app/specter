@@ -9,6 +9,11 @@ angular.module('specter.tab.create', ['specter.tab.create.controller'])
         controller: 'createCtrl as create'
       }
     },
+    resolve: {
+      location: function (geoService) {
+        return geoService.getLocation();
+      }
+    },
     data: {
       logInRequired: true
     }

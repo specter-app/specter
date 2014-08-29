@@ -1,14 +1,15 @@
 
   <div class="list" ui-view>
     <div ng-repeat="created_stache in staches_created">
-      <a class="item item-stable" ng-click="">
-          <p style="font-size:14pt;font-weight:bold;">{{created_stache.title}}</p>
+       <a class="item item-thumbnail-left" href="#">
+         <img src={{created_stache.aws_url}}>
+          <p>{{created_stache.title}}</p>
           <p>Created {{created_stache.date | timeConversion}}</p>
           <span style="float:left" class="item-note ion-ios7-pricetag" ng-show="stache.tags.length">
             <span ng-repeat="tag in created_stache.tags">
               {{tag}}&nbsp
-            </span>
-          </span>
-        </a>
+        </span>
+      </span>
+    </a>
     </div>
   </div>
